@@ -1,4 +1,4 @@
-bitrix/
-!bitrix/components/maximaster/readdatafromcsv/
+bitrix/*
+!bitrix/components
 upload/
 .idea/
