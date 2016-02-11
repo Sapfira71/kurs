@@ -5,7 +5,12 @@
 </head>
 <body>
         <?php
-        include $_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php';
+        $APPLICATION->IncludeComponent('maximaster:readdatafromcsv', '.default',
+        array(
+            'FILE_NAME' => 'products.csv',
+        ));
+
+        /*include $_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php';
         CModule::IncludeModule('iblock');
         echo "<pre>";
         if (($handle = fopen("products.csv", "r")) !== FALSE) {
@@ -65,7 +70,7 @@
             echo "</table>";
 
             fclose($handle);
-        }
+        }*/
         ?>
 </body>
 </html>
