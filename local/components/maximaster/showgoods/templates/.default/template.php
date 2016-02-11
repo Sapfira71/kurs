@@ -1,10 +1,10 @@
 <table border="1">
     <tr>
-        <td>Артикул/цена</td>
-        <td>Название</td>
-        <td>Цена</td>
-        <td>Количество на складе</td>
-        <td>Симольный код</td>
+        <td>Vendor code</td>
+        <td>Name</td>
+        <td>Price</td>
+        <td>Quantity</td>
+        <td>Character code</td>
     </tr>
 <?php foreach($arResult["ELEMENTS"] as $elem):?>
     <tr>

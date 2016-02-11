@@ -1,7 +1,5 @@
 <html>
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
     <?php
@@ -45,7 +43,6 @@
                     echo 'Error: '.$ibe->LAST_ERROR.'<br>';
                 }
             }
-            echo "Данные успешно загружены";
             fclose($handle);
         }
     ?>

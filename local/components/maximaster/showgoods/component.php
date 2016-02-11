@@ -2,8 +2,8 @@
     CModule::IncludeModule('iblock');
     $arFilter = Array("IBLOCK_ID"=>1);
     $res = CIBlockElement::GetList(Array(), $arFilter, false, Array("nPageSize"=>20), Array());
-    $arResult["NAV_STRING"]  = $res->GetPageNavStringEx($navComponentObject, '', '', 'Y');
     $number = 0;
+    $arResult["NAV_STRING"]  = $res->GetPageNavStringEx($navComponentObject, '', '', 'Y');
     while($ob = $res->GetNextElement())
     {
         if($number!==0) {
