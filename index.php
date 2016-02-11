@@ -4,15 +4,10 @@
     <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
-        <?php
-        $APPLICATION->IncludeComponent('maximaster:readdatafromcsv', '.default',
-        array(
-            'FILE_NAME' => 'products.csv',
-        ));
-
-        /*include $_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php';
+    <?php
+        include $_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php';
         CModule::IncludeModule('iblock');
-        echo "<pre>";
+
         if (($handle = fopen("products.csv", "r")) !== FALSE) {
             $counter = 0;
             $datarr = array();
@@ -50,27 +45,9 @@
                     echo 'Error: '.$ibe->LAST_ERROR.'<br>';
                 }
             }
-
-            echo "<table border='1'>";
-            $arFilter = Array("IBLOCK_ID"=>1);
-            $res = CIBlockElement::GetList(Array(), $arFilter, false, false, Array());
-            $count = true;
-            while($ob = $res->GetNextElement())
-            {
-                $arField = $ob->GetProperties();
-
-                echo "<tr>";
-                echo "<td>".$arField["ART"]["VALUE"]."</td>";
-                echo "<td>". $arField["NAME"]["VALUE"] ."</td>";
-                echo "<td>". $arField["QUANTITY"]["VALUE"] ."</td>";
-                echo "<td>". $arField["PRICE"]["VALUE"] ."</td>";
-                echo "<td>". $arField["SYMB"]["VALUE"] ."</td>";
-                echo "</tr>";
-            }
-            echo "</table>";
-
+            echo "Данные успешно загружены";
             fclose($handle);
-        }*/
-        ?>
+        }
+    ?>
 </body>
 </html>
