@@ -1,4 +1,4 @@
-<table border="1">
+<table border="1" id="goods">
     <tr>
         <td>Vendor code</td>
         <td>Name</td>
