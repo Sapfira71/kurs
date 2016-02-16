@@ -1,21 +1,24 @@
 <?php
     CModule::IncludeModule('iblock');
-    $arFilter = Array("IBLOCK_ID"=>1);
+    $arFilter = array_merge(Array("IBLOCK_ID"=>$arParams["IBLOCK_ID"]), $arParams["FILTER"]);
+
     $res = CIBlockElement::GetList(Array(), $arFilter, false, Array("nPageSize"=>20), Array());
-    $number = 0;
-    $arResult["NAV_STRING"]  = $res->GetPageNavStringEx($navComponentObject, '', '', 'Y');
+
     while($ob = $res->GetNextElement())
     {
-        if($number!==0) {
-            $arField = $ob->GetProperties();
+        $arFields = $ob->GetFields();
+        $arProperties = $ob->GetProperties();
 
-            $arResult["ELEMENTS"][$number]["ART"] = $arField["ART"]["VALUE"];
-            $arResult["ELEMENTS"][$number]["NAME"] = $arField["NAME"]["VALUE"];
-            $arResult["ELEMENTS"][$number]["QUANTITY"] = $arField["QUANTITY"]["VALUE"];
-            $arResult["ELEMENTS"][$number]["PRICE"] = $arField["PRICE"]["VALUE"];
-            $arResult["ELEMENTS"][$number]["SYMB"] = $arField["SYMB"]["VALUE"];
-        }
-
-        $number++;
+        $arProduct = array(
+            'ART' => $arProperties["ART"]["VALUE"],
+            'NAME' => $arFields["NAME"],
+            'QUANTITY' => $arProperties["QUANTITY"]["VALUE"],
+            'PRICE' => $arProperties["PRICE"]["VALUE"],
+            'SYMB' => $arFields["CODE"],
+        );
+        $arResult["ELEMENTS"][] = $arProduct;
     }
+
+    if(!empty($arResult)) $arResult["NAV_STRING"]  = $res->GetPageNavStringEx($navComponentObject, '', '', 'Y');
+
     $this->IncludeComponentTemplate();

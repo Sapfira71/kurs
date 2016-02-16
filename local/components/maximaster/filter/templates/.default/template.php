@@ -1,25 +1,25 @@
-<pre>
-    <?php print_r($_POST)?>
-</pre>
+<form name="filter" method="post">
 <table>
     <tr>
-        <td>Vendor code:</td>
-        <td><input type="text" name="vendorCode" value="<?=$_POST["vendorCode"]?>"></td>
+        <td>Артикул:</td>
+        <td><input type="text" name="myFilter[vendorCode]" value="<?if(isset($arParams["FILTER"]["vendorCode"]))echo $arParams["FILTER"]["vendorCode"];?>"></td>
     </tr>
     <tr>
-        <td>Name:</td>
-        <td><input type="text" name="name" value="<?=$_POST["name"]?>"></td>
+        <td>Название:</td>
+        <td><input type="text" name="myFilter[name]" value="<?if(isset($arParams["FILTER"]["name"]))echo $arParams["FILTER"]["name"];?>"></td>
     </tr>
     <tr>
-        <td>Price:</td>
-        <td>from <input type="text" name="price1" value="<?=$_POST["price1"]?>"> to <input type="text" name="price2" value="<?=$_POST["price2"]?>"></td>
+        <td>Цена:</td>
+        <td>от <input type="text" name="myFilter[price1]" value="<?if(isset($arParams["FILTER"]["price1"]))echo $arParams["FILTER"]["price1"];?>">
+            до <input type="text" name="myFilter[price2]" value="<?if(isset($arParams["FILTER"]["price2"]))echo $arParams["FILTER"]["price2"];?>"></td>
     </tr>
     <tr>
-        <td>Quantity:</td>
-        <td><input type="checkbox" name="quantity" value="<?=$_POST["quantity"]?>"></td>
+        <td>Только в наличии:</td>
+        <td><input type="checkbox" name="myFilter[availability]" <?if(isset($arParams["FILTER"]["availability"]))echo "checked";?>></td>
     </tr>
 </table>
-<input type="submit" value="Submit">
-<input type="reset" value="Reset">
+<input type="submit" value="Найти">
+<input type="reset" value="Сброс">
 <br/>
 <br/>
+</form>
