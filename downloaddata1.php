@@ -1,25 +1,19 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
 
-if (($handle = fopen("goods.csv", "r")) !== FALSE) {
+if (($handle = fopen("products.csv", "r")) !== FALSE) {
     $counterKeys = 0;
     $counterElements = 0;
     $datarr = array();
-    $keys = array("SYMB", "NAME", "QUANTITY", "PRICE", "COUNTRY", "BRAND");
+    $keys = array("ART", "NAME", "QUANTITY", "PRICE", "SYMB");
 
 
     CModule::IncludeModule('iblock');
-    $res = CIBlockElement::GetList(Array(), Array("IBLOCK_ID"=>2));
+    $res = CIBlockElement::GetList(Array(), Array("IBLOCK_ID"=>1));
     $arraySC = Array();
     while($ob = $res->GetNextElement())
     {
         $arFields = $ob->GetFields();
-        $arProperties = $ob->GetProperties();
-
-        echo "<pre>";
-        print_r($arFields);
-        print_r($arProperties);
-        echo "</pre>";
         $arraySC[] = Array("CODE" => $arFields["CODE"],"ID" => $arFields["ID"]);
     }
 
@@ -27,11 +21,13 @@ if (($handle = fopen("goods.csv", "r")) !== FALSE) {
         if($counterElements!==0) {
             foreach ($data as $value) {
                 $elements = explode(";", $value);
-                echo "<pre>";
-                print_r($value);
                 $el = array();
                 foreach ($elements as $it) {
-                    $el[$keys[$counterKeys]] = $it;
+                    if($counterKeys==3) {
+                        $el[$keys[$counterKeys]] = (int)str_replace(" ","",$it);
+                    }else {
+                        $el[$keys[$counterKeys]] = $it;
+                    }
                     $counterKeys++;
                 }
                 $datarr[] = $el;
@@ -44,19 +40,17 @@ if (($handle = fopen("goods.csv", "r")) !== FALSE) {
     foreach ($datarr as $elem) {
         $ibe = new CIBlockElement;
 
-        $PROP = Array(
-            'PRICE' => $elem['PRICE'],
-            'QUANTITY' => $elem['QUANTITY'],
-            'COUNTRY' => $elem['COUNTRY'],
-            'BRAND' => $elem['BRAND']
-        );
+        $PROP = array();
+        $PROP['ART'] = $elem['ART'];
+        $PROP['QUANTITY'] = $elem['QUANTITY'];
+        $PROP['PRICE'] = $elem['PRICE'];
 
         $arFields = Array(
-            'ACTIVE' => 'Y',
-            'IBLOCK_ID' => 2,
+            "ACTIVE" => 'Y',
+            "IBLOCK_ID" => 1,
             'NAME' => $elem['NAME'],
             'CODE' => $elem['SYMB'],
-            'PROPERTY_VALUES' => $PROP
+            "PROPERTY_VALUES" => $PROP
         );
 
         $flag = true;
