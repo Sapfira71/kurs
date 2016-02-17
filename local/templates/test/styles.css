@@ -1,0 +1,47 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+table {width: 100%;}
+
+table#goods tr:first-child {
+    text-align: center;
+    font: bold 14px serif;;
+}
+
+header, menu, footer, aside, div#content {border: 1px solid black;}
+
+header, footer {height: 80px;}
+
+footer {clear: both;}
+
+menu {
+    margin: 0; padding: 0;
+    height: 60px;
+    text-align: center;
+    background-color: white;
+}
+
+aside#left, aside#right {width: 110px;}
+
+aside#left {float: left;}
+
+aside#right {float: right;}
+
+div#content {margin: 0 112px;}
+
+aside, div#content {height: 100%;}
+
+img#lotus {width: 70px; height: 70px;}
+
+.menuFixed{
+    z-index: 1;
+    position: fixed;
+    left: 0; top: 0;
+    width: 100%;
+}
+
+.mainpageUrlNone {
+    display: none;
+}
