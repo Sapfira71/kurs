@@ -9,7 +9,7 @@ jQuery("document").ready(function(){
     });
 
     var linkManepage = $('#mainPageLink');
-    if(window.location.href == "http://morozova.bitrix.develop.maximaster.ru/") {
+    if(window.location.href == "http://morozova.bitrix.develop.maximaster.ru/" || window.location.href.indexOf("index.php")!== -1) {
         linkManepage.addClass("mainpageUrlNone");
     } else {
         linkManepage.removeClass("mainpageUrlNone");

@@ -23,13 +23,13 @@ menu {
     background-color: white;
 }
 
-aside#left, aside#right {width: 110px;}
+aside#left, aside#right {width: 200px;}
 
 aside#left {float: left;}
 
 aside#right {float: right;}
 
-div#content {margin: 0 112px;}
+div#content {margin: 0 202px;}
 
 aside, div#content {height: 100%;}
 

@@ -29,7 +29,15 @@ function selfURL(){
     <a href="../contacts.php">Контакты</a>
 </menu>
 <aside id="left">
-
+    <?$APPLICATION->IncludeComponent(
+        "bitrix:menu",
+        "tree",
+        Array(
+            "ROOT_MENU_TYPE" => "left",
+            "CHILD_MENU_TYPE" => "left",
+            "USE_EXT" => "Y"
+        )
+    );?>
 </aside>
 <aside id="right">
 
