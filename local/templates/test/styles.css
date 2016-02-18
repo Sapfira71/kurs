@@ -42,6 +42,13 @@ img#lotus {width: 70px; height: 70px;}
     width: 100%;
 }
 
-.mainpageUrlNone {
-    display: none;
+.mainpageUrlNone {display: none;}
+
+.section, .sectionElems, .sectionHead {padding: 10px;}
+
+.sectionImage {
+    width: 20%;
+    border: 1px solid slateblue;
 }
+
+.sectionElement {border: 1px solid salmon; padding: 5px;}
