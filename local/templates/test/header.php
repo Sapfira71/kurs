@@ -21,7 +21,6 @@ function selfURL(){
     return $url;
 }
 ?>
-
 <header><img src="lotus.png" class="imgLotus">Привет! Этот сайт - результат выполнения обучающего задания.</header>
 <menu type="toolbar" id="headMenu">
     <a href="../about.php">О себе</a>

@@ -3,18 +3,21 @@ html, body {
     padding: 0;
 }
 
-table {width: 100%;}
-
-table.tableGoods tr:first-child {
-    text-align: center;
-    font: bold 14px serif;;
-}
-
 header, menu, footer, aside, .content {border: 1px solid black;}
+
+.content, aside {min-height: 100%}
+
+.content {margin: 0 202px;}
 
 header, footer {height: 80px;}
 
-footer {clear: both;}
+.asideLeft, .asideRight {width: 200px;}
+
+.asideLeft {float: left;}
+
+.asideRight {float: right;}
+
+.imgLotus {width: 70px; height: 70px;}
 
 menu {
     margin: 0; padding: 0;
@@ -23,26 +26,12 @@ menu {
     background-color: white;
 }
 
-.asideLeft, .asideRightight {width: 200px;}
-
-.asideLeft {float: left;}
-
-.asideRight {float: right;}
-
-.content {margin: 0 202px;}
-
-aside, .content {height: 100%;}
-
-.imgLotus {width: 70px; height: 70px;}
-
 .menuFixed{
     z-index: 1;
     position: fixed;
     left: 0; top: 0;
     width: 100%;
 }
-
-.mainpageUrlNone {display: none;}
 
 .section, .sectionElems, .sectionHead {padding: 10px;}
 
@@ -52,3 +41,10 @@ aside, .content {height: 100%;}
 }
 
 .sectionElement {border: 1px solid salmon; padding: 5px;}
+
+table {width: 100%;}
+
+table.tableGoods tr:first-child {
+    text-align: center;
+    font: bold 14px serif;;
+}
