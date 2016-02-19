@@ -5,12 +5,12 @@ html, body {
 
 table {width: 100%;}
 
-table#goods tr:first-child {
+table.tableGoods tr:first-child {
     text-align: center;
     font: bold 14px serif;;
 }
 
-header, menu, footer, aside, div#content {border: 1px solid black;}
+header, menu, footer, aside, .content {border: 1px solid black;}
 
 header, footer {height: 80px;}
 
@@ -23,17 +23,17 @@ menu {
     background-color: white;
 }
 
-aside#left, aside#right {width: 200px;}
+.asideLeft, .asideRightight {width: 200px;}
 
-aside#left {float: left;}
+.asideLeft {float: left;}
 
-aside#right {float: right;}
+.asideRight {float: right;}
 
-div#content {margin: 0 202px;}
+.content {margin: 0 202px;}
 
-aside, div#content {height: 100%;}
+aside, .content {height: 100%;}
 
-img#lotus {width: 70px; height: 70px;}
+.imgLotus {width: 70px; height: 70px;}
 
 .menuFixed{
     z-index: 1;

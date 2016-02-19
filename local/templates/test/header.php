@@ -22,13 +22,12 @@ function selfURL(){
 }
 ?>
 
-<header><img src="lotus.png" id="lotus">Привет! Этот сайт - результат выполнения обучающего задания.</header>
-<menu type="toolbar">
-    <a href="/" id="mainPageLink">Главная страница</a>
+<header><img src="lotus.png" class="imgLotus">Привет! Этот сайт - результат выполнения обучающего задания.</header>
+<menu type="toolbar" id="headMenu">
     <a href="../about.php">О себе</a>
     <a href="../contacts.php">Контакты</a>
 </menu>
-<aside id="left">
+<aside class="asideLeft">
     <?$APPLICATION->IncludeComponent(
         "bitrix:menu",
         "tree",
@@ -39,7 +38,7 @@ function selfURL(){
         )
     );?>
 </aside>
-<aside id="right">
+<aside class="asideRight">
 
 </aside>
-<div id="content">
+<div class="content">

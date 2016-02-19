@@ -1,5 +1,5 @@
 <?php if(!empty($arResult)):?>
-    <table border="1" id="goods">
+    <table border="1" class="tableGoods">
     <tr>
         <td>Артикул/цена</td>
         <td>Название</td>
