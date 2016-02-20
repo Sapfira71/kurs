@@ -1,4 +1,5 @@
 <?php
+if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 if(empty($_REQUEST["SECTION_ID"])) return;
 
 CModule::IncludeModule('iblock');
