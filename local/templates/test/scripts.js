@@ -7,8 +7,4 @@ jQuery("document").ready(function(){
             nav.removeClass("menuFixed");
         }
     });
-
-    if(window.location.href !== "http://morozova.bitrix.develop.maximaster.ru/" && window.location.href.indexOf("index.php")== -1) {
-        $("#headMenu").prepend("<a href='/'>Главная страница</a>");
-    }
 });

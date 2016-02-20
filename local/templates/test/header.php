@@ -23,6 +23,7 @@ $APPLICATION->ShowPanel();
 ?>
 <header><img src="<?=SITE_TEMPLATE_PATH?>/images/lotus.png" class="imgLotus">Привет! Этот сайт - результат выполнения обучающего задания.</header>
 <menu type="toolbar" id="headMenu">
+    <a href="/">Главная страница</a>
     <a href="../about.php">О себе</a>
     <a href="../contacts.php">Контакты</a>
 </menu>
