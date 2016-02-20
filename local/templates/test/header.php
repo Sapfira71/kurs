@@ -26,18 +26,20 @@ function selfURL(){
     <a href="../about.php">О себе</a>
     <a href="../contacts.php">Контакты</a>
 </menu>
-<aside class="asideLeft">
-    <?$APPLICATION->IncludeComponent(
-        "bitrix:menu",
-        "tree",
-        Array(
-            "ROOT_MENU_TYPE" => "left",
-            "CHILD_MENU_TYPE" => "left",
-            "USE_EXT" => "Y"
-        )
-    );?>
-</aside>
-<aside class="asideRight">
-
-</aside>
-<div class="content">
+<table cellpadding="5" cellspacing="0" class="col">
+    <tr>
+        <td class="col1">
+            <aside class="asideLeft">
+                <?$APPLICATION->IncludeComponent(
+                    "bitrix:menu",
+                    "tree",
+                    Array(
+                        "ROOT_MENU_TYPE" => "left",
+                        "CHILD_MENU_TYPE" => "left",
+                        "USE_EXT" => "Y"
+                    )
+                );?>
+            </aside>
+        </td>
+        <td>
+            <div class="content">

@@ -13,7 +13,7 @@
         <p class="sectionElement">
             <?=$elem["NAME"]?>. Цена: <?=$elem["PRICE"]?> руб.<br>
             <img class="sectionImage" src="<?=$elem['PREV_P']?>">
-            <div><?=$elem['PREV_D']?></div>
+            <?=$elem['PREV_D']?>
         </p>
     <?php endforeach;?>
 </div>
