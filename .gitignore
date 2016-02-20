@@ -1,3 +1,5 @@
 bitrix/
 upload/
 .idea/
+*.csv
+local/images
