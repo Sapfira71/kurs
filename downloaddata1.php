@@ -1,8 +1,10 @@
 <?php
-if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
+    die();
+}
 include $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
 
-if (($handle = fopen("products.csv", "r")) !== FALSE) {
+if (($handle = fopen("products.csv", "r")) !== false) {
     $counterKeys = 0;
     $counterElements = 0;
     $datarr = array();
@@ -10,23 +12,22 @@ if (($handle = fopen("products.csv", "r")) !== FALSE) {
 
 
     CModule::IncludeModule('iblock');
-    $res = CIBlockElement::GetList(Array(), Array("IBLOCK_ID"=>1));
+    $res = CIBlockElement::GetList(Array(), Array("IBLOCK_ID" => 1));
     $arraySC = Array();
-    while($ob = $res->GetNextElement())
-    {
+    while ($ob = $res->GetNextElement()) {
         $arFields = $ob->GetFields();
-        $arraySC[] = Array("CODE" => $arFields["CODE"],"ID" => $arFields["ID"]);
+        $arraySC[] = Array("CODE" => $arFields["CODE"], "ID" => $arFields["ID"]);
     }
 
-    while (($data = fgetcsv($handle, 0, "\n")) !== FALSE) {
-        if($counterElements!==0) {
+    while (($data = fgetcsv($handle, 0, "\n")) !== false) {
+        if ($counterElements !== 0) {
             foreach ($data as $value) {
                 $elements = explode(";", $value);
                 $el = array();
                 foreach ($elements as $it) {
-                    if($counterKeys==3) {
-                        $el[$keys[$counterKeys]] = (int)str_replace(" ","",$it);
-                    }else {
+                    if ($counterKeys == 3) {
+                        $el[$keys[$counterKeys]] = (int)str_replace(" ", "", $it);
+                    } else {
                         $el[$keys[$counterKeys]] = $it;
                     }
                     $counterKeys++;
@@ -55,14 +56,14 @@ if (($handle = fopen("products.csv", "r")) !== FALSE) {
         );
 
         $flag = true;
-        foreach($arraySC as $value) {
-            if($value["CODE"] == $elem['SYMB']) {
+        foreach ($arraySC as $value) {
+            if ($value["CODE"] == $elem['SYMB']) {
                 $ID = $ibe->Update($value["ID"], $arFields);
                 $flag = false;
                 break;
             }
         }
-        if($flag) {
+        if ($flag) {
             if ($ID = $ibe->Add($arFields)) {
             } else {
                 echo 'Error: ' . $ibe->LAST_ERROR . '<br>';

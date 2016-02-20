@@ -3,42 +3,66 @@ html, body {
     padding: 0;
 }
 
-header, menu, footer, table.col td {border: 1px solid black;}
+header, menu, footer, table.col td {
+    border: 1px solid black;
+}
 
-table.col {width: 100%; height: 100%;}
+table.col {
+    width: 100%;
+    height: 100%;
+}
 
-table.col td {vertical-align: top; padding: 0;}
+table.col td {
+    vertical-align: top;
+    padding: 0;
+}
 
-td.col1, td.col3 {width: 200px;}
+td.col1, td.col3 {
+    width: 200px;
+}
 
-header, footer {height: 80px;}
+header, footer {
+    height: 80px;
+}
 
-.imgLotus {width: 70px; height: 70px;}
+.imgLotus {
+    width: 70px;
+    height: 70px;
+}
 
 menu {
-    margin: 0; padding: 0;
+    margin: 0;
+    padding: 0;
     height: 60px;
     text-align: center;
     background-color: white;
 }
 
-.menuFixed{
+.menuFixed {
     z-index: 1;
     position: fixed;
-    left: 0; top: 0;
+    left: 0;
+    top: 0;
     width: 100%;
 }
 
-.section, .sectionElems, .sectionHead {padding: 10px;}
+.section, .sectionElems, .sectionHead {
+    padding: 10px;
+}
 
 .sectionImage {
     width: 20%;
     border: 1px solid slateblue;
 }
 
-.sectionElement {border: 1px solid salmon; padding: 5px;}
+.sectionElement {
+    border: 1px solid salmon;
+    padding: 5px;
+}
 
-table {width: 100%;}
+table {
+    width: 100%;
+}
 
 table.tableGoods tr:first-child {
     text-align: center;
