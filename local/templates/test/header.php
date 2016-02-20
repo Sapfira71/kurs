@@ -13,13 +13,13 @@
 </head>
 <body>
 <?php
-include $_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php';
-function selfURL(){
-    $url  = ( $_SERVER["HTTPS"] != 'on' ) ? 'http://'.$_SERVER["SERVER_NAME"] :  'https://'.$_SERVER["SERVER_NAME"];
-    $url .= ( $_SERVER["SERVER_PORT"] != 80 ) ? ":".$_SERVER["SERVER_PORT"] : "";
-    $url .= $_SERVER["REQUEST_URI"];
-    return $url;
-}
+    include $_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php';
+    function selfURL(){
+        $url  = ( $_SERVER["HTTPS"] != 'on' ) ? 'http://'.$_SERVER["SERVER_NAME"] :  'https://'.$_SERVER["SERVER_NAME"];
+        $url .= ( $_SERVER["SERVER_PORT"] != 80 ) ? ":".$_SERVER["SERVER_PORT"] : "";
+        $url .= $_SERVER["REQUEST_URI"];
+        return $url;
+    }
 ?>
 <header><img src="lotus.png" class="imgLotus">Привет! Этот сайт - результат выполнения обучающего задания.</header>
 <menu type="toolbar" id="headMenu">

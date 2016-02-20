@@ -8,12 +8,16 @@
 </div>
 
 <div class="sectionElems">
-    <h3>В разделе есть следующие товары:</h3>
-    <?php foreach($arResult["ELEMENTS"] as $elem):?>
-        <p class="sectionElement">
-            <?=$elem["NAME"]?>. Цена: <?=$elem["PRICE"]?> руб.<br>
-            <img class="sectionImage" src="<?=$elem['PREV_P']?>">
-            <?=$elem['PREV_D']?>
-        </p>
-    <?php endforeach;?>
+    <?php if(!empty($arResult["ELEMENTS"])):?>
+        <h3>В разделе есть следующие товары:</h3>
+        <?php foreach($arResult["ELEMENTS"] as $elem):?>
+            <p class="sectionElement">
+                <?=$elem["NAME"]?>. Цена: <?=$elem["PRICE"]?> руб.<br>
+                <img class="sectionImage" src="<?=$elem['PREV_P']?>">
+                <?=$elem['PREV_D']?>
+            </p>
+        <?php endforeach;?>
+    <?php else:?>
+        <h3>Товары отсутствуют в данном разделе</h3>
+    <?php endif;?>
 </div>
