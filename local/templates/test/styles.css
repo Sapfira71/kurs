@@ -3,8 +3,20 @@ html, body {
     padding: 0;
 }
 
-header, menu, footer, table.col td {
+.header, .menu, .footer, table.col td {
     border: 1px solid black;
+}
+
+.header, .footer {
+    height: 80px;
+}
+
+.menu {
+    margin: 0;
+    padding: 0;
+    height: 60px;
+    text-align: center;
+    background-color: white;
 }
 
 table.col {
@@ -21,21 +33,9 @@ td.col1, td.col3 {
     width: 200px;
 }
 
-header, footer {
-    height: 80px;
-}
-
 .imgLotus {
     width: 70px;
     height: 70px;
-}
-
-menu {
-    margin: 0;
-    padding: 0;
-    height: 60px;
-    text-align: center;
-    background-color: white;
 }
 
 .menuFixed {
@@ -60,7 +60,7 @@ menu {
     padding: 5px;
 }
 
-table {
+table.tableGoods {
     width: 100%;
 }
 
