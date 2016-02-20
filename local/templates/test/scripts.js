@@ -1,4 +1,4 @@
-jQuery("document").ready(function(){
+jQuery("document").ready(function () {
     var nav = $('menu');
     $(window).scroll(function () {
         if ($(this).scrollTop() > 80) {
