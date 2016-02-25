@@ -27,7 +27,7 @@ while ($ar_result = $sec_list->Fetch()) {
 }
 
 $arFilter = Array(
-    "IBLOCK_ID" => 2,
+    "IBLOCK_ID" => IBLOCK_CATALOG_ID,
     "SECTION_ID" => $_REQUEST["SECTION_ID"],
     "INCLUDE_SUBSECTIONS" => 'Y'
 );

@@ -16,7 +16,7 @@ if (($handle = fopen("goods.csv", "r")) !== false) {
     $arraySC = Array();
     $arSelect = Array('CODE', 'ID');
 
-    $res = CIBlockElement::GetList(Array(), Array("IBLOCK_ID" => 2), false, false, $arSelect);
+    $res = CIBlockElement::GetList(Array(), Array("IBLOCK_ID" => IBLOCK_CATALOG_ID), false, false, $arSelect);
     while ($ob = $res->Fetch()) {
         $arraySC[] = Array("CODE" => $ob["CODE"], "ID" => $ob["ID"]);
     }
@@ -49,7 +49,7 @@ if (($handle = fopen("goods.csv", "r")) !== false) {
 
         $arFields = Array(
             'ACTIVE' => 'Y',
-            'IBLOCK_ID' => 2,
+            'IBLOCK_ID' => IBLOCK_CATALOG_ID,
             'NAME' => $elem['NAME'],
             'CODE' => $elem['SYMB'],
             'PROPERTY_VALUES' => $PROP

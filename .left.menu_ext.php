@@ -11,7 +11,7 @@ $aMenuLinksExt = $APPLICATION->IncludeComponent(
     Array(
         "ID" => $_REQUEST["SECTION_ID"],
         "IBLOCK_TYPE" => "catalog",
-        "IBLOCK_ID" => "2",
+        "IBLOCK_ID" => IBLOCK_CATALOG_ID,
         "DEPTH_LEVEL" => "3",
         "SECTION_URL" => "/index.php?SECTION_ID=#ID#",
         "CACHE_TYPE" => "A",
