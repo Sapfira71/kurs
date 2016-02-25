@@ -51,5 +51,6 @@ if (!empty($arParams["FILTER"]["price1"]) && !empty($arParams["FILTER"]["price2"
 }
 
 $_POST['myFilter'] = $arFilter;
+$_POST['filterParams'] = $arResult;
 
 $this->IncludeComponentTemplate();
