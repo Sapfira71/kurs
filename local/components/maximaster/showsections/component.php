@@ -9,9 +9,15 @@ if (empty($_REQUEST["SECTION_ID"])) {
 CModule::IncludeModule('iblock');
 
 $arFilter = Array("IBLOCK_ID" => IBLOCK_CATALOG_ID, "ID" => $_REQUEST["SECTION_ID"]);
-$sec_list = CIBlockSection::GetList(Array(), $arFilter, true);
+$arSelect = Array(
+    'NAME',
+    'ELEMENT_CNT',
+    'DESCRIPTION',
+    'PICTURE'
+);
+$sec_list = CIBlockSection::GetList(Array(), $arFilter, true, $arSelect);
 
-while ($ar_result = $sec_list->GetNext()) {
+while ($ar_result = $sec_list->Fetch()) {
     $arResult = Array(
         'NAME' => $ar_result['NAME'],
         'ELEMENT_CNT' => $ar_result['ELEMENT_CNT'],
@@ -25,17 +31,20 @@ $arFilter = Array(
     "SECTION_ID" => $_REQUEST["SECTION_ID"],
     "INCLUDE_SUBSECTIONS" => 'Y'
 );
-$res = CIBlockElement::GetList(Array(), $arFilter);
+$arSelect = Array(
+    'NAME',
+    'PROPERTY_PRICE',
+    'PREVIEW_TEXT',
+    'PREVIEW_PICTURE'
+);
+$res = CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
 
-while ($ob = $res->GetNextElement()) {
-    $arFields = $ob->GetFields();
-    $arProperties = $ob->GetProperties();
-
+while ($ob = $res->Fetch()) {
     $arProduct = array(
-        'NAME' => $arFields["NAME"],
-        'PRICE' => $arProperties["PRICE"]["VALUE"],
-        'PREV_D' => $arFields["PREVIEW_TEXT"],
-        'PREV_P' => CFile::GetPath($arFields["PREVIEW_PICTURE"])
+        'NAME' => $ob["NAME"],
+        'PRICE' => $ob["PROPERTY_PRICE_VALUE"],
+        'PREV_D' => $ob["PREVIEW_TEXT"],
+        'PREV_P' => CFile::GetPath($ob["PREVIEW_PICTURE"])
     );
     $arResult["ELEMENTS"][] = $arProduct;
 }

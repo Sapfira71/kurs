@@ -12,11 +12,13 @@ if (($handle = fopen("products.csv", "r")) !== false) {
 
 
     CModule::IncludeModule('iblock');
-    $res = CIBlockElement::GetList(Array(), Array("IBLOCK_ID" => 1));
+
     $arraySC = Array();
-    while ($ob = $res->GetNextElement()) {
-        $arFields = $ob->GetFields();
-        $arraySC[] = Array("CODE" => $arFields["CODE"], "ID" => $arFields["ID"]);
+    $arSelect = Array('CODE', 'ID');
+
+    $res = CIBlockElement::GetList(Array(), Array("IBLOCK_ID" => 1), false, false, $arSelect);
+    while ($ob = $res->Fetch()) {
+        $arraySC[] = Array("CODE" => $ob["CODE"], "ID" => $ob["ID"]);
     }
 
     while (($data = fgetcsv($handle, 0, "\n")) !== false) {
