@@ -1,14 +1,14 @@
 <?php
-if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
+/*if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
     die();
-}
+}*/
 include $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
 
 if (($handle = fopen("goods.csv", "r")) !== false) {
     $counterKeys = 0;
     $counterElements = 0;
     $datarr = array();
-    $keys = array("SYMB", "NAME", "QUANTITY", "PRICE", "COUNTRY", "BRAND");
+    $keys = array("ID", "SYMB", "NAME", "SECTION", "QUANTITY", "PRICE", "COUNTRY", "BRAND", "PREW_T", "PREW_P");
 
 
     CModule::IncludeModule('iblock');
@@ -37,6 +37,17 @@ if (($handle = fopen("goods.csv", "r")) !== false) {
         $counterElements++;
     }
 
+    $arFilter = Array('IBLOCK_ID' => IBLOCK_CATALOG_ID);
+    $arSelect = Array('ID', 'NAME');
+    $db_list = CIBlockSection::GetList(Array(), $arFilter, false, $arSelect);
+    $selectedSection = Array();
+    while ($ar_result = $db_list->Fetch()) {
+        $selectedSection[] = Array(
+            'ID' => $ar_result['ID'],
+            'NAME' => $ar_result['NAME']
+        );
+    }
+
     foreach ($datarr as $elem) {
         $ibe = new CIBlockElement;
 
@@ -52,8 +63,23 @@ if (($handle = fopen("goods.csv", "r")) !== false) {
             'IBLOCK_ID' => IBLOCK_CATALOG_ID,
             'NAME' => $elem['NAME'],
             'CODE' => $elem['SYMB'],
-            'PROPERTY_VALUES' => $PROP
+            'ID' => $elem['ID'],
+            'PROPERTY_VALUES' => $PROP,
+            'PREVIEW_TEXT' => $elem['PREW_T']
         );
+
+        $explodeSec = explode("-", $elem['SECTION']);
+        $cat = $explodeSec[count($explodeSec)-1];
+
+        foreach ($selectedSection as $value) {
+            if ($value['NAME'] == $cat) {
+                $arFields['IBLOCK_SECTION_ID'] = $value['ID'];
+                break;
+            }
+        }
+
+        echo "<pre>";
+        print_r($arFields);
 
         $flag = true;
         foreach ($arraySC as $value) {

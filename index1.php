@@ -6,7 +6,7 @@
     <script>
         function loadData() {
             $.ajax({
-                url: 'downloaddata.php'
+                url: 'downloaddata1.php'
             });
         }
     </script>
