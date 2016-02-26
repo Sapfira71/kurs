@@ -20,6 +20,14 @@ $arComponentParameters = array(
             "MULTIPLE" => "N",
             "DEFAULT" => 1,
             "REFRESH" => "Y"
-        )
+        ),
+        "FILTER_PARAMS" => array(
+            "PARENT" => ADDITIONAL_SETTINGS,
+            "NAME" => "Массив со значениями из формы фильтра",
+            "TYPE" => "ARRAY",
+            "MULTIPLE" => "N",
+            "DEFAULT" => $_POST['filterParams'],
+            "REFRESH" => "Y"
+        ),
     )
 );

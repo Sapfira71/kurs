@@ -18,7 +18,7 @@
 include $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
 $APPLICATION->IncludeComponent('maximaster:filter', '.default', array('FILTER' => $_POST['myFilter']));
 $APPLICATION->IncludeComponent('maximaster:showgoods', '.default',
-    array('FILTER' => $_POST['myFilter'], "IBLOCK_ID" => IBLOCK_CATALOG_TASK1_ID));
+    array('FILTER' => $_POST['myFilter'], "IBLOCK_ID" => IBLOCK_CATALOG_TASK1_ID, 'FILTER_PARAMS' => $_POST['filterParams'],));
 ?>
 </body>
 </html>
