@@ -1,4 +1,4 @@
-<form name="filter" method="post">
+<form name="filter" method="post" action="<?=substr_replace($_SERVER['REQUEST_URI'],'',strpos($_SERVER['REQUEST_URI'],'?'))?>">
     <table>
         <tr>
             <td>Артикул:</td>

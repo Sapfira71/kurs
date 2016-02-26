@@ -21,9 +21,7 @@
 <?php else: ?>
     <h3>Товары отсутствуют в инфоблоке</h3>
 <?php endif; ?>
-
 <script type="text/javascript">
-
     $('a').each(function () {
         if(this.href.indexOf('price1')==-1) {
             <? if (isset($arParams["FILTER_PARAMS"]['price1'])):?>
@@ -47,9 +45,8 @@
         }
         if(this.href.indexOf('availability')==-1) {
             <? if (isset($arParams["FILTER_PARAMS"]['availability'])):?>
-            this.href += ('&availability=' + $arParams["FILTER_PARAMS"]['availability']?>);
+            this.href += ('&availability=' + 'on');
             <? endif;?>
         }
     });
-
 </script>
