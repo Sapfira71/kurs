@@ -26,28 +26,28 @@
 
     $('a').each(function () {
         if(this.href.indexOf('price1')==-1) {
-            <? if (isset($_POST['filterParams']['price1'])):?>
-            this.href += ('&price1=' + <?=$_POST['filterParams']['price1']?>);
+            <? if (isset($arParams["FILTER_PARAMS"]['price1'])):?>
+            this.href += ('&price1=' + <?=$arParams["FILTER_PARAMS"]['price1']?>);
             <? endif;?>
         }
         if(this.href.indexOf('price2')==-1) {
-            <? if (isset($_POST['filterParams']['price2'])):?>
-            this.href += ('&price2=' + <?=$_POST['filterParams']['price2']?>);
+            <? if (isset($arParams["FILTER_PARAMS"]['price2'])):?>
+            this.href += ('&price2=' + <?=$arParams["FILTER_PARAMS"]['price2']?>);
             <? endif;?>
         }
         if(this.href.indexOf('name')==-1) {
-            <? if (isset($_POST['filterParams']['name'])):?>
-            this.href += ('&name=' + <?=$_POST['filterParams']['name']?>);
+            <? if (isset($arParams["FILTER_PARAMS"]['name'])):?>
+            this.href += ('&name=' + <?=$arParams["FILTER_PARAMS"]['name']?>);
             <? endif;?>
         }
         if(this.href.indexOf('vendorCode')==-1) {
-            <? if (isset($_POST['filterParams']['vendorCode'])):?>
-            this.href += ('&vendorCode=' + <?=$_POST['filterParams']['vendorCode']?>);
+            <? if (isset($arParams["FILTER_PARAMS"]['vendorCode'])):?>
+            this.href += ('&vendorCode=' + <?=$arParams["FILTER_PARAMS"]['vendorCode']?>);
             <? endif;?>
         }
         if(this.href.indexOf('availability')==-1) {
-            <? if (isset($_POST['filterParams']['availability'])):?>
-            this.href += ('&availability=' + <?=$_POST['filterParams']['availability']?>);
+            <? if (isset($arParams["FILTER_PARAMS"]['availability'])):?>
+            this.href += ('&availability=' + $arParams["FILTER_PARAMS"]['availability']?>);
             <? endif;?>
         }
     });
