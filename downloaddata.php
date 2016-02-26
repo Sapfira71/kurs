@@ -48,6 +48,13 @@ if (($handle = fopen("goods.csv", "r")) !== false) {
         );
     }
 
+    $nav = CIBlockSection::GetNavChain(IBLOCK_CATALOG_ID, 17, Array('NAME', 'ID'));
+    while($arSectionPath = $nav->Fetch()) {
+        echo "<pre>";
+        print_r($arSectionPath);
+        echo "</pre>";
+    }
+
     foreach ($datarr as $elem) {
         $ibe = new CIBlockElement;
 
@@ -69,7 +76,7 @@ if (($handle = fopen("goods.csv", "r")) !== false) {
         );
 
         $explodeSec = explode("-", $elem['SECTION']);
-        $cat = $explodeSec[count($explodeSec)-1];
+        $cat = $explodeSec[count($explodeSec) - 1];
 
         foreach ($selectedSection as $value) {
             if ($value['NAME'] == $cat) {
@@ -77,9 +84,6 @@ if (($handle = fopen("goods.csv", "r")) !== false) {
                 break;
             }
         }
-
-        echo "<pre>";
-        print_r($arFields);
 
         $flag = true;
         foreach ($arraySC as $value) {
