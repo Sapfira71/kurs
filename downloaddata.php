@@ -4,14 +4,50 @@
 }*/
 include $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
 
+function UpdateGoods($ibe, $elem, $arFields, $value) {
+    $ibe->Update($value["ID"], $arFields);
+
+    CCatalogProduct::update(
+        $value["ID"],
+        array('QUANTITY' => $elem['QUANTITY'])
+    );
+
+    $price = CPrice::GetList(Array(), Array(
+        'PRODUCT_ID' => $value["ID"],
+        'CATALOG_GROUP_ID' => 1
+    ), false, false, Array('ID'));
+
+    if ($arPrice = $price->Fetch()) {
+        CPrice::Update($arPrice['ID'], array(
+            'PRODUCT_ID' => $value["ID"],
+            'CATALOG_GROUP_ID' => 1,
+            'PRICE' => $elem['PRICE'],
+            "CURRENCY" => "RUB"
+        ));
+    }
+}
+
+function AddGoodsPriceAndQuantity($ID, $elem) {
+    CCatalogProduct::add(
+        Array('ID' => $ID, 'QUANTITY' => $elem['QUANTITY']),
+        false
+    );
+    CPrice::Add(array(
+        'PRODUCT_ID' => $ID,
+        'CATALOG_GROUP_ID' => 1,
+        'PRICE' => $elem['PRICE'],
+        "CURRENCY" => "RUB"
+    ));
+}
+
 function addOrUpdateElement($arraySC, $datarr)
 {
     $sectionList = getSectionListFromInfoblock();
+
     foreach ($datarr as $elem) {
         $ibe = new CIBlockElement;
 
         $PROP = Array(
-            'PRICE' => $elem['PRICE'],
             'COUNTRY' => $elem['COUNTRY'],
             'BRAND' => $elem['BRAND']
         );
@@ -32,20 +68,14 @@ function addOrUpdateElement($arraySC, $datarr)
         $flag = true;
         foreach ($arraySC as $value) {
             if ($value["CODE"] == $elem['SYMB']) {
-                $ibe->Update($value["ID"], $arFields);
-                CCatalogProduct::update($value["ID"], array('QUANTITY' => $elem['QUANTITY']));
+                UpdateGoods($ibe, $elem, $arFields, $value);
                 $flag = false;
                 break;
             }
         }
         if ($flag) {
             if ($ID = $ibe->Add($arFields)) {
-                CCatalogProduct::add(Array(
-                    'ID' => $ID,
-                    'QUANTITY' => $elem['QUANTITY']
-                ),
-                    false
-                );
+                AddGoodsPriceAndQuantity($ID, $elem);
             } else {
                 echo 'Error: ' . $ibe->LAST_ERROR . '<br>';
             }
