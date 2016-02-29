@@ -4,7 +4,8 @@
 }*/
 include $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
 
-function UpdateGoods($ibe, $elem, $arFields, $value) {
+function UpdateGoods($ibe, $elem, $arFields, $value)
+{
     $ibe->Update($value["ID"], $arFields);
 
     CCatalogProduct::update(
@@ -27,7 +28,8 @@ function UpdateGoods($ibe, $elem, $arFields, $value) {
     }
 }
 
-function AddGoodsPriceAndQuantity($ID, $elem) {
+function AddGoodsPriceAndQuantity($ID, $elem)
+{
     CCatalogProduct::add(
         Array('ID' => $ID, 'QUANTITY' => $elem['QUANTITY']),
         false
@@ -40,6 +42,23 @@ function AddGoodsPriceAndQuantity($ID, $elem) {
     ));
 }
 
+function getIdOfCountry($elem)
+{
+    $countryID = 0;
+    $property_enums = CIBlockPropertyEnum::GetList(Array(), Array(
+            "IBLOCK_ID" => IBLOCK_CATALOG_ID,
+            "CODE" => "COUNTRY"
+        )
+    );
+    while ($enum_fields = $property_enums->GetNext()) {
+        if ($enum_fields["VALUE"] == $elem['COUNTRY']) {
+            $countryID = $enum_fields["ID"];
+            break;
+        }
+    }
+    return $countryID;
+}
+
 function addOrUpdateElement($arraySC, $datarr)
 {
     $sectionList = getSectionListFromInfoblock();
@@ -47,8 +66,10 @@ function addOrUpdateElement($arraySC, $datarr)
     foreach ($datarr as $elem) {
         $ibe = new CIBlockElement;
 
+        $countryID = getIdOfCountry($elem);
+
         $PROP = Array(
-            'COUNTRY' => $elem['COUNTRY'],
+            'COUNTRY' => $countryID,
             'BRAND' => $elem['BRAND']
         );
 
