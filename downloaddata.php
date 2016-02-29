@@ -12,7 +12,6 @@ function addOrUpdateElement($arraySC, $datarr)
 
         $PROP = Array(
             'PRICE' => $elem['PRICE'],
-            'QUANTITY' => $elem['QUANTITY'],
             'COUNTRY' => $elem['COUNTRY'],
             'BRAND' => $elem['BRAND']
         );
@@ -34,12 +33,19 @@ function addOrUpdateElement($arraySC, $datarr)
         foreach ($arraySC as $value) {
             if ($value["CODE"] == $elem['SYMB']) {
                 $ibe->Update($value["ID"], $arFields);
+                CCatalogProduct::update($value["ID"], array('QUANTITY' => $elem['QUANTITY']));
                 $flag = false;
                 break;
             }
         }
         if ($flag) {
             if ($ID = $ibe->Add($arFields)) {
+                CCatalogProduct::add(Array(
+                    'ID' => $ID,
+                    'QUANTITY' => $elem['QUANTITY']
+                ),
+                    false
+                );
             } else {
                 echo 'Error: ' . $ibe->LAST_ERROR . '<br>';
             }
