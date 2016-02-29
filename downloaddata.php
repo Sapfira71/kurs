@@ -110,7 +110,8 @@ function addOrUpdateElement($arraySC, $datarr)
             'CODE' => $elem['SYMB'],
             'IBLOCK_SECTION_ID' => $sectionID,
             'PROPERTY_VALUES' => $PROP,
-            'PREVIEW_TEXT' => $elem['PREW_T']
+            'PREVIEW_TEXT' => $elem['PREW_T'],
+            'PREVIEW_PICTURE' => CFile::MakeFileArray("/local/images/" . $elem['PREW_P'])
         );
 
         $flag = true;
