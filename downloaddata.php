@@ -3,6 +3,8 @@
     die();
 }*/
 include $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
+use Bitrix\Highloadblock as HL;
+use Bitrix\Main\Entity;
 
 function UpdateGoods($ibe, $elem, $arFields, $value)
 {
@@ -59,6 +61,31 @@ function getIdOfCountry($elem)
     return $countryID;
 }
 
+function getIdOfBrand($elem)
+{
+    CModule::IncludeModule("highloadblock");
+
+    $idbrand = "";
+
+    $hlblock = HL\HighloadBlockTable::getById(ID_BRAND_INFOBLOCK)->fetch();
+    $entity = HL\HighloadBlockTable::compileEntity($hlblock);
+    $entity_data_class = $entity->getDataClass();
+    $entity_table_name = $hlblock['Brand'];
+
+    $sTableID = 'tbl_' . $entity_table_name;
+    $rsData = $entity_data_class::getList(array(
+        "select" => array('UF_NAME', 'UF_XML_ID')
+    ));
+    $rsData = new CDBResult($rsData, $sTableID);
+    while ($arRes = $rsData->Fetch()) {
+        if ($arRes['UF_NAME'] == $elem['BRAND']) {
+            $idbrand = $arRes['UF_XML_ID'];
+            break;
+        }
+    }
+    return $idbrand;
+}
+
 function addOrUpdateElement($arraySC, $datarr)
 {
     $sectionList = getSectionListFromInfoblock();
@@ -67,10 +94,11 @@ function addOrUpdateElement($arraySC, $datarr)
         $ibe = new CIBlockElement;
 
         $countryID = getIdOfCountry($elem);
+        $brandName = getIdOfBrand($elem);
 
         $PROP = Array(
             'COUNTRY' => $countryID,
-            'BRAND' => $elem['BRAND']
+            'BRAND' => $brandName
         );
 
         $sectionID = getSectionId($elem['SECTION'], $sectionList);
@@ -80,7 +108,6 @@ function addOrUpdateElement($arraySC, $datarr)
             'IBLOCK_ID' => IBLOCK_CATALOG_ID,
             'NAME' => $elem['NAME'],
             'CODE' => $elem['SYMB'],
-            'ID' => $elem['ID'],
             'IBLOCK_SECTION_ID' => $sectionID,
             'PROPERTY_VALUES' => $PROP,
             'PREVIEW_TEXT' => $elem['PREW_T']
@@ -169,7 +196,6 @@ function readDataFromFile()
         $counterKeys = 0;
         $counterElements = 0;
         $keys = array(
-            "ID",
             "SYMB",
             "NAME",
             "SECTION",
