@@ -4,57 +4,9 @@
 }*/
 include $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
 
-if (($handle = fopen("goods.csv", "r")) !== false) {
-    $counterKeys = 0;
-    $counterElements = 0;
-    $datarr = array();
-    $keys = array("ID", "SYMB", "NAME", "SECTION", "QUANTITY", "PRICE", "COUNTRY", "BRAND", "PREW_T", "PREW_P");
-
-
-    CModule::IncludeModule('iblock');
-
-    $arraySC = Array();
-    $arSelect = Array('CODE', 'ID');
-
-    $res = CIBlockElement::GetList(Array(), Array("IBLOCK_ID" => IBLOCK_CATALOG_ID), false, false, $arSelect);
-    while ($ob = $res->Fetch()) {
-        $arraySC[] = Array("CODE" => $ob["CODE"], "ID" => $ob["ID"]);
-    }
-
-    while (($data = fgetcsv($handle, 0, "\n")) !== false) {
-        if ($counterElements !== 0) {
-            foreach ($data as $value) {
-                $elements = explode(";", $value);
-                $el = array();
-                foreach ($elements as $it) {
-                    $el[$keys[$counterKeys]] = $it;
-                    $counterKeys++;
-                }
-                $datarr[] = $el;
-                $counterKeys = 0;
-            }
-        }
-        $counterElements++;
-    }
-
-    $arFilter = Array('IBLOCK_ID' => IBLOCK_CATALOG_ID);
-    $arSelect = Array('ID', 'NAME');
-    $db_list = CIBlockSection::GetList(Array(), $arFilter, false, $arSelect);
-    $selectedSection = Array();
-    while ($ar_result = $db_list->Fetch()) {
-        $selectedSection[] = Array(
-            'ID' => $ar_result['ID'],
-            'NAME' => $ar_result['NAME']
-        );
-    }
-
-    $nav = CIBlockSection::GetNavChain(IBLOCK_CATALOG_ID, 17, Array('NAME', 'ID'));
-    while($arSectionPath = $nav->Fetch()) {
-        echo "<pre>";
-        print_r($arSectionPath);
-        echo "</pre>";
-    }
-
+function addOrUpdateElement($arraySC, $datarr)
+{
+    $sectionList = getSectionListFromInfoblock();
     foreach ($datarr as $elem) {
         $ibe = new CIBlockElement;
 
@@ -65,30 +17,23 @@ if (($handle = fopen("goods.csv", "r")) !== false) {
             'BRAND' => $elem['BRAND']
         );
 
+        $sectionID = getSectionId($elem['SECTION'], $sectionList);
+
         $arFields = Array(
             'ACTIVE' => 'Y',
             'IBLOCK_ID' => IBLOCK_CATALOG_ID,
             'NAME' => $elem['NAME'],
             'CODE' => $elem['SYMB'],
             'ID' => $elem['ID'],
+            'IBLOCK_SECTION_ID' => $sectionID,
             'PROPERTY_VALUES' => $PROP,
             'PREVIEW_TEXT' => $elem['PREW_T']
         );
 
-        $explodeSec = explode("-", $elem['SECTION']);
-        $cat = $explodeSec[count($explodeSec) - 1];
-
-        foreach ($selectedSection as $value) {
-            if ($value['NAME'] == $cat) {
-                $arFields['IBLOCK_SECTION_ID'] = $value['ID'];
-                break;
-            }
-        }
-
         $flag = true;
         foreach ($arraySC as $value) {
             if ($value["CODE"] == $elem['SYMB']) {
-                $ID = $ibe->Update($value["ID"], $arFields);
+                $ibe->Update($value["ID"], $arFields);
                 $flag = false;
                 break;
             }
@@ -100,6 +45,125 @@ if (($handle = fopen("goods.csv", "r")) !== false) {
             }
         }
     }
-    fclose($handle);
 }
+
+function getSectionListFromInfoblock()
+{
+    $sectionList = Array();
+
+    $arFilter = Array('IBLOCK_ID' => IBLOCK_CATALOG_ID);
+    $arSelect = Array('ID', 'NAME');
+    $db_list = CIBlockSection::GetList(Array(), $arFilter, false, $arSelect);
+    while ($ar_result = $db_list->Fetch()) {
+        $sectionList[] = Array(
+            'ID' => $ar_result['ID'],
+            'NAME' => $ar_result['NAME']
+        );
+    }
+
+    return $sectionList;
+}
+
+function getSectionId($sec, $sectionList)
+{
+    $explodeSec = explode("-", $sec);
+    $secid = 0;
+
+    $possibleSections = Array();
+    foreach ($sectionList as $section) {
+        if ($section['NAME'] == $explodeSec[count($explodeSec) - 1]) {
+            $possibleSections[] = $section['ID'];
+        }
+    }
+
+    $arrPath = Array();
+    foreach ($possibleSections as $value) {
+        $nav = CIBlockSection::GetNavChain(IBLOCK_CATALOG_ID, $value, Array('NAME', 'ID'));
+        while ($arSectionPath = $nav->Fetch()) {
+            $arrPath[$value][] = $arSectionPath;
+        }
+    }
+    foreach ($arrPath as $path) {
+        $flag = true;
+        $temp = 0;
+        if (count($path) !== count($explodeSec)) {
+            continue;
+        }
+        for ($i = 0; $i < count($explodeSec); $i++) {
+            if ($path[$i]['NAME'] !== $explodeSec[$i]) {
+                $flag = false;
+                break;
+            } else {
+                $temp = $path[$i]['ID'];
+            }
+        }
+        if ($flag) {
+            $secid = $temp;
+        }
+    }
+    return $secid;
+}
+
+function readDataFromFile()
+{
+    $datarr = Array();
+
+    if (($handle = fopen("goods.csv", "r")) !== false) {
+        $counterKeys = 0;
+        $counterElements = 0;
+        $keys = array(
+            "ID",
+            "SYMB",
+            "NAME",
+            "SECTION",
+            "QUANTITY",
+            "PRICE",
+            "COUNTRY",
+            "BRAND",
+            "PREW_T",
+            "PREW_P"
+        );
+
+        while (($data = fgetcsv($handle, 0, "\n")) !== false) {
+            if ($counterElements !== 0) {
+                foreach ($data as $value) {
+                    $elements = explode(";", $value);
+                    $el = array();
+                    foreach ($elements as $it) {
+                        $el[$keys[$counterKeys]] = $it;
+                        $counterKeys++;
+                    }
+                    $datarr[] = $el;
+                    $counterKeys = 0;
+                }
+            }
+            $counterElements++;
+        }
+        fclose($handle);
+    }
+
+    return $datarr;
+}
+
+function getElementsCodeAndIdFromInfoblock()
+{
+    $arraySC = Array();
+    $arSelect = Array('CODE', 'ID');
+    $res = CIBlockElement::GetList(Array(), Array("IBLOCK_ID" => IBLOCK_CATALOG_ID), false, false, $arSelect);
+    while ($ob = $res->Fetch()) {
+        $arraySC[] = Array("CODE" => $ob["CODE"], "ID" => $ob["ID"]);
+    }
+    return $arraySC;
+}
+
+function main()
+{
+    CModule::IncludeModule('iblock');
+    $datarr = readDataFromFile();
+    $arraySC = getElementsCodeAndIdFromInfoblock();
+    addOrUpdateElement($arraySC, $datarr);
+}
+
+main();
+
 ?>
