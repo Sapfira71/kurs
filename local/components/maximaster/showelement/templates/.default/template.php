@@ -12,6 +12,7 @@
                 Бренд: <?= $elem['BRAND'] ?><br>
                 Количество на складе: <?= $elem['QUANTITY'] ?><br>
                 Страна-производитель: <?= $elem['COUNTRY'] ?><br>
+                <a class="purchaseButton" href="/purchase.php?ELEMENT_ID=<?= $elem['ID'] ?>">Купить</a>
             </p>
         <?php endforeach; ?>
     <?php else: ?>

@@ -89,7 +89,8 @@ class CShowElement extends CBitrixComponent
                 'DET_P' => CFile::GetPath($ob["DETAIL_PICTURE"]),
                 'BRAND' => $this -> getBrandName($ob["PROPERTY_BRAND_VALUE"]),
                 'COUNTRY' => $ob["PROPERTY_COUNTRY_VALUE"],
-                'QUANTITY' => $this->getQuantity($ob['ID'])
+                'QUANTITY' => $this->getQuantity($ob['ID']),
+                'ID' => $ob['ID']
             );
         }
 
