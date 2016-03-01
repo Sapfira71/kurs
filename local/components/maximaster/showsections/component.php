@@ -35,27 +35,22 @@ $arSelect = Array(
     'NAME',
     'PREVIEW_TEXT',
     'PREVIEW_PICTURE',
-    'ID'
+    'ID',
+    'CATALOG_GROUP_' . ID_TYPE_PRICE_BASE,
+    'CATALOG_PRICE_' . ID_TYPE_PRICE_BASE
 );
+
 $res = CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
 
 while ($ob = $res->Fetch()) {
-    $price = CPrice::GetList(Array(), Array(
-        'PRODUCT_ID' => $ob["ID"],
-        'CATALOG_GROUP_ID' => ID_TYPE_PRICE_BASE
-    ), false, false, Array('PRICE'));
-
-    $priceEl = 0;
-    if ($arPrice = $price->Fetch()) {
-        $priceEl = $arPrice['PRICE'];
-    }
     $arProduct = array(
         'NAME' => $ob["NAME"],
         'ID' => $ob['ID'],
-        'PRICE' => $priceEl,
+        'PRICE' => $ob['CATALOG_PRICE_' . ID_TYPE_PRICE_BASE],
         'PREV_D' => $ob["PREVIEW_TEXT"],
         'PREV_P' => CFile::GetPath($ob["PREVIEW_PICTURE"])
     );
+
     $arResult["ELEMENTS"][] = $arProduct;
 }
 
