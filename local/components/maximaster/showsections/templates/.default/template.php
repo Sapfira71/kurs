@@ -12,7 +12,7 @@
         <h3>В разделе есть следующие товары:</h3>
         <?php foreach ($arResult["ELEMENTS"] as $elem): ?>
             <p class="sectionElement">
-                <?= $elem["NAME"] ?>. Цена: <?= $elem["PRICE"] ?> руб.<br>
+                <a href="/index.php?ELEMENT_ID=<?=$elem['ID']?>"><?= $elem["NAME"] ?></a>. Цена: <?= $elem["PRICE"] ?> руб.<br>
                 <img class="sectionImage" src="<?= $elem['PREV_P'] ?>">
                 <?= $elem['PREV_D'] ?>
             </p>
