@@ -49,9 +49,9 @@ while ($ob = $res->Fetch()) {
     if ($arPrice = $price->Fetch()) {
         $priceEl = $arPrice['PRICE'];
     }
-
     $arProduct = array(
         'NAME' => $ob["NAME"],
+        'ID' => $ob['ID'],
         'PRICE' => $priceEl,
         'PREV_D' => $ob["PREVIEW_TEXT"],
         'PREV_P' => CFile::GetPath($ob["PREVIEW_PICTURE"])
