@@ -8,9 +8,11 @@
     </tr>
 </table>
 <footer class="footer">
-    <a href="mailto:a.morozova@maximaster.ru?subject=<?=selfURL();?>&body=Hello! It`s your site">
-        Морозова Анастасия Олеговна
-    </a>
+    <?$APPLICATION->IncludeFile(
+        $APPLICATION->GetTemplatePath(SITE_TEMPLATE_PATH."/include_areas/inc_footer.php"),
+        Array(),
+        Array("MODE"=>"php")
+    );?>
 </footer>
 </body>
 </html>

@@ -13,9 +13,18 @@
     <![endif]-->
 </head>
 <body>
-<?php require('scriptsphp.php'); ?>
-<header class="header"><img src="<?= SITE_TEMPLATE_PATH ?>/images/lotus.png" class="imgLotus">
-    Привет! Этот сайт - результат выполнения обучающего задания.
+
+<?php
+$APPLICATION->ShowPanel();
+require('scriptsphp.php');
+?>
+
+<header class="header">
+    <?$APPLICATION->IncludeFile(
+        $APPLICATION->GetTemplatePath(SITE_TEMPLATE_PATH."/include_areas/inc_header.php"),
+        Array(),
+        Array("MODE"=>"php")
+    );?>
 </header>
 <menu class="menu" type="toolbar">
     <a href="/">Главная страница</a>
