@@ -16,7 +16,6 @@
 
 <?php
 $APPLICATION->ShowPanel();
-require('scriptsphp.php');
 ?>
 
 <header class="header">
