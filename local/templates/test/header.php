@@ -19,10 +19,13 @@ $APPLICATION->ShowPanel();
 ?>
 
 <header class="header">
-    <?$APPLICATION->IncludeFile(
-        $APPLICATION->GetTemplatePath(SITE_TEMPLATE_PATH."/include_areas/inc_header.php"),
-        Array(),
-        Array("MODE"=>"php")
+    <?$APPLICATION->IncludeComponent(
+        "bitrix:main.include",
+        "",
+        Array(
+            "AREA_FILE_SHOW" => "file",
+            "PATH" => SITE_TEMPLATE_PATH."/include_areas/inc_header.php"
+        )
     );?>
 </header>
 <menu class="menu" type="toolbar">
