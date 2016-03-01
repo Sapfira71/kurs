@@ -111,7 +111,9 @@ function addOrUpdateElement($arraySC, $datarr)
             'IBLOCK_SECTION_ID' => $sectionID,
             'PROPERTY_VALUES' => $PROP,
             'PREVIEW_TEXT' => $elem['PREW_T'],
-            'PREVIEW_PICTURE' => CFile::MakeFileArray("/local/images/" . $elem['PREW_P'])
+            'PREVIEW_PICTURE' => CFile::MakeFileArray("/local/images/" . $elem['PREW_P']),
+            'DETAIL_TEXT' => $elem['DET_T'],
+            'DETAIL_PICTURE' => CFile::MakeFileArray("/local/images/" . $elem['DET_P'])
         );
 
         $flag = true;
@@ -205,7 +207,9 @@ function readDataFromFile()
             "COUNTRY",
             "BRAND",
             "PREW_T",
-            "PREW_P"
+            "PREW_P",
+            "DET_T",
+            "DET_P"
         );
 
         while (($data = fgetcsv($handle, 0, "\n")) !== false) {
