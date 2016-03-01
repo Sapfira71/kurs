@@ -7,4 +7,6 @@ jQuery("document").ready(function () {
             nav.removeClass("menuFixed");
         }
     });
+
+    $('.imgEl').loupe();
 });

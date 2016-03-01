@@ -7,7 +7,7 @@
         <?php foreach ($arResult as $elem): ?>
             <p class="sectionElement">
                 <?= $elem["NAME"] ?>. Цена: <?= $elem["PRICE"] ?> руб.<br>
-                <img class="sectionImage" src="<?= $elem['DET_P'] ?>">
+                <img class="sectionImage imgEl" src="<?= $elem['DET_P'] ?>">
                 <?= $elem['DET_D'] ?><br><br>
                 Бренд: <?= $elem['BRAND'] ?><br>
                 Количество на складе: <?= $elem['QUANTITY'] ?><br>

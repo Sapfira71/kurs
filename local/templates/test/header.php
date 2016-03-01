@@ -5,7 +5,11 @@
 
     <? $APPLICATION->SetAdditionalCSS("<?= SITE_TEMPLATE_PATH ?>/styles.css"); ?>
     <script type="text/javascript"
-            src="<?= CUtil::GetAdditionalFileURL(SITE_TEMPLATE_PATH . '/scripts.js', true) ?>"></script>
+            src="<?= CUtil::GetAdditionalFileURL(SITE_TEMPLATE_PATH . '/scripts.js', true) ?>">
+    </script>
+    <script type="text/javascript"
+            src="<?= CUtil::GetAdditionalFileURL(SITE_TEMPLATE_PATH . '/zoom/jquery.loupe.js', true) ?>">
+    </script>
     <? $APPLICATION->ShowHead() ?>
     <title><? $APPLICATION->ShowTitle() ?></title>
     <!--[if lt IE 9]>
