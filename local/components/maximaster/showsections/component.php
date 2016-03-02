@@ -36,8 +36,7 @@ $arSelect = Array(
     'PREVIEW_TEXT',
     'PREVIEW_PICTURE',
     'ID',
-    'CATALOG_GROUP_' . ID_TYPE_PRICE_BASE,
-    'CATALOG_PRICE_' . ID_TYPE_PRICE_BASE
+    'CATALOG_GROUP_' . ID_TYPE_PRICE_BASE
 );
 
 $res = CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
