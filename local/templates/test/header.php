@@ -2,19 +2,19 @@
 <html>
 <head>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-
-    <? $APPLICATION->SetAdditionalCSS("<?= SITE_TEMPLATE_PATH ?>/styles.css"); ?>
-    <script type="text/javascript"
-            src="<?= CUtil::GetAdditionalFileURL(SITE_TEMPLATE_PATH . '/scripts.js', true) ?>">
-    </script>
-    <script type="text/javascript"
-            src="<?= CUtil::GetAdditionalFileURL(SITE_TEMPLATE_PATH . '/zoom/jquery.loupe.js', true) ?>">
-    </script>
-    <? $APPLICATION->ShowHead() ?>
-    <title><? $APPLICATION->ShowTitle() ?></title>
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+    <?
+    Bitrix\Main\Page\Asset::getInstance()->addCss(SITE_TEMPLATE_PATH . '/styles.css');
+    Bitrix\Main\Page\Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . '/scripts.js');
+    Bitrix\Main\Page\Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . '/zoom/jquery.loupe.js');
+    ?>
+
+    <? $APPLICATION->ShowHead() ?>
+
+    <title><? $APPLICATION->ShowTitle() ?></title>
 </head>
 <body>
 
