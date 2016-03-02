@@ -13,7 +13,7 @@
         "",
         Array(
             "AREA_FILE_SHOW" => "file",
-            "PATH" => SITE_TEMPLATE_PATH."/include_areas/inc_footer.php"
+            "PATH" => "local/templates/test/include_areas/inc_footer.php"
         )
     );?>
 </footer>
