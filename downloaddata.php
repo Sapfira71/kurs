@@ -3,8 +3,6 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
     die();
 }
 include $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
-use Bitrix\Highloadblock as HL;
-use Bitrix\Main\Entity;
 
 function UpdateGoods($ibe, $elem, $arFields, $value)
 {
@@ -67,21 +65,19 @@ function getIdOfBrand($elem)
 
     $idbrand = "";
 
-    $hlblock = HL\HighloadBlockTable::getById(ID_BRAND_INFOBLOCK)->fetch();
-    $entity = HL\HighloadBlockTable::compileEntity($hlblock);
+    $hlblock = Bitrix\Highloadblock\HighloadBlockTable::getById(ID_BRAND_INFOBLOCK)->fetch();
+    $entity = Bitrix\Highloadblock\HighloadBlockTable::compileEntity($hlblock);
     $entity_data_class = $entity->getDataClass();
     $entity_table_name = $hlblock['Brand'];
 
     $sTableID = 'tbl_' . $entity_table_name;
     $rsData = $entity_data_class::getList(array(
-        "select" => array('UF_NAME', 'UF_XML_ID')
+        "select" => array('UF_NAME', 'UF_XML_ID'),
+        "filter" => array('=UF_NAME' => $elem['BRAND'])
     ));
     $rsData = new CDBResult($rsData, $sTableID);
-    while ($arRes = $rsData->Fetch()) {
-        if ($arRes['UF_NAME'] == $elem['BRAND']) {
-            $idbrand = $arRes['UF_XML_ID'];
-            break;
-        }
+    if($arRes = $rsData->Fetch()) {
+        $idbrand = $arRes['UF_XML_ID'];
     }
     return $idbrand;
 }
