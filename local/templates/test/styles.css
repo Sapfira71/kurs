@@ -33,12 +33,12 @@ td.col1, td.col3 {
     width: 200px;
 }
 
-.imgLotus {
+.img-lotus {
     width: 70px;
     height: 70px;
 }
 
-.menuFixed {
+.menu-fixed {
     z-index: 1;
     position: fixed;
     left: 0;
@@ -46,25 +46,25 @@ td.col1, td.col3 {
     width: 100%;
 }
 
-.section, .sectionElems, .sectionHead {
+.section, .section-elems, .section-head {
     padding: 10px;
 }
 
-.sectionImage {
+.section-image {
     width: 20%;
     border: 1px solid slateblue;
 }
 
-.sectionElement {
+.section-element {
     border: 1px solid salmon;
     padding: 5px;
 }
 
-table.tableGoods {
+table.table-goods {
     width: 100%;
 }
 
-table.tableGoods tr:first-child {
+table.table-goods tr:first-child {
     text-align: center;
     font: bold 14px serif;;
 }

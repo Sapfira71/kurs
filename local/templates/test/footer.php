@@ -1,7 +1,7 @@
             </div>
         </td>
         <td class="col3">
-            <aside class="asideRight">
+            <aside>
 
             </aside>
         </td>
