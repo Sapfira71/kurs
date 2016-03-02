@@ -2,12 +2,12 @@
     die();
 }?>
 
-<div class="sectionElems">
+<div class="section-elems">
     <?php if (!empty($arResult["element"])): ?>
         <?php foreach ($arResult as $elem): ?>
-            <p class="sectionElement">
+            <p class="section-element">
                 <?= $elem["NAME"] ?>. Цена: <?= $elem["PRICE"] ?> руб.<br>
-                <img class="sectionImage imgEl" src="<?= $elem['DET_P'] ?>">
+                <img class="section-image js-img-el" src="<?= $elem['DET_P'] ?>">
                 <?= $elem['DET_D'] ?><br><br>
                 Бренд: <?= $elem['BRAND'] ?><br>
                 Количество на складе: <?= $elem['QUANTITY'] ?><br>

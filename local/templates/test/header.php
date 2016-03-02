@@ -38,7 +38,7 @@ require('scriptsphp.php');
 <table cellpadding="5" cellspacing="0" class="col">
     <tr>
         <td class="col1">
-            <aside class="asideLeft">
+            <aside>
                 <? $APPLICATION->IncludeComponent(
                     "bitrix:menu",
                     "tree",

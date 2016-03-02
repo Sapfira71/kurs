@@ -2,11 +2,11 @@ jQuery("document").ready(function () {
     var nav = $('menu');
     $(window).scroll(function () {
         if ($(this).scrollTop() > 80) {
-            nav.addClass("menuFixed");
+            nav.addClass("menu-fixed");
         } else {
-            nav.removeClass("menuFixed");
+            nav.removeClass("menu-fixed");
         }
     });
 
-    $('.imgEl').loupe();
+    $('.js-img-el').loupe();
 });
