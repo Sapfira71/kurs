@@ -27,8 +27,9 @@ $APPLICATION->ShowPanel();
         "bitrix:main.include",
         "",
         Array(
-            "AREA_FILE_SHOW" => "file",
-            "PATH" => "local/templates/test/include_areas/inc_header.php"
+            "AREA_FILE_SHOW" => "page",
+            "AREA_FILE_SUFFIX" => "header",
+            "EDIT_TEMPLATE" => ""
         )
     );?>
 </header>
