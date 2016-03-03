@@ -20,17 +20,14 @@
 
 <?php
 $APPLICATION->ShowPanel();
+require('scriptsphp.php');
 ?>
 
 <header class="header">
-    <?$APPLICATION->IncludeComponent(
-        "bitrix:main.include",
-        "",
-        Array(
-            "AREA_FILE_SHOW" => "page",
-            "AREA_FILE_SUFFIX" => "header",
-            "EDIT_TEMPLATE" => ""
-        )
+    <?$APPLICATION->IncludeFile(
+        $APPLICATION->GetTemplatePath(SITE_TEMPLATE_PATH."/include_areas/inc_header.php"),
+        Array(),
+        Array("MODE"=>"php")
     );?>
 </header>
 <menu class="menu" type="toolbar">
