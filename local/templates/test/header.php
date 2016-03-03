@@ -7,9 +7,10 @@
     <![endif]-->
 
     <?
-    Bitrix\Main\Page\Asset::getInstance()->addCss(SITE_TEMPLATE_PATH . '/styles.css');
-    Bitrix\Main\Page\Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . '/scripts.js');
-    Bitrix\Main\Page\Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . '/zoom/jquery.loupe.js');
+    $assetManager = Bitrix\Main\Page\Asset::getInstance();
+    $assetManager->addCss(SITE_TEMPLATE_PATH . '/styles.css');
+    $assetManager->addJs(SITE_TEMPLATE_PATH . '/scripts.js');
+    $assetManager->addJs(SITE_TEMPLATE_PATH . '/zoom/jquery.loupe.js');
     ?>
 
     <? $APPLICATION->ShowHead() ?>
@@ -24,11 +25,11 @@ require('scriptsphp.php');
 ?>
 
 <header class="header">
-    <?$APPLICATION->IncludeFile(
-        $APPLICATION->GetTemplatePath(SITE_TEMPLATE_PATH."/include_areas/inc_header.php"),
+    <? $APPLICATION->IncludeFile(
+        $APPLICATION->GetTemplatePath(SITE_TEMPLATE_PATH . "/include_areas/inc_header.php"),
         Array(),
-        Array("MODE"=>"php")
-    );?>
+        Array("MODE" => "php")
+    ); ?>
 </header>
 <menu class="menu" type="toolbar">
     <a href="/">Главная страница</a>
