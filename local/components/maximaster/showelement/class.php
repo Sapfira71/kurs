@@ -2,9 +2,6 @@
     die();
 }
 
-use Bitrix\Highloadblock as HL;
-use Bitrix\Main\Entity;
-
 class CShowElement extends CBitrixComponent
 {
     private function getPrice($id)
@@ -43,21 +40,19 @@ class CShowElement extends CBitrixComponent
 
         $namebrand = "";
 
-        $hlblock = HL\HighloadBlockTable::getById(ID_BRAND_INFOBLOCK)->fetch();
-        $entity = HL\HighloadBlockTable::compileEntity($hlblock);
+        $hlblock = Bitrix\Highloadblock\HighloadBlockTable::getById(ID_BRAND_INFOBLOCK)->fetch();
+        $entity = Bitrix\Highloadblock\HighloadBlockTable::compileEntity($hlblock);
         $entity_data_class = $entity->getDataClass();
         $entity_table_name = $hlblock['Brand'];
 
         $sTableID = 'tbl_' . $entity_table_name;
         $rsData = $entity_data_class::getList(array(
-            "select" => array('UF_NAME', 'UF_XML_ID')
+            "select" => array('UF_NAME', 'UF_XML_ID'),
+            "filter" => array('=UF_XML_ID' => $xml_id)
         ));
         $rsData = new CDBResult($rsData, $sTableID);
-        while ($arRes = $rsData->Fetch()) {
-            if ($arRes['UF_XML_ID'] == $xml_id) {
+        if ($arRes = $rsData->Fetch()) {
                 $namebrand = $arRes['UF_NAME'];
-                break;
-            }
         }
         return $namebrand;
     }

@@ -7,9 +7,10 @@
     <![endif]-->
 
     <?
-    Bitrix\Main\Page\Asset::getInstance()->addCss(SITE_TEMPLATE_PATH . '/styles.css');
-    Bitrix\Main\Page\Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . '/scripts.js');
-    Bitrix\Main\Page\Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . '/zoom/jquery.loupe.js');
+    $assetManager = Bitrix\Main\Page\Asset::getInstance();
+    $assetManager->addCss(SITE_TEMPLATE_PATH . '/styles.css');
+    $assetManager->addJs(SITE_TEMPLATE_PATH . '/scripts.js');
+    $assetManager->addJs(SITE_TEMPLATE_PATH . '/zoom/jquery.loupe.js');
     ?>
 
     <? $APPLICATION->ShowHead() ?>
@@ -20,14 +21,17 @@
 
 <?php
 $APPLICATION->ShowPanel();
-require('scriptsphp.php');
 ?>
 
 <header class="header">
-    <?$APPLICATION->IncludeFile(
-        $APPLICATION->GetTemplatePath(SITE_TEMPLATE_PATH."/include_areas/inc_header.php"),
-        Array(),
-        Array("MODE"=>"php")
+    <?$APPLICATION->IncludeComponent(
+        "bitrix:main.include",
+        "",
+        Array(
+            "AREA_FILE_SHOW" => "page",
+            "AREA_FILE_SUFFIX" => "header",
+            "EDIT_TEMPLATE" => ""
+        )
     );?>
 </header>
 <menu class="menu" type="toolbar">
