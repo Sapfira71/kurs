@@ -12,8 +12,9 @@
         "bitrix:main.include",
         "",
         Array(
-            "AREA_FILE_SHOW" => "file",
-            "PATH" => "local/templates/test/include_areas/inc_footer.php"
+            "AREA_FILE_SHOW" => "page",
+            "AREA_FILE_SUFFIX" => "footer",
+            "EDIT_TEMPLATE" => ""
         )
     );?>
 </footer>
