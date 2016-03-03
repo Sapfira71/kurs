@@ -1,14 +1,14 @@
-            </div>
-        </td>
-        <td class="col3">
-            <aside>
+</div>
+</td>
+<td class="col3">
+    <aside>
 
-            </aside>
-        </td>
-    </tr>
+    </aside>
+</td>
+</tr>
 </table>
 <footer class="footer">
-    <?$APPLICATION->IncludeComponent(
+    <? $APPLICATION->IncludeComponent(
         "bitrix:main.include",
         "",
         Array(
@@ -16,7 +16,7 @@
             "AREA_FILE_SUFFIX" => "footer",
             "EDIT_TEMPLATE" => ""
         )
-    );?>
+    ); ?>
 </footer>
 </body>
 </html>

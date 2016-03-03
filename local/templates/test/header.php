@@ -24,7 +24,7 @@ $APPLICATION->ShowPanel();
 ?>
 
 <header class="header">
-    <?$APPLICATION->IncludeComponent(
+    <? $APPLICATION->IncludeComponent(
         "bitrix:main.include",
         "",
         Array(
@@ -32,7 +32,7 @@ $APPLICATION->ShowPanel();
             "AREA_FILE_SUFFIX" => "header",
             "EDIT_TEMPLATE" => ""
         )
-    );?>
+    ); ?>
 </header>
 <menu class="menu" type="toolbar">
     <a href="/">Главная страница</a>

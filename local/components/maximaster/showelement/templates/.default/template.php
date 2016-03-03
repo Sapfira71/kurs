@@ -1,6 +1,6 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
     die();
-}?>
+} ?>
 
 <div class="section-elems">
     <?php if (!empty($arResult["element"])): ?>

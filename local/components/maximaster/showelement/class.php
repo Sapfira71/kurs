@@ -35,7 +35,8 @@ class CShowElement extends CBitrixComponent
         return $res;
     }
 
-    private function getBrandName($xml_id) {
+    private function getBrandName($xml_id)
+    {
         CModule::IncludeModule("highloadblock");
 
         $namebrand = "";
@@ -52,7 +53,7 @@ class CShowElement extends CBitrixComponent
         ));
         $rsData = new CDBResult($rsData, $sTableID);
         if ($arRes = $rsData->Fetch()) {
-                $namebrand = $arRes['UF_NAME'];
+            $namebrand = $arRes['UF_NAME'];
         }
         return $namebrand;
     }
@@ -82,7 +83,7 @@ class CShowElement extends CBitrixComponent
                 'PRICE' => $this->getPrice($ob['ID']),
                 'DET_D' => $ob["DETAIL_TEXT"],
                 'DET_P' => CFile::GetPath($ob["DETAIL_PICTURE"]),
-                'BRAND' => $this -> getBrandName($ob["PROPERTY_BRAND_VALUE"]),
+                'BRAND' => $this->getBrandName($ob["PROPERTY_BRAND_VALUE"]),
                 'COUNTRY' => $ob["PROPERTY_COUNTRY_VALUE"],
                 'QUANTITY' => $this->getQuantity($ob['ID'])
             );

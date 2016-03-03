@@ -76,7 +76,7 @@ function getIdOfBrand($elem)
         "filter" => array('=UF_NAME' => $elem['BRAND'])
     ));
     $rsData = new CDBResult($rsData, $sTableID);
-    if($arRes = $rsData->Fetch()) {
+    if ($arRes = $rsData->Fetch()) {
         $idbrand = $arRes['UF_XML_ID'];
     }
     return $idbrand;
