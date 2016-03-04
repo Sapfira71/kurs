@@ -35,9 +35,15 @@ $APPLICATION->ShowPanel();
     ); ?>
 </header>
 <menu class="menu" type="toolbar">
-    <a href="/">Главная страница</a>
-    <a href="../about.php">О себе</a>
-    <a href="../contacts.php">Контакты</a>
+    <? $APPLICATION->IncludeComponent(
+        "bitrix:main.include",
+        "",
+        Array(
+            "AREA_FILE_SHOW" => "page",
+            "AREA_FILE_SUFFIX" => "topmenu",
+            "EDIT_TEMPLATE" => ""
+        )
+    ); ?>
 </menu>
 <table cellpadding="5" cellspacing="0" class="col">
     <tr>
