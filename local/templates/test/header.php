@@ -36,12 +36,10 @@ $APPLICATION->ShowPanel();
 </header>
 <menu class="menu" type="toolbar">
     <? $APPLICATION->IncludeComponent(
-        "bitrix:main.include",
-        "",
+        "bitrix:menu",
+        "grey_tabs",
         Array(
-            "AREA_FILE_SHOW" => "page",
-            "AREA_FILE_SUFFIX" => "topmenu",
-            "EDIT_TEMPLATE" => ""
+            "ROOT_MENU_TYPE" => "top"
         )
     ); ?>
 </menu>
