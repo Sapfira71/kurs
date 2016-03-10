@@ -18,3 +18,21 @@ function setCookies()
     $APPLICATION->set_cookie("number", $_POST['number'], time() + 60 * 5);
     $APPLICATION->set_cookie("mail", $_POST['mail'], time() + 60 * 5);
 }
+
+function sendMessage($id)
+{
+    setCookies();
+
+    CBitrixComponent::includeComponentClass("maximaster:showelement");
+    $ob = new CShowElement();
+    $arEl = $ob->readElementInfo($id);
+
+    $to = $_POST['mail'];
+    $message = "Ваше имя: " . $_POST['name'] . ". Телефон: " . $_POST['number'] . ". Почта: " . $_POST['mail'] . ". ";
+    $message .= $arEl['NAME'] . ". " . $arEl['PRICE'] . ". " . $arEl['BRAND'] . ". " . $arEl['COUNTRY'];
+    /*$message = wordwrap($message, 70, "\r\n");*/
+    echo $message;
+    if (mail($to, "Your order", $message)) {
+        echo "<br>" . "Письмо отправлено успешно!" . "<br>";
+    }
+}

@@ -1,8 +1,9 @@
 <?
 include $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
 ?>
-    <form name="order" method="post" action="<? setCookies(); ?>">
+    <form name="order" method="post" action="">
         <pre>
+            <? sendMessage($_GET['ELEMENT_ID']); ?>
             <? print_r($_POST);
             print_r($_COOKIE); ?>
         </pre>
