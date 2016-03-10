@@ -2,11 +2,11 @@
     die();
 }
 
-if (empty($_REQUEST["ELEMENT_ID"])) {
+if (!empty($_REQUEST["ELEMENT_ID"]) || !empty($_REQUEST["BRAND_ID"])) {
+    $arResult['element'] = $this->readElementInfo($_REQUEST["ELEMENT_ID"], $_REQUEST["BRAND_ID"]);
+} else {
     return;
 }
-
-$arResult['element'] = $this->readElementInfo($_REQUEST["ELEMENT_ID"]);
 
 $this->includeComponentTemplate();
 ?>

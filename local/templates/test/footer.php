@@ -2,7 +2,9 @@
 </td>
 <td class="col3">
     <aside>
-
+        <?php
+        $APPLICATION->IncludeComponent('maximaster:showbrands', '.default');
+        ?>
     </aside>
 </td>
 </tr>
