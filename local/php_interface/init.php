@@ -22,7 +22,4 @@ function setCookies()
     $APPLICATION->set_cookie("name", $_POST['name'], time() + 60 * 5);
     $APPLICATION->set_cookie("number", $_POST['number'], time() + 60 * 5);
     $APPLICATION->set_cookie("mail", $_POST['mail'], time() + 60 * 5);
-
-    print_r($_POST);
-    print_r($_COOKIE);
 }
