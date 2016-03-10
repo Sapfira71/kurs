@@ -4,7 +4,7 @@
 
 <div class="section-elems">
     <?php if (!empty($arResult["element"])): ?>
-        <?php foreach ($arResult as $elem): ?>
+        <?php foreach ($arResult['element'] as $elem): ?>
             <p class="section-element">
                 <?= $elem["NAME"] ?>. Цена: <?= $elem["PRICE"] ?> руб.<br>
                 <img class="section-image js-img-el" src="<?= $elem['DET_P'] ?>">

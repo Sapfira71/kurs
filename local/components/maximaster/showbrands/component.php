@@ -2,7 +2,7 @@
     die();
 }
 
-$arResult['element'] = $this->readElementInfo($_REQUEST["ELEMENT_ID"], $_REQUEST["BRAND_ID"]);
+$arResult['brands'] = $this->getBrands();
 
 $this->includeComponentTemplate();
 ?>

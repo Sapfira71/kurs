@@ -62,15 +62,22 @@ class CShowElement extends CBitrixComponent
         return $namebrand;
     }
 
-    public function readElementInfo($elementID)
+    public function readElementInfo($elementID, $brandID)
     {
         CModule::IncludeModule('iblock');
         $arElement = Array();
 
         $arFilter = Array(
-            "IBLOCK_ID" => IBLOCK_CATALOG_ID,
-            "ID" => $elementID
+            "IBLOCK_ID" => IBLOCK_CATALOG_ID
         );
+
+        if(!empty($elementID)) {
+            $arFilter['ID'] = $elementID;
+        }
+        if(!empty($brandID)) {
+            $arFilter['PROPERTY_BRAND'] = $brandID;
+        }
+
         $arSelect = Array(
             'NAME',
             'DETAIL_TEXT',
@@ -82,7 +89,7 @@ class CShowElement extends CBitrixComponent
 
         $res = CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
         while ($ob = $res->Fetch()) {
-            $arElement = array(
+            $arElement[] = array(
                 'NAME' => $ob["NAME"],
                 'PRICE' => $this->getPrice($ob['ID']),
                 'DET_D' => $ob["DETAIL_TEXT"],
