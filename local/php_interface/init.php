@@ -10,16 +10,3 @@ function selfURL()
     $url .= $_SERVER["REQUEST_URI"];
     return $url;
 }
-
-function sendMessage($elemID)
-{
-
-}
-
-function setCookies()
-{
-    global $APPLICATION;
-    $APPLICATION->set_cookie("name", $_POST['name'], time() + 60 * 5);
-    $APPLICATION->set_cookie("number", $_POST['number'], time() + 60 * 5);
-    $APPLICATION->set_cookie("mail", $_POST['mail'], time() + 60 * 5);
-}
