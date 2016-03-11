@@ -1,6 +1,5 @@
 <?
 use Bitrix\Highloadblock as HL;
-use Bitrix\Main\Entity;
 
 class CShowBrands extends CBitrixComponent
 {
@@ -46,14 +45,14 @@ class CShowBrands extends CBitrixComponent
 
         $hlblock = HL\HighloadBlockTable::getById(ID_BRAND_INFOBLOCK)->fetch();
         $entity = HL\HighloadBlockTable::compileEntity($hlblock);
-        $entity_data_class = $entity->getDataClass();
-        $entity_table_name = $hlblock['Brand'];
+        $entityDataClass = $entity->getDataClass();
+        $entityTableName = $hlblock['Brand'];
 
-        $sTableID = 'tbl_' . $entity_table_name;
-        $rsData = $entity_data_class::getList(array(
+        $rsData = $entityDataClass::getList(array(
             "select" => array('UF_NAME', 'UF_XML_ID')
         ));
-        $rsData = new CDBResult($rsData, $sTableID);
+        $rsData = new CDBResult($rsData, $entityTableName);
+
         while ($arRes = $rsData->Fetch()) {
             foreach ($listCurrentBr as $br) {
                 if ($arRes['UF_XML_ID'] == $br) {
@@ -67,5 +66,13 @@ class CShowBrands extends CBitrixComponent
         }
 
         return $res;
+    }
+
+    public function executeComponent()
+    {
+        $this->arResult["brands"] = $this->getBrands();
+        $this->includeComponentTemplate();
+
+        return $this->arResult["brands"];
     }
 }

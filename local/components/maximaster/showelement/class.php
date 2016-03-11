@@ -1,6 +1,5 @@
 <?
 use Bitrix\Highloadblock as HL;
-use Bitrix\Main\Entity;
 
 class CShowElement extends CBitrixComponent
 {
@@ -43,14 +42,14 @@ class CShowElement extends CBitrixComponent
 
         $hlblock = HL\HighloadBlockTable::getById(ID_BRAND_INFOBLOCK)->fetch();
         $entity = HL\HighloadBlockTable::compileEntity($hlblock);
-        $entity_data_class = $entity->getDataClass();
-        $entity_table_name = $hlblock['Brand'];
+        $entityDataClass = $entity->getDataClass();
+        $entityTableName = $hlblock['Brand'];
 
-        $sTableID = 'tbl_' . $entity_table_name;
-        $rsData = $entity_data_class::getList(array(
+        $rsData = $entityDataClass::getList(array(
             "select" => array('UF_NAME', 'UF_XML_ID')
         ));
-        $rsData = new CDBResult($rsData, $sTableID);
+        $rsData = new CDBResult($rsData, $entityTableName);
+
         while ($arRes = $rsData->Fetch()) {
             if ($arRes['UF_XML_ID'] == $xml_id) {
                 $namebrand = $arRes['UF_NAME'];
@@ -99,5 +98,16 @@ class CShowElement extends CBitrixComponent
         }
 
         return $arElement;
+    }
+
+    public function executeComponent()
+    {
+        if (!empty($_REQUEST["ELEMENT_ID"]) || !empty($_REQUEST["BRAND_ID"])) {
+            $this->arResult['element'] = $this->readElementInfo($_REQUEST["ELEMENT_ID"], $_REQUEST["BRAND_ID"]);
+        } else {
+            return;
+        }
+        $this->includeComponentTemplate();
+        return $this->arResult["element"];
     }
 }
