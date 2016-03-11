@@ -10,10 +10,14 @@
 </tr>
 </table>
 <footer class="footer">
-    <? $APPLICATION->IncludeFile(
-        $APPLICATION->GetTemplatePath(SITE_TEMPLATE_PATH . "/include_areas/inc_footer.php"),
-        Array(),
-        Array("MODE" => "php")
+    <? $APPLICATION->IncludeComponent(
+        "bitrix:main.include",
+        "",
+        Array(
+            "AREA_FILE_SHOW" => "page",
+            "AREA_FILE_SUFFIX" => "footer",
+            "EDIT_TEMPLATE" => ""
+        )
     ); ?>
 </footer>
 </body>

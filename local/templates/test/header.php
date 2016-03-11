@@ -23,20 +23,27 @@
 
 <?php
 $APPLICATION->ShowPanel();
-require('scriptsphp.php');
 ?>
 
 <header class="header">
-    <? $APPLICATION->IncludeFile(
-        $APPLICATION->GetTemplatePath(SITE_TEMPLATE_PATH . "/include_areas/inc_header.php"),
-        Array(),
-        Array("MODE" => "php")
+    <? $APPLICATION->IncludeComponent(
+        "bitrix:main.include",
+        "",
+        Array(
+            "AREA_FILE_SHOW" => "page",
+            "AREA_FILE_SUFFIX" => "header",
+            "EDIT_TEMPLATE" => ""
+        )
     ); ?>
 </header>
 <menu class="menu" type="toolbar">
-    <a href="/">Главная страница</a>
-    <a href="../about.php">О себе</a>
-    <a href="../contacts.php">Контакты</a>
+    <? $APPLICATION->IncludeComponent(
+        "bitrix:menu",
+        "grey_tabs",
+        Array(
+            "ROOT_MENU_TYPE" => "top"
+        )
+    ); ?>
 </menu>
 <table cellpadding="5" cellspacing="0" class="col">
     <tr>

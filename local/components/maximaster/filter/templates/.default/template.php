@@ -36,9 +36,9 @@
         <tr>
             <td>Только в наличии:</td>
             <td><input type="checkbox" name="myFilter[availability]"
-                    <? if (isset($arResult["availability"])) {
-                        echo "checked";
-                    } ?>>
+                       <? if (isset($arResult["availability"])) {
+                            echo "checked";
+                       } ?>>
             </td>
         </tr>
     </table>
