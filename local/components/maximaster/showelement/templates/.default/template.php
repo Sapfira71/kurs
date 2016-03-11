@@ -1,6 +1,4 @@
-<? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
-    die();
-}?>
+
 
 <div class="section-elems">
     <?php if (!empty($arResult["element"])): ?>
@@ -13,6 +11,9 @@
                 Количество на складе: <?= $elem['QUANTITY'] ?><br>
                 Страна-производитель: <?= $elem['COUNTRY'] ?><br>
             </p>
+            <pre>
+                <?print_r($elem);?>
+            </pre>
         <?php endforeach; ?>
     <?php else: ?>
         <h3>Товар с таким идентификатором отсутствует на складе</h3>

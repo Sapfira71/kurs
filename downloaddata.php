@@ -86,6 +86,19 @@ function getIdOfBrand($elem)
     return $idbrand;
 }
 
+function getGalleryImages($elem)
+{
+    $result = Array();
+
+    $str = $elem['GALLERY'];
+    $explodeStr = explode("-", $str);
+    foreach($explodeStr as $el) {
+        $result[]= CFile::MakeFileArray("/local/images/" . $el);
+    }
+
+    return $result;
+}
+
 function addOrUpdateElement($arraySC, $datarr)
 {
     $sectionList = getSectionListFromInfoblock();
@@ -95,10 +108,12 @@ function addOrUpdateElement($arraySC, $datarr)
 
         $countryID = getIdOfCountry($elem);
         $brandName = getIdOfBrand($elem);
+        $galleryArr = getGalleryImages($elem);
 
         $PROP = Array(
             'COUNTRY' => $countryID,
-            'BRAND' => $brandName
+            'BRAND' => $brandName,
+            'GALLERY' => $galleryArr
         );
 
         $sectionID = getSectionId($elem['SECTION'], $sectionList);
@@ -205,7 +220,8 @@ function readDataFromFile()
             "COUNTRY",
             "BRAND",
             "PREW_T",
-            "PREW_P"
+            "PREW_P",
+            "GALLERY"
         );
 
         while (($data = fgetcsv($handle, 0, "\n")) !== false) {

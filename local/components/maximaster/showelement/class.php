@@ -81,7 +81,8 @@ class CShowElement extends CBitrixComponent
             'DETAIL_PICTURE',
             'PROPERTY_BRAND',
             'PROPERTY_COUNTRY',
-            'ID'
+            'ID',
+            'GALLERY'
         );
 
         $res = CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
@@ -93,7 +94,8 @@ class CShowElement extends CBitrixComponent
                 'DET_P' => CFile::GetPath($ob["DETAIL_PICTURE"]),
                 'BRAND' => $this->getBrandName($ob["PROPERTY_BRAND_VALUE"]),
                 'COUNTRY' => $ob["PROPERTY_COUNTRY_VALUE"],
-                'QUANTITY' => $this->getQuantity($ob['ID'])
+                'QUANTITY' => $this->getQuantity($ob['ID']),
+                'GALLERY' => $ob['GALLERY']
             );
         }
 
