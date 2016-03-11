@@ -48,12 +48,11 @@ class CShowElement extends CBitrixComponent
         $entityDataClass = $entity->getDataClass();
         $entityTableName = $hlblock['Brand'];
 
-        $sTableID = 'tbl_' . $entity_table_name;
-        $rsData = $entity_data_class::getList(array(
+        $rsData = $entityDataClass::getList(array(
             "select" => array('UF_NAME', 'UF_XML_ID'),
             "filter" => array('=UF_XML_ID' => $xml_id)
         ));
-        $rsData = new CDBResult($rsData, $sTableID);
+        $rsData = new CDBResult($rsData, $entityTableName);
         while ($arRes = $rsData->Fetch()) {
             if ($arRes['UF_XML_ID'] == $xml_id) {
                 $namebrand = $arRes['UF_NAME'];
@@ -72,10 +71,10 @@ class CShowElement extends CBitrixComponent
             "IBLOCK_ID" => IBLOCK_CATALOG_ID
         );
 
-        if(!empty($elementID)) {
+        if (!empty($elementID)) {
             $arFilter['ID'] = $elementID;
         }
-        if(!empty($brandID)) {
+        if (!empty($brandID)) {
             $arFilter['PROPERTY_BRAND'] = $brandID;
         }
 
@@ -96,7 +95,7 @@ class CShowElement extends CBitrixComponent
                 'PRICE' => $this->getPrice($ob['ID']),
                 'DET_D' => $ob["DETAIL_TEXT"],
                 'DET_P' => CFile::GetPath($ob["DETAIL_PICTURE"]),
-                'BRAND' => $this -> getBrandName($ob["PROPERTY_BRAND_VALUE"]),
+                'BRAND' => $this->getBrandName($ob["PROPERTY_BRAND_VALUE"]),
                 'COUNTRY' => $ob["PROPERTY_COUNTRY_VALUE"],
                 'QUANTITY' => $this->getQuantity($ob['ID']),
                 'GALLERY' => $ob['GALLERY']

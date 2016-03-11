@@ -1,7 +1,5 @@
 <?php
-if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
-    die();
-}
+
 include $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
 
 function UpdateGoods($ibe, $elem, $arFields, $value)
@@ -88,8 +86,8 @@ function getGalleryImages($elem)
 
     $str = $elem['GALLERY'];
     $explodeStr = explode("-", $str);
-    foreach($explodeStr as $el) {
-        $result[]= CFile::MakeFileArray("/local/images/" . $el);
+    foreach ($explodeStr as $el) {
+        $result[] = CFile::MakeFileArray("/local/images/" . $el);
     }
 
     return $result;

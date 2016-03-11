@@ -4,7 +4,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
     <p>Рабочий телефон: 8-915-***-23-71</p>
     <a id="2gis_mini_biglink" title="Организации Тулы"
        href="http://maps.2gis.ru/#/?history=project/tula/center/37.613707,54.19409/zoom/17/">
-       Перейти к большой карте
+        Перейти к большой карте
     </a>
     <noscript id="dg-widget-minigis-place-023946f1" style="color:#c00;font-size:16px;font-weight:bold;">
         Код для вставки виджета на сайт

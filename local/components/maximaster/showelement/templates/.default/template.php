@@ -1,6 +1,6 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
     die();
-}?>
+} ?>
 
 <div class="section-elems">
     <?php if (!empty($arResult["element"])): ?>
@@ -14,7 +14,7 @@
                 Страна-производитель: <?= $elem['COUNTRY'] ?><br>
             </p>
             <pre>
-                <?print_r($elem);?>
+                <? print_r($elem); ?>
             </pre>
         <?php endforeach; ?>
     <?php else: ?>

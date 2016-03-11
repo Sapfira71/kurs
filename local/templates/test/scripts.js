@@ -11,7 +11,7 @@ jQuery("document").ready(function () {
     $('.js-img-el').loupe();
 });
 
-$(function(){
+$(function () {
     $('#products').slides({
         preload: true,
         preloadImage: 'img/loading.gif',
