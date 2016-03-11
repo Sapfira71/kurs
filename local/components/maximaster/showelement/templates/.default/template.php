@@ -13,9 +13,22 @@
                 Количество на складе: <?= $elem['QUANTITY'] ?><br>
                 Страна-производитель: <?= $elem['COUNTRY'] ?><br>
             </p>
-            <pre>
-                <? print_r($elem); ?>
-            </pre>
+            <div id="container">
+                <div id="products_example">
+                    <div id="products">
+                        <div class="slides_container">
+                            <?php foreach ($elem['GALLERY'] as $pict): ?>
+                                <a target="_blank"><img src="<?=$pict?>" width="350"></a>
+                            <?php endforeach; ?>
+                        </div>
+                        <ul class="pagination">
+                            <?php foreach ($elem['GALLERY'] as $pict): ?>
+                                <li><a href="#"><img src="<?=$pict?>" width="55"></a></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         <?php endforeach; ?>
     <?php else: ?>
         <h3>Товар с таким идентификатором отсутствует на складе</h3>

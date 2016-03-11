@@ -1,7 +1,4 @@
-<? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
-    die();
-}
-
+<?
 use Bitrix\Highloadblock as HL;
 
 class CShowElement extends CBitrixComponent
@@ -85,11 +82,23 @@ class CShowElement extends CBitrixComponent
             'PROPERTY_BRAND',
             'PROPERTY_COUNTRY',
             'ID',
-            'GALLERY'
+            'PROPERTY_GALLERY'
         );
 
         $res = CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
-        while ($ob = $res->Fetch()) {
+
+        while ($ob = $res->Fetch())
+        {
+            echo "<pre>";
+            print_r($ob);
+            echo "</pre>";
+
+            $arPict = Array();
+            $temp = CIBlockElement::GetProperty(IBLOCK_CATALOG_ID, $ob['ID'], array(), Array("CODE"=>"GALLERY"));
+            while ($ob1 = $temp->GetNext()) {
+                $arPict[] = CFile::GetPath($ob1['VALUE']);
+            }
+
             $arElement[] = array(
                 'NAME' => $ob["NAME"],
                 'PRICE' => $this->getPrice($ob['ID']),
@@ -98,7 +107,7 @@ class CShowElement extends CBitrixComponent
                 'BRAND' => $this->getBrandName($ob["PROPERTY_BRAND_VALUE"]),
                 'COUNTRY' => $ob["PROPERTY_COUNTRY_VALUE"],
                 'QUANTITY' => $this->getQuantity($ob['ID']),
-                'GALLERY' => $ob['GALLERY']
+                'GALLERY' => $arPict
             );
         }
 
@@ -112,6 +121,9 @@ class CShowElement extends CBitrixComponent
         } else {
             return;
         }
+        /*echo "<pre>";
+        print_r($this->arResult["element"]);
+        echo "</pre>";*/
         $this->includeComponentTemplate();
         return $this->arResult["element"];
     }
