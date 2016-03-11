@@ -1,7 +1,4 @@
-<? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
-    die();
-}
-
+<?
 use Bitrix\Highloadblock as HL;
 use Bitrix\Main\Entity;
 
@@ -38,7 +35,8 @@ class CShowElement extends CBitrixComponent
         return $res;
     }
 
-    private function getBrandName($xml_id) {
+    private function getBrandName($xml_id)
+    {
         CModule::IncludeModule("highloadblock");
 
         $namebrand = "";
@@ -71,10 +69,10 @@ class CShowElement extends CBitrixComponent
             "IBLOCK_ID" => IBLOCK_CATALOG_ID
         );
 
-        if(!empty($elementID)) {
+        if (!empty($elementID)) {
             $arFilter['ID'] = $elementID;
         }
-        if(!empty($brandID)) {
+        if (!empty($brandID)) {
             $arFilter['PROPERTY_BRAND'] = $brandID;
         }
 
@@ -94,7 +92,7 @@ class CShowElement extends CBitrixComponent
                 'PRICE' => $this->getPrice($ob['ID']),
                 'DET_D' => $ob["DETAIL_TEXT"],
                 'DET_P' => CFile::GetPath($ob["DETAIL_PICTURE"]),
-                'BRAND' => $this -> getBrandName($ob["PROPERTY_BRAND_VALUE"]),
+                'BRAND' => $this->getBrandName($ob["PROPERTY_BRAND_VALUE"]),
                 'COUNTRY' => $ob["PROPERTY_COUNTRY_VALUE"],
                 'QUANTITY' => $this->getQuantity($ob['ID'])
             );

@@ -1,3 +1,7 @@
+<? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
+    die();
+}?>
+
 <?php if (!empty($arResult)): ?>
     <table border="1" class="table-goods">
         <tr>
