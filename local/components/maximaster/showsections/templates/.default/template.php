@@ -2,6 +2,7 @@
     die();
 } ?>
 
+<? if(empty($_REQUEST['BRAND_ID'])):?>
 <div class="section-head">
     <h3><?= $arResult['NAME'] ?> (<?= $arResult['ELEMENT_CNT'] ?>)</h3>
 </div>
@@ -11,6 +12,7 @@
 
     <div><?= $arResult['DESCRIPTION'] ?></div>
 </div>
+<? endif;?>
 
 <div class="section-elems">
     <?php if (!empty($arResult["ELEMENTS"])): ?>

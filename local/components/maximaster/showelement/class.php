@@ -59,7 +59,7 @@ class CShowElement extends CBitrixComponent
         return $namebrand;
     }
 
-    public function readElementInfo($elementID, $brandID)
+    public function readElementInfo($elementID)
     {
         CModule::IncludeModule('iblock');
         $arElement = Array();
@@ -70,9 +70,6 @@ class CShowElement extends CBitrixComponent
 
         if (!empty($elementID)) {
             $arFilter['ID'] = $elementID;
-        }
-        if (!empty($brandID)) {
-            $arFilter['PROPERTY_BRAND'] = $brandID;
         }
 
         $res = CIBlockElement::GetList(Array(), $arFilter, false, false, Array());
@@ -105,14 +102,12 @@ class CShowElement extends CBitrixComponent
 
     public function executeComponent()
     {
-        if (!empty($_REQUEST["ELEMENT_ID"]) || !empty($_REQUEST["BRAND_ID"])) {
-            $this->arResult['element'] = $this->readElementInfo($_REQUEST["ELEMENT_ID"], $_REQUEST["BRAND_ID"]);
+        if (!empty($_REQUEST["ELEMENT_ID"])) {
+            $this->arResult['element'] = $this->readElementInfo($_REQUEST["ELEMENT_ID"]);
         } else {
             return;
         }
-        /*echo "<pre>";
-        print_r($this->arResult["element"]);
-        echo "</pre>";*/
+
         $this->includeComponentTemplate();
         return $this->arResult["element"];
     }

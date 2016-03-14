@@ -2,35 +2,45 @@
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
     die();
 }
-if (empty($_REQUEST["SECTION_ID"])) {
+if (empty($_REQUEST["SECTION_ID"]) && empty($_REQUEST["BRAND_ID"])) {
     return;
 }
 
 CModule::IncludeModule('iblock');
 
-$arFilter = Array("IBLOCK_ID" => IBLOCK_CATALOG_ID, "ID" => $_REQUEST["SECTION_ID"]);
-$arSelect = Array(
-    'NAME',
-    'ELEMENT_CNT',
-    'DESCRIPTION',
-    'PICTURE'
-);
-$sec_list = CIBlockSection::GetList(Array(), $arFilter, true, $arSelect);
-
-while ($ar_result = $sec_list->Fetch()) {
-    $arResult = Array(
-        'NAME' => $ar_result['NAME'],
-        'ELEMENT_CNT' => $ar_result['ELEMENT_CNT'],
-        'DESCRIPTION' => $ar_result['DESCRIPTION'],
-        'IMAGE' => CFile::GetPath($ar_result["PICTURE"])
+if (!empty($_REQUEST["SECTION_ID"])) {
+    $arFilter = Array("IBLOCK_ID" => IBLOCK_CATALOG_ID, "ID" => $_REQUEST["SECTION_ID"]);
+    $arSelect = Array(
+        'NAME',
+        'ELEMENT_CNT',
+        'DESCRIPTION',
+        'PICTURE'
     );
+    $sec_list = CIBlockSection::GetList(Array(), $arFilter, true, $arSelect);
+
+    while ($ar_result = $sec_list->Fetch()) {
+        $arResult = Array(
+            'NAME' => $ar_result['NAME'],
+            'ELEMENT_CNT' => $ar_result['ELEMENT_CNT'],
+            'DESCRIPTION' => $ar_result['DESCRIPTION'],
+            'IMAGE' => CFile::GetPath($ar_result["PICTURE"])
+        );
+    }
 }
 
 $arFilter = Array(
-    "IBLOCK_ID" => IBLOCK_CATALOG_ID,
-    "SECTION_ID" => $_REQUEST["SECTION_ID"],
-    "INCLUDE_SUBSECTIONS" => 'Y'
+    "IBLOCK_ID" => IBLOCK_CATALOG_ID
 );
+
+if(!empty($_REQUEST["SECTION_ID"])) {
+    $arFilter["SECTION_ID"] = $_REQUEST["SECTION_ID"];
+    $arFilter["INCLUDE_SUBSECTIONS"] = "Y";
+}
+
+if(!empty($_REQUEST["BRAND_ID"])) {
+    $arFilter["PROPERTY_BRAND"] = $_REQUEST["BRAND_ID"];
+}
+
 $arSelect = Array(
     'NAME',
     'PREVIEW_TEXT',
