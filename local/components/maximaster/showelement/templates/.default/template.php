@@ -7,7 +7,7 @@
         <?php foreach ($arResult['element'] as $elem): ?>
             <p class="section-element">
                 <?= $elem["NAME"] ?>. Цена: <?= $elem["PRICE"] ?> руб.<br>
-                <img class="section-image js-img-el" src="<?= $elem['DET_P'] ?>">
+                <img class="section-image js-img-el" src="<?= $elem['DET_P'] ?>" alt="Изображение товара">
                 <?= $elem['DET_D'] ?><br><br>
                 Бренд: <?= $elem['BRAND'] ?><br>
                 Количество на складе: <?= $elem['QUANTITY'] ?><br>
@@ -19,12 +19,16 @@
                     <div id="products">
                         <div class="slides_container">
                             <?php foreach ($elem['GALLERY'] as $pict): ?>
-                                <a target="_blank"><img class="imageGalleryFull" src="<?= $pict ?>" width="350"></a>
+                                <a target="_blank"><img class="imageGalleryFull" src="<?= $pict ?>" width="350"
+                                                        alt="Изображение товара"></a>
                             <?php endforeach; ?>
                         </div>
                         <ul class="pagination">
                             <?php foreach ($elem['GALLERY'] as $pict): ?>
-                                <li><div class="imageGallery"><a href="#"><img src="<?= $pict ?>" width="55"></a></div></li>
+                                <li>
+                                    <div class="imageGallery"><a href="#"><img src="<?= $pict ?>" width="55"
+                                                                               alt="Изображение товара"></a></div>
+                                </li>
                             <?php endforeach; ?>
                         </ul>
                     </div>

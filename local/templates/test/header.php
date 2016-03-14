@@ -1,4 +1,4 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html>
 <head>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
@@ -17,7 +17,12 @@
 
     <? $APPLICATION->ShowHead() ?>
 
-    <title><? $APPLICATION->ShowTitle() ?></title>
+    <title>
+        <?
+        $APPLICATION->SetTitle("Обучающее задание");
+        $APPLICATION->ShowTitle();
+        ?>
+    </title>
 </head>
 <body>
 
@@ -45,7 +50,7 @@ $APPLICATION->ShowPanel();
         )
     ); ?>
 </menu>
-<table cellpadding="5" cellspacing="0" class="col">
+<table class="col">
     <tr>
         <td class="col1">
             <aside>

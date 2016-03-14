@@ -8,7 +8,7 @@
 </div>
 
 <div class="section">
-    <img class="section-image" src="<?= $arResult['IMAGE'] ?>">
+    <img class="section-image" src="<?= $arResult['IMAGE']?>" alt="Изображение секции">
 
     <div><?= $arResult['DESCRIPTION'] ?></div>
 </div>
@@ -20,7 +20,7 @@
         <?php foreach ($arResult["ELEMENTS"] as $elem): ?>
             <p class="section-element">
                 <a href="<?= $elem['DETAIL_URL'] ?>"><?= $elem["NAME"] ?></a>. Цена: <?= $elem["PRICE"] ?> руб.<br>
-                <img class="section-image" src="<?= $elem['PREV_P'] ?>">
+                <img class="section-image" src="<?= $elem['PREV_P']?>" alt="Изображение товара">
                 <?= $elem['PREV_D'] ?>
             </p>
         <?php endforeach; ?>
