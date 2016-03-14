@@ -91,7 +91,8 @@ class CShowElement extends CBitrixComponent
                 'BRAND' => $this->getBrandName($ar_res["PROPERTIES"]["BRAND"]["VALUE"]),
                 'COUNTRY' => $ar_res["PROPERTIES"]["COUNTRY"]["VALUE"],
                 'QUANTITY' => $this->getQuantity($ar_res['ID']),
-                'GALLERY' => $arPict
+                'GALLERY' => $arPict,
+                'DET_PAGE' => $ar_res['DETAIL_PAGE_URL']
             );
         }
 
