@@ -1,11 +1,10 @@
 <?
 $arUrlRewrite = array(
 	array(
-		"CONDITION" => "#^/bitrix/services/ymarket/#",
-		"RULE" => "",
-		"ID" => "",
-		"PATH" => "/bitrix/services/ymarket/index.php",
-	),
+		"CONDITION" => '#^/([\-a-zA-Z]+)/#',
+		"RULE" => "SECTION_ID=$1",
+		"PATH" => "/index.php"
+	)
 );
 
 ?>
