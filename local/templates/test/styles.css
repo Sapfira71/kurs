@@ -83,3 +83,11 @@ table.order {
 table.order input {
     width: 100%;
 }
+
+.imageGallery {
+    overflow: hidden;
+}
+
+.imageGalleryFull {
+    width: 366px;
+}

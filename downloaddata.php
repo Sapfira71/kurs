@@ -1,7 +1,5 @@
 <?php
-if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
-    die();
-}
+
 include $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
 
 function UpdateGoods($ibe, $elem, $arFields, $value)
@@ -82,6 +80,21 @@ function getIdOfBrand($elem)
     return $idbrand;
 }
 
+function getGalleryImages($elem)
+{
+    $result = Array();
+
+    $str = $elem['GALLERY'];
+    $explodeStr = explode("-", $str);
+    foreach ($explodeStr as $el) {
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/local/images/' . $el)) {
+            $result[] = CFile::MakeFileArray("/local/images/" . $el);
+        }
+    }
+
+    return $result;
+}
+
 function addOrUpdateElement($arraySC, $datarr)
 {
     $sectionList = getSectionListFromInfoblock();
@@ -91,6 +104,7 @@ function addOrUpdateElement($arraySC, $datarr)
 
         $countryID = getIdOfCountry($elem);
         $brandName = getIdOfBrand($elem);
+        $galleryArr = getGalleryImages($elem);
 
         $PROP = Array(
             'COUNTRY' => $countryID,
@@ -116,6 +130,7 @@ function addOrUpdateElement($arraySC, $datarr)
         foreach ($arraySC as $value) {
             if ($value["CODE"] == $elem['SYMB']) {
                 UpdateGoods($ibe, $elem, $arFields, $value);
+                CIBlockElement::SetPropertyValuesEx($value['ID'], IBLOCK_CATALOG_ID, array("GALLERY" => $galleryArr));
                 $flag = false;
                 break;
             }
@@ -123,6 +138,7 @@ function addOrUpdateElement($arraySC, $datarr)
         if ($flag) {
             if ($ID = $ibe->Add($arFields)) {
                 AddGoodsPriceAndQuantity($ID, $elem);
+                CIBlockElement::SetPropertyValuesEx($ID, IBLOCK_CATALOG_ID, array("GALLERY" => $galleryArr));
             } else {
                 echo 'Error: ' . $ibe->LAST_ERROR . '<br>';
             }
@@ -205,7 +221,8 @@ function readDataFromFile()
             "PREW_T",
             "PREW_P",
             "DET_T",
-            "DET_P"
+            "DET_P",
+            "GALLERY"
         );
 
         while (($data = fgetcsv($handle, 0, "\n")) !== false) {

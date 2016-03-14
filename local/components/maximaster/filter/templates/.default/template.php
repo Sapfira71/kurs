@@ -1,3 +1,7 @@
+<? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
+    die();
+} ?>
+
 <form name="filter" method="post"
       action="<?= substr_replace($_SERVER['REQUEST_URI'], '', strpos($_SERVER['REQUEST_URI'], '?')) ?>">
     <table>
@@ -32,9 +36,9 @@
         <tr>
             <td>Только в наличии:</td>
             <td><input type="checkbox" name="myFilter[availability]"
-                    <? if (isset($arResult["availability"])) {
-                        echo "checked";
-                    } ?>>
+                       <? if (isset($arResult["availability"])) {
+                            echo "checked";
+                       } ?>>
             </td>
         </tr>
     </table>

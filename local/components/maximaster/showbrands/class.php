@@ -1,9 +1,5 @@
-<? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
-    die();
-}
-
+<?
 use Bitrix\Highloadblock as HL;
-use Bitrix\Main\Entity;
 
 class CShowBrands extends CBitrixComponent
 {
@@ -49,26 +45,41 @@ class CShowBrands extends CBitrixComponent
 
         $hlblock = HL\HighloadBlockTable::getById(ID_BRAND_INFOBLOCK)->fetch();
         $entity = HL\HighloadBlockTable::compileEntity($hlblock);
-        $entity_data_class = $entity->getDataClass();
-        $entity_table_name = $hlblock['Brand'];
+        $entityDataClass = $entity->getDataClass();
+        $entityTableName = $hlblock['Brand'];
 
-        $sTableID = 'tbl_' . $entity_table_name;
-        $rsData = $entity_data_class::getList(array(
+        $rsData = $entityDataClass::getList(array(
             "select" => array('UF_NAME', 'UF_XML_ID')
         ));
-        $rsData = new CDBResult($rsData, $sTableID);
+        $rsData = new CDBResult($rsData, $entityTableName);
+
         while ($arRes = $rsData->Fetch()) {
-            foreach ($listCurrentBr as $br) {
-                if ($arRes['UF_XML_ID'] == $br) {
-                    $res[] = Array(
-                        'NAME' => $arRes['UF_NAME'],
-                        'XML_ID' => $arRes['UF_XML_ID']
-                    );
-                    break;
+            if (empty($_REQUEST['BRAND_ID']) && empty($_REQUEST['SECTION_ID']) && empty($_REQUEST['ELEMENT_ID'])) {
+                $res[] = Array(
+                    'NAME' => $arRes['UF_NAME'],
+                    'XML_ID' => $arRes['UF_XML_ID']
+                );
+            } else {
+                foreach ($listCurrentBr as $br) {
+                    if ($arRes['UF_XML_ID'] == $br) {
+                        $res[] = Array(
+                            'NAME' => $arRes['UF_NAME'],
+                            'XML_ID' => $arRes['UF_XML_ID']
+                        );
+                        break;
+                    }
                 }
             }
         }
 
         return $res;
+    }
+
+    public function executeComponent()
+    {
+        $this->arResult["brands"] = $this->getBrands();
+        $this->includeComponentTemplate();
+
+        return $this->arResult["brands"];
     }
 }

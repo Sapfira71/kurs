@@ -1,6 +1,5 @@
-<? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
-    die();
-}
+<?
+use Bitrix\Highloadblock as HL;
 
 class CShowElement extends CBitrixComponent
 {
@@ -41,24 +40,23 @@ class CShowElement extends CBitrixComponent
 
         $namebrand = "";
 
-        $hlblock = Bitrix\Highloadblock\HighloadBlockTable::getById(ID_BRAND_INFOBLOCK)->fetch();
-        $entity = Bitrix\Highloadblock\HighloadBlockTable::compileEntity($hlblock);
-        $entity_data_class = $entity->getDataClass();
-        $entity_table_name = $hlblock['Brand'];
+        $hlblock = HL\HighloadBlockTable::getById(ID_BRAND_INFOBLOCK)->fetch();
+        $entity = HL\HighloadBlockTable::compileEntity($hlblock);
+        $entityDataClass = $entity->getDataClass();
+        $entityTableName = $hlblock['Brand'];
 
-        $sTableID = 'tbl_' . $entity_table_name;
-        $rsData = $entity_data_class::getList(array(
+        $rsData = $entityDataClass::getList(array(
             "select" => array('UF_NAME', 'UF_XML_ID'),
             "filter" => array('=UF_XML_ID' => $xml_id)
         ));
-        $rsData = new CDBResult($rsData, $sTableID);
+        $rsData = new CDBResult($rsData, $entityTableName);
         if ($arRes = $rsData->Fetch()) {
             $namebrand = $arRes['UF_NAME'];
         }
         return $namebrand;
     }
 
-    public function readElementInfo($elementID, $brandID)
+    public function readElementInfo($elementID)
     {
         CModule::IncludeModule('iblock');
         $arElement = Array();
@@ -67,36 +65,47 @@ class CShowElement extends CBitrixComponent
             "IBLOCK_ID" => IBLOCK_CATALOG_ID
         );
 
-        if(!empty($elementID)) {
+        if (!empty($elementID)) {
             $arFilter['ID'] = $elementID;
         }
-        if(!empty($brandID)) {
-            $arFilter['PROPERTY_BRAND'] = $brandID;
-        }
 
-        $arSelect = Array(
-            'NAME',
-            'DETAIL_TEXT',
-            'DETAIL_PICTURE',
-            'PROPERTY_BRAND',
-            'PROPERTY_COUNTRY',
-            'ID'
-        );
+        $res = CIBlockElement::GetList(Array(), $arFilter, false, false, Array());
 
-        $res = CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
-        while ($ob = $res->Fetch()) {
+        while ($ob = $res->GetNextElement())
+        {
+            $ar_res = $ob->GetFields();
+            $ar_res["PROPERTIES"] = $ob->GetProperties();
+
+            $arPict = Array();
+            $temp = CIBlockElement::GetProperty(IBLOCK_CATALOG_ID, $ar_res['ID'], array(), Array("CODE"=>"GALLERY"));
+            while ($ob_res = $temp->GetNext()) {
+                $arPict[] = CFile::GetPath($ob_res['VALUE']);
+            }
+
             $arElement[] = array(
-                'NAME' => $ob["NAME"],
-                'PRICE' => $this->getPrice($ob['ID']),
-                'DET_D' => $ob["DETAIL_TEXT"],
-                'DET_P' => CFile::GetPath($ob["DETAIL_PICTURE"]),
-                'BRAND' => $this->getBrandName($ob["PROPERTY_BRAND_VALUE"]),
-                'COUNTRY' => $ob["PROPERTY_COUNTRY_VALUE"],
-                'QUANTITY' => $this->getQuantity($ob['ID']),
-                'ID' => $ob['ID']
+                'NAME' => $ar_res["NAME"],
+                'PRICE' => $this->getPrice($ar_res['ID']),
+                'DET_D' => $ar_res["DETAIL_TEXT"],
+                'DET_P' => CFile::GetPath($ar_res["DETAIL_PICTURE"]),
+                'BRAND' => $this->getBrandName($ar_res["PROPERTIES"]["BRAND"]["VALUE"]),
+                'COUNTRY' => $ar_res["PROPERTIES"]["COUNTRY"]["VALUE"],
+                'QUANTITY' => $this->getQuantity($ar_res['ID']),
+                'GALLERY' => $arPict
             );
         }
 
         return $arElement;
+    }
+
+    public function executeComponent()
+    {
+        if (!empty($_REQUEST["ELEMENT_ID"])) {
+            $this->arResult['element'] = $this->readElementInfo($_REQUEST["ELEMENT_ID"]);
+        } else {
+            return;
+        }
+
+        $this->includeComponentTemplate();
+        return $this->arResult["element"];
     }
 }

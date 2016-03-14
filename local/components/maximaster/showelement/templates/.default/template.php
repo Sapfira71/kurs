@@ -14,8 +14,24 @@
                 Страна-производитель: <?= $elem['COUNTRY'] ?><br>
                 <a class="purchaseButton" href="/purchase.php?ELEMENT_ID=<?= $elem['ID'] ?>">Купить</a>
             </p>
+            <div id="container">
+                <div id="products_example">
+                    <div id="products">
+                        <div class="slides_container">
+                            <?php foreach ($elem['GALLERY'] as $pict): ?>
+                                <a target="_blank"><img class="imageGalleryFull" src="<?= $pict ?>" width="350"></a>
+                            <?php endforeach; ?>
+                        </div>
+                        <ul class="pagination">
+                            <?php foreach ($elem['GALLERY'] as $pict): ?>
+                                <li><div class="imageGallery"><a href="#"><img src="<?= $pict ?>" width="55"></a></div></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         <?php endforeach; ?>
     <?php else: ?>
-        <h3>Товар с таким идентификатором отсутствует на складе</h3>
+        <h3>Товар отсутствует на складе</h3>
     <?php endif; ?>
 </div>
