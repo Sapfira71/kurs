@@ -67,3 +67,19 @@ table.table-goods tr:first-child {
     text-align: center;
     font: bold 14px serif;;
 }
+
+.purchaseButton {
+    background-color: bisque;
+    border: 1px solid burlywood;
+    text-align: center;
+    text-decoration: none;
+}
+
+table.order {
+    width: 100%;
+    border: none;
+}
+
+table.order input {
+    width: 100%;
+}
