@@ -1,9 +1,8 @@
 <?
 include $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
 ?>
-    <form name="order" method="post" action="">
+    <form name="order" method="post" onsubmit="<?sendMessage($_GET['ELEMENT_ID']);?>">
         <pre>
-            <? sendMessage($_GET['ELEMENT_ID']); ?>
             <? print_r($_POST);
             print_r($_COOKIE); ?>
         </pre>

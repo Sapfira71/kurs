@@ -30,9 +30,10 @@ function sendMessage($id)
     $to = $_POST['mail'];
     $message = "Ваше имя: " . $_POST['name'] . ". Телефон: " . $_POST['number'] . ". Почта: " . $_POST['mail'] . ". ";
     $message .= $arEl['NAME'] . ". " . $arEl['PRICE'] . ". " . $arEl['BRAND'] . ". " . $arEl['COUNTRY'];
-    /*$message = wordwrap($message, 70, "\r\n");*/
-    echo $message;
+
     if (mail($to, "Your order", $message)) {
-        echo "<br>" . "Письмо отправлено успешно!" . "<br>";
+        return true;
+    } else {
+        return false;
     }
 }
