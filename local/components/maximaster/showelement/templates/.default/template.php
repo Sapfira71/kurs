@@ -18,12 +18,12 @@
                     <div id="products">
                         <div class="slides_container">
                             <?php foreach ($elem['GALLERY'] as $pict): ?>
-                                <a target="_blank"><img src="<?=$pict?>" width="350"></a>
+                                <a target="_blank"><img class="imageGalleryFull" src="<?= $pict ?>" width="350"></a>
                             <?php endforeach; ?>
                         </div>
                         <ul class="pagination">
                             <?php foreach ($elem['GALLERY'] as $pict): ?>
-                                <li><a href="#"><img src="<?=$pict?>" width="55"></a></li>
+                                <li><div class="imageGallery"><a href="#"><img src="<?= $pict ?>" width="55"></a></div></li>
                             <?php endforeach; ?>
                         </ul>
                     </div>

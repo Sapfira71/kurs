@@ -67,3 +67,11 @@ table.table-goods tr:first-child {
     text-align: center;
     font: bold 14px serif;;
 }
+
+.imageGallery {
+    overflow: hidden;
+}
+
+.imageGalleryFull {
+    width: 366px;
+}
