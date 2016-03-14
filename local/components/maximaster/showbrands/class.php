@@ -54,13 +54,20 @@ class CShowBrands extends CBitrixComponent
         $rsData = new CDBResult($rsData, $entityTableName);
 
         while ($arRes = $rsData->Fetch()) {
-            foreach ($listCurrentBr as $br) {
-                if ($arRes['UF_XML_ID'] == $br) {
-                    $res[] = Array(
-                        'NAME' => $arRes['UF_NAME'],
-                        'XML_ID' => $arRes['UF_XML_ID']
-                    );
-                    break;
+            if (empty($_REQUEST['BRAND_ID']) && empty($_REQUEST['SECTION_ID']) && empty($_REQUEST['ELEMENT_ID'])) {
+                $res[] = Array(
+                    'NAME' => $arRes['UF_NAME'],
+                    'XML_ID' => $arRes['UF_XML_ID']
+                );
+            } else {
+                foreach ($listCurrentBr as $br) {
+                    if ($arRes['UF_XML_ID'] == $br) {
+                        $res[] = Array(
+                            'NAME' => $arRes['UF_NAME'],
+                            'XML_ID' => $arRes['UF_XML_ID']
+                        );
+                        break;
+                    }
                 }
             }
         }
