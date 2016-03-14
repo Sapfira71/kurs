@@ -83,6 +83,7 @@ class CShowElement extends CBitrixComponent
             }
 
             $arElement[] = array(
+                'ID' => $ar_res["ID"],
                 'NAME' => $ar_res["NAME"],
                 'PRICE' => $this->getPrice($ar_res['ID']),
                 'DET_D' => $ar_res["DETAIL_TEXT"],
