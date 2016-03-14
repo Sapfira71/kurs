@@ -87,7 +87,9 @@ function getGalleryImages($elem)
     $str = $elem['GALLERY'];
     $explodeStr = explode("-", $str);
     foreach ($explodeStr as $el) {
-        $result[] = CFile::MakeFileArray("/local/images/" . $el);
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/local/images/' . $el)) {
+            $result[] = CFile::MakeFileArray("/local/images/" . $el);
+        }
     }
 
     return $result;
@@ -106,8 +108,7 @@ function addOrUpdateElement($arraySC, $datarr)
 
         $PROP = Array(
             'COUNTRY' => $countryID,
-            'BRAND' => $brandName,
-            'GALLERY' => $galleryArr
+            'BRAND' => $brandName
         );
 
         $sectionID = getSectionId($elem['SECTION'], $sectionList);
@@ -129,6 +130,7 @@ function addOrUpdateElement($arraySC, $datarr)
         foreach ($arraySC as $value) {
             if ($value["CODE"] == $elem['SYMB']) {
                 UpdateGoods($ibe, $elem, $arFields, $value);
+                CIBlockElement::SetPropertyValuesEx($value['ID'], IBLOCK_CATALOG_ID, array("GALLERY" => $galleryArr));
                 $flag = false;
                 break;
             }
@@ -136,6 +138,7 @@ function addOrUpdateElement($arraySC, $datarr)
         if ($flag) {
             if ($ID = $ibe->Add($arFields)) {
                 AddGoodsPriceAndQuantity($ID, $elem);
+                CIBlockElement::SetPropertyValuesEx($ID, IBLOCK_CATALOG_ID, array("GALLERY" => $galleryArr));
             } else {
                 echo 'Error: ' . $ibe->LAST_ERROR . '<br>';
             }
