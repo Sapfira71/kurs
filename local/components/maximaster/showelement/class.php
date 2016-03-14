@@ -75,38 +75,27 @@ class CShowElement extends CBitrixComponent
             $arFilter['PROPERTY_BRAND'] = $brandID;
         }
 
-        $arSelect = Array(
-            'NAME',
-            'DETAIL_TEXT',
-            'DETAIL_PICTURE',
-            'PROPERTY_BRAND',
-            'PROPERTY_COUNTRY',
-            'ID',
-            'PROPERTY_GALLERY'
-        );
+        $res = CIBlockElement::GetList(Array(), $arFilter, false, false, Array());
 
-        $res = CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
-
-        while ($ob = $res->Fetch())
+        while ($ob = $res->GetNextElement())
         {
-            echo "<pre>";
-            print_r($ob);
-            echo "</pre>";
+            $ar_res = $ob->GetFields();
+            $ar_res["PROPERTIES"] = $ob->GetProperties();
 
             $arPict = Array();
-            $temp = CIBlockElement::GetProperty(IBLOCK_CATALOG_ID, $ob['ID'], array(), Array("CODE"=>"GALLERY"));
-            while ($ob1 = $temp->GetNext()) {
-                $arPict[] = CFile::GetPath($ob1['VALUE']);
+            $temp = CIBlockElement::GetProperty(IBLOCK_CATALOG_ID, $ar_res['ID'], array(), Array("CODE"=>"GALLERY"));
+            while ($ob_res = $temp->GetNext()) {
+                $arPict[] = CFile::GetPath($ob_res['VALUE']);
             }
 
             $arElement[] = array(
-                'NAME' => $ob["NAME"],
-                'PRICE' => $this->getPrice($ob['ID']),
-                'DET_D' => $ob["DETAIL_TEXT"],
-                'DET_P' => CFile::GetPath($ob["DETAIL_PICTURE"]),
-                'BRAND' => $this->getBrandName($ob["PROPERTY_BRAND_VALUE"]),
-                'COUNTRY' => $ob["PROPERTY_COUNTRY_VALUE"],
-                'QUANTITY' => $this->getQuantity($ob['ID']),
+                'NAME' => $ar_res["NAME"],
+                'PRICE' => $this->getPrice($ar_res['ID']),
+                'DET_D' => $ar_res["DETAIL_TEXT"],
+                'DET_P' => CFile::GetPath($ar_res["DETAIL_PICTURE"]),
+                'BRAND' => $this->getBrandName($ar_res["PROPERTIES"]["BRAND"]["VALUE"]),
+                'COUNTRY' => $ar_res["PROPERTIES"]["COUNTRY"]["VALUE"],
+                'QUANTITY' => $this->getQuantity($ar_res['ID']),
                 'GALLERY' => $arPict
             );
         }
