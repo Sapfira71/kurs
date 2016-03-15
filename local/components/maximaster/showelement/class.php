@@ -5,37 +5,6 @@ use Bitrix\Highloadblock as HL;
 
 class ShowElement extends \CBitrixComponent
 {
-    private function getPrice($id)
-    {
-        $res = 0;
-
-        $price = \CPrice::GetList(Array(), Array(
-            'PRODUCT_ID' => $id,
-            'CATALOG_GROUP_ID' => TYPE_PRICE_BASE_ID
-        ), false, false, Array('PRICE'));
-
-        if ($arPrice = $price->Fetch()) {
-            $res = $arPrice['PRICE'];
-        }
-
-        return $res;
-    }
-
-    private function getQuantity($id)
-    {
-        $res = 0;
-
-        $quantity = \CCatalogProduct::GetList(Array(), Array(
-            'PRODUCT_ID' => $id,
-        ), false, false, Array('QUANTITY'));
-
-        if ($arQuantity = $quantity->Fetch()) {
-            $res = $arQuantity['QUANTITY'];
-        }
-
-        return $res;
-    }
-
     private function getBrandName($xml_id)
     {
         \CModule::IncludeModule("highloadblock");
@@ -75,7 +44,8 @@ class ShowElement extends \CBitrixComponent
             'PROPERTY_BRAND',
             'PROPERTY_COUNTRY',
             'ID',
-            'PROPERTY_GALLERY'
+            'PROPERTY_GALLERY',
+            'CATALOG_QUANTITY'
         );
 
         $res = \CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
@@ -98,7 +68,7 @@ class ShowElement extends \CBitrixComponent
                 'DET_P' => \CFile::GetPath($ob["DETAIL_PICTURE"]),
                 'BRAND' => $this->getBrandName($ob["PROPERTY_BRAND_VALUE"]),
                 'COUNTRY' => $ob["PROPERTY_COUNTRY_VALUE"],
-                'QUANTITY' => $this->getQuantity($ob['ID']),
+                'QUANTITY' => $ob['CATALOG_QUANTITY'],
                 'GALLERY' => $arPict
             );
         }
