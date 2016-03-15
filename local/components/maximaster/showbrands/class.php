@@ -26,15 +26,11 @@ class ShowBrands extends \CBitrixComponent
         if (!empty($_REQUEST['BRAND_ID'])) {
             $arFilter['PROPERTY_BRAND'] = $_REQUEST['BRAND_ID'];
         }
-        $arSelect = Array(
-            'PROPERTY_BRAND'
-        );
 
-        $res = \CIBlockElement::GetList(Array(), $arFilter, array('PROPERTY_BRAND'), false, $arSelect);
+        $res = \CIBlockElement::GetList(Array(), $arFilter, array('PROPERTY_BRAND'), false, Array());
         while ($ob = $res->Fetch()) {
-            $result[ $ob['PROPERTY_BRAND_VALUE'] ] = $ob['PROPERTY_BRAND_VALUE'];
+            $result[] = $ob['PROPERTY_BRAND_VALUE'];
         }
-
 
         return $result;
     }
@@ -42,7 +38,8 @@ class ShowBrands extends \CBitrixComponent
     public function getBrands()
     {
         $res = Array();
-        $listCurrentBr = array_unique($this->getListCurrentBrands());
+        $listCurrentBr = $this->getListCurrentBrands();
+
         \CModule::IncludeModule("highloadblock");
 
         $hlblock = HL\HighloadBlockTable::getById(HIGHLOADBLOCK_BRAND_ID)->fetch();
@@ -51,25 +48,19 @@ class ShowBrands extends \CBitrixComponent
         $entityTableName = $hlblock['Brand'];
 
         $rsData = $entityDataClass::getList(array(
-            "select" => array('UF_NAME', 'UF_XML_ID')
+            "select" => array('UF_NAME', 'UF_XML_ID'),
+            "filter" => array()
         ));
         $rsData = new \CDBResult($rsData, $entityTableName);
 
         while ($arRes = $rsData->Fetch()) {
-            if (empty($_REQUEST['BRAND_ID']) && empty($_REQUEST['SECTION_ID']) && empty($_REQUEST['ELEMENT_ID'])) {
-                $res[] = Array(
-                    'NAME' => $arRes['UF_NAME'],
-                    'XML_ID' => $arRes['UF_XML_ID']
-                );
-            } else {
-                foreach ($listCurrentBr as $br) {
-                    if ($arRes['UF_XML_ID'] == $br) {
-                        $res[] = Array(
-                            'NAME' => $arRes['UF_NAME'],
-                            'XML_ID' => $arRes['UF_XML_ID']
-                        );
-                        break;
-                    }
+            foreach ($listCurrentBr as $br) {
+                if ($arRes['UF_XML_ID'] == $br) {
+                    $res[] = Array(
+                        'NAME' => $arRes['UF_NAME'],
+                        'XML_ID' => $arRes['UF_XML_ID']
+                    );
+                    break;
                 }
             }
         }
