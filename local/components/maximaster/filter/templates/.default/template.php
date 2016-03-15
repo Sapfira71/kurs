@@ -9,35 +9,27 @@
             <td>Артикул:</td>
 
             <td><input type="text" name="myFilter[vendorCode]"
-                       value="<?=isset($arResult["vendorCode"]) ? $arResult["vendorCode"] : ''?>">
+                       value="<?= isset($arResult["vendorCode"]) ? $arResult["vendorCode"] : '' ?>">
             </td>
         </tr>
         <tr>
             <td>Название:</td>
             <td><input type="text" name="myFilter[name]"
-                       value="<? if (isset($arResult["name"])) {
-                           echo $arResult["name"];
-                       } ?>">
+                       value="<?= isset($arResult["name"]) ? $arResult["name"] : '' ?>">
             </td>
         </tr>
         <tr>
             <td>Цена:</td>
             <td>от <input type="text" name="myFilter[price1]"
-                          value="<? if (isset($arResult["price1"])) {
-                              echo $arResult["price1"];
-                          } ?>">
+                          value="<?= isset($arResult["price1"]) ? $arResult["price1"] : '' ?>">
                 до <input type="text" name="myFilter[price2]"
-                          value="<? if (isset($arResult["price2"])) {
-                              echo $arResult["price2"];
-                          } ?>">
+                          value="<?= isset($arResult["price2"]) ? $arResult["price2"] : '' ?>">
             </td>
         </tr>
         <tr>
             <td>Только в наличии:</td>
             <td><input type="checkbox" name="myFilter[availability]"
-                       <? if (isset($arResult["availability"])) {
-                            echo "checked";
-                       } ?>>
+                <?= isset($arResult["availability"]) ? "checked" : '' ?>
             </td>
         </tr>
     </table>
