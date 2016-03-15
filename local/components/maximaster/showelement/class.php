@@ -11,7 +11,7 @@ class ShowElement extends \CBitrixComponent
 
         $price = \CPrice::GetList(Array(), Array(
             'PRODUCT_ID' => $id,
-            'CATALOG_GROUP_ID' => ID_TYPE_PRICE_BASE
+            'CATALOG_GROUP_ID' => TYPE_PRICE_BASE_ID
         ), false, false, Array('PRICE'));
 
         if ($arPrice = $price->Fetch()) {
@@ -42,7 +42,7 @@ class ShowElement extends \CBitrixComponent
 
         $namebrand = "";
 
-        $hlblock = HL\HighloadBlockTable::getById(ID_BRAND_INFOBLOCK)->fetch();
+        $hlblock = HL\HighloadBlockTable::getById(HIGHLOADBLOCK_BRAND_ID)->fetch();
         $entity = HL\HighloadBlockTable::compileEntity($hlblock);
         $entityDataClass = $entity->getDataClass();
         $entityTableName = $hlblock['Brand'];
@@ -64,7 +64,7 @@ class ShowElement extends \CBitrixComponent
         $arElement = Array();
 
         $arFilter = Array(
-            "IBLOCK_ID" => IBLOCK_CATALOG_ID
+            "IBLOCK_ID" => IBLOCK_WEAR_ID
         );
 
         if (!empty($elementID)) {
@@ -79,7 +79,7 @@ class ShowElement extends \CBitrixComponent
             $ar_res["PROPERTIES"] = $ob->GetProperties();
             //var_dump($ar_res['PROPERTIES']['GALLERY']);die;
             $arPict = Array();
-            $temp = \CIBlockElement::GetProperty(IBLOCK_CATALOG_ID, $ar_res['ID'], array(), Array("CODE"=>"GALLERY"));
+            $temp = \CIBlockElement::GetProperty(IBLOCK_WEAR_ID, $ar_res['ID'], array(), Array("CODE"=>"GALLERY"));
             foreach ($ar_res['PROPERTIES']['GALLERY']['VALUE'] as $pictureId) {
                 $arPict[] = \CFile::GetPath($pictureId);
             }

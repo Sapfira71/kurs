@@ -12,7 +12,7 @@ class ShowBrands extends \CBitrixComponent
         \CModule::IncludeModule('iblock');
 
         $arFilter = Array(
-            "IBLOCK_ID" => IBLOCK_CATALOG_ID
+            "IBLOCK_ID" => IBLOCK_WEAR_ID
         );
         if (!empty($_REQUEST['SECTION_ID'])) {
             $arFilter = Array(
@@ -45,7 +45,7 @@ class ShowBrands extends \CBitrixComponent
         $listCurrentBr = array_unique($this->getListCurrentBrands());
         \CModule::IncludeModule("highloadblock");
 
-        $hlblock = HL\HighloadBlockTable::getById(ID_BRAND_INFOBLOCK)->fetch();
+        $hlblock = HL\HighloadBlockTable::getById(HIGHLOADBLOCK_BRAND_ID)->fetch();
         $entity = HL\HighloadBlockTable::compileEntity($hlblock);
         $entityDataClass = $entity->getDataClass();
         $entityTableName = $hlblock['Brand'];

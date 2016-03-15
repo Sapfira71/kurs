@@ -9,7 +9,7 @@ if (empty($_REQUEST["SECTION_ID"]) && empty($_REQUEST["BRAND_ID"])) {
 CModule::IncludeModule('iblock');
 
 if (!empty($_REQUEST["SECTION_ID"])) {
-    $arFilter = Array("IBLOCK_ID" => IBLOCK_CATALOG_ID, "ID" => $_REQUEST["SECTION_ID"]);
+    $arFilter = Array("IBLOCK_ID" => IBLOCK_WEAR_ID, "ID" => $_REQUEST["SECTION_ID"]);
     $arSelect = Array(
         'NAME',
         'ELEMENT_CNT',
@@ -29,7 +29,7 @@ if (!empty($_REQUEST["SECTION_ID"])) {
 }
 
 $arFilter = Array(
-    "IBLOCK_ID" => IBLOCK_CATALOG_ID
+    "IBLOCK_ID" => IBLOCK_WEAR_ID
 );
 
 if(!empty($_REQUEST["SECTION_ID"])) {
@@ -46,7 +46,7 @@ $arSelect = Array(
     'PREVIEW_TEXT',
     'PREVIEW_PICTURE',
     'ID',
-    'CATALOG_GROUP_' . ID_TYPE_PRICE_BASE,
+    'CATALOG_GROUP_' . TYPE_PRICE_BASE_ID,
     'DETAIL_PAGE_URL'
 );
 
@@ -56,7 +56,7 @@ while ($ob = $res->GetNext()) {
     $arProduct = array(
         'NAME' => $ob["NAME"],
         'ID' => $ob['ID'],
-        'PRICE' => $ob['CATALOG_PRICE_' . ID_TYPE_PRICE_BASE],
+        'PRICE' => $ob['CATALOG_PRICE_' . TYPE_PRICE_BASE_ID],
         'PREV_D' => $ob["PREVIEW_TEXT"],
         'PREV_P' => CFile::GetPath($ob["PREVIEW_PICTURE"]),
         'DETAIL_URL' => $ob['DETAIL_PAGE_URL']
