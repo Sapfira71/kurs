@@ -1,13 +1,15 @@
 <?
+namespace Maximaster\Components;
+
 use Bitrix\Highloadblock as HL;
 
-class CShowElement extends CBitrixComponent
+class ShowElement extends \CBitrixComponent
 {
     private function getPrice($id)
     {
         $res = 0;
 
-        $price = CPrice::GetList(Array(), Array(
+        $price = \CPrice::GetList(Array(), Array(
             'PRODUCT_ID' => $id,
             'CATALOG_GROUP_ID' => ID_TYPE_PRICE_BASE
         ), false, false, Array('PRICE'));
@@ -23,7 +25,7 @@ class CShowElement extends CBitrixComponent
     {
         $res = 0;
 
-        $quantity = CCatalogProduct::GetList(Array(), Array(
+        $quantity = \CCatalogProduct::GetList(Array(), Array(
             'PRODUCT_ID' => $id,
         ), false, false, Array('QUANTITY'));
 
@@ -36,7 +38,7 @@ class CShowElement extends CBitrixComponent
 
     private function getBrandName($xml_id)
     {
-        CModule::IncludeModule("highloadblock");
+        \CModule::IncludeModule("highloadblock");
 
         $namebrand = "";
 
@@ -49,7 +51,7 @@ class CShowElement extends CBitrixComponent
             "select" => array('UF_NAME', 'UF_XML_ID'),
             "filter" => array('=UF_XML_ID' => $xml_id)
         ));
-        $rsData = new CDBResult($rsData, $entityTableName);
+        $rsData = new \CDBResult($rsData, $entityTableName);
         if ($arRes = $rsData->Fetch()) {
             $namebrand = $arRes['UF_NAME'];
         }
@@ -58,7 +60,7 @@ class CShowElement extends CBitrixComponent
 
     public function readElementInfo($elementID)
     {
-        CModule::IncludeModule('iblock');
+        \CModule::IncludeModule('iblock');
         $arElement = Array();
 
         $arFilter = Array(
@@ -69,7 +71,7 @@ class CShowElement extends CBitrixComponent
             $arFilter['ID'] = $elementID;
         }
 
-        $res = CIBlockElement::GetList(Array(), $arFilter, false, false, Array());
+        $res = \CIBlockElement::GetList(Array(), $arFilter, false, false, Array());
 
         while ($ob = $res->GetNextElement())
         {
@@ -77,9 +79,9 @@ class CShowElement extends CBitrixComponent
             $ar_res["PROPERTIES"] = $ob->GetProperties();
             //var_dump($ar_res['PROPERTIES']['GALLERY']);die;
             $arPict = Array();
-            $temp = CIBlockElement::GetProperty(IBLOCK_CATALOG_ID, $ar_res['ID'], array(), Array("CODE"=>"GALLERY"));
+            $temp = \CIBlockElement::GetProperty(IBLOCK_CATALOG_ID, $ar_res['ID'], array(), Array("CODE"=>"GALLERY"));
             foreach ($ar_res['PROPERTIES']['GALLERY']['VALUE'] as $pictureId) {
-                $arPict[] = CFile::GetPath($pictureId);
+                $arPict[] = \CFile::GetPath($pictureId);
             }
 
             $arElement[] = array(
@@ -87,7 +89,7 @@ class CShowElement extends CBitrixComponent
                 'NAME' => $ar_res["NAME"],
                 'PRICE' => $this->getPrice($ar_res['ID']),
                 'DETAIL_TEXT' => $ar_res["DETAIL_TEXT"],
-                'DETAIL_PICTURE' => CFile::GetPath($ar_res["DETAIL_PICTURE"]),
+                'DETAIL_PICTURE' => \CFile::GetPath($ar_res["DETAIL_PICTURE"]),
                 'BRAND' => $this->getBrandName($ar_res["PROPERTIES"]["BRAND"]["VALUE"]),
                 'COUNTRY' => $ar_res["PROPERTIES"]["COUNTRY"]["VALUE"],
                 'QUANTITY' => $this->getQuantity($ar_res['ID']),

@@ -3,7 +3,7 @@ namespace Maximaster\Components;
 
 use Bitrix\Highloadblock as HL;
 
-class CShowBrands extends \CBitrixComponent
+class ShowBrands extends \CBitrixComponent
 {
     private function getListCurrentBrands()
     {
