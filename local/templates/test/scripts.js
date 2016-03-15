@@ -1,4 +1,6 @@
 jQuery("document").ready(function () {
+
+    //Меню
     var nav = $('menu');
     $(window).scroll(function () {
         if ($(this).scrollTop() > 80) {
@@ -8,11 +10,11 @@ jQuery("document").ready(function () {
         }
     });
 
+    //Зум
     $('.js-img-el').loupe();
-});
 
-$(function () {
-    $('#products').slides({
+    //ГАлерея
+    $('.js-gallery').slides({
         preload: true,
         preloadImage: 'img/loading.gif',
         effect: 'slide, fade',
@@ -22,4 +24,5 @@ $(function () {
         generateNextPrev: true,
         generatePagination: false
     });
+
 });

@@ -68,7 +68,7 @@ table.table-goods tr:first-child {
     font: bold 14px serif;;
 }
 
-.purchaseButton {
+.purchase-button {
     background-color: bisque;
     border: 1px solid burlywood;
     text-align: center;
@@ -84,10 +84,10 @@ table.order input {
     width: 100%;
 }
 
-.imageGallery {
+.image-gallery {
     overflow: hidden;
 }
 
-.imageGalleryFull {
+.image-gallery-gull {
     width: 366px;
 }

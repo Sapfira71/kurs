@@ -1,13 +1,15 @@
 <?
+namespace Maximaster\Components;
+
 use Bitrix\Highloadblock as HL;
 
-class CShowBrands extends CBitrixComponent
+class CShowBrands extends \CBitrixComponent
 {
     private function getListCurrentBrands()
     {
         $result = Array();
 
-        CModule::IncludeModule('iblock');
+        \CModule::IncludeModule('iblock');
 
         $arFilter = Array(
             "IBLOCK_ID" => IBLOCK_CATALOG_ID
@@ -28,10 +30,11 @@ class CShowBrands extends CBitrixComponent
             'PROPERTY_BRAND'
         );
 
-        $res = CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
+        $res = \CIBlockElement::GetList(Array(), $arFilter, array('PROPERTY_BRAND'), false, $arSelect);
         while ($ob = $res->Fetch()) {
-            $result[] = $ob['PROPERTY_BRAND_VALUE'];
+            $result[ $ob['PROPERTY_BRAND_VALUE'] ] = $ob['PROPERTY_BRAND_VALUE'];
         }
+
 
         return $result;
     }
@@ -39,9 +42,8 @@ class CShowBrands extends CBitrixComponent
     public function getBrands()
     {
         $res = Array();
-        $listCurrentBr = $this->getListCurrentBrands();
-
-        CModule::IncludeModule("highloadblock");
+        $listCurrentBr = array_unique($this->getListCurrentBrands());
+        \CModule::IncludeModule("highloadblock");
 
         $hlblock = HL\HighloadBlockTable::getById(ID_BRAND_INFOBLOCK)->fetch();
         $entity = HL\HighloadBlockTable::compileEntity($hlblock);
@@ -51,7 +53,7 @@ class CShowBrands extends CBitrixComponent
         $rsData = $entityDataClass::getList(array(
             "select" => array('UF_NAME', 'UF_XML_ID')
         ));
-        $rsData = new CDBResult($rsData, $entityTableName);
+        $rsData = new \CDBResult($rsData, $entityTableName);
 
         while ($arRes = $rsData->Fetch()) {
             if (empty($_REQUEST['BRAND_ID']) && empty($_REQUEST['SECTION_ID']) && empty($_REQUEST['ELEMENT_ID'])) {
@@ -79,7 +81,5 @@ class CShowBrands extends CBitrixComponent
     {
         $this->arResult["brands"] = $this->getBrands();
         $this->includeComponentTemplate();
-
-        return $this->arResult["brands"];
     }
 }

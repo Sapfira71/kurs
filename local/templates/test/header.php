@@ -19,7 +19,7 @@
 
     <title>
         <?
-        $APPLICATION->SetTitle("Обучающее задание");
+        //$APPLICATION->SetTitle("Обучающее задание");
         $APPLICATION->ShowTitle();
         ?>
     </title>

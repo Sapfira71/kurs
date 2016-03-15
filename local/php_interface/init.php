@@ -2,6 +2,11 @@
 
 require __DIR__ . '/const.php';
 
+/**
+ * Функция возвращает URL страницы
+ *
+ * @return string
+ */
 function selfURL()
 {
     $url = ($_SERVER["HTTPS"] != 'on') ? 'http://' . $_SERVER["SERVER_NAME"] : 'https://'
@@ -31,6 +36,7 @@ function sendMessage($id)
     $message = "Ваше имя: " . $_POST['name'] . ". Телефон: " . $_POST['number'] . ". Почта: " . $_POST['mail'] . ". ";
     $message .= $arEl['NAME'] . ". " . $arEl['PRICE'] . ". " . $arEl['BRAND'] . ". " . $arEl['COUNTRY'];
 
+    //CEvent
     if (mail($to, "Your order", $message)) {
         return true;
     } else {

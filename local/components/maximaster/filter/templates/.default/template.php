@@ -7,10 +7,9 @@
     <table>
         <tr>
             <td>Артикул:</td>
+
             <td><input type="text" name="myFilter[vendorCode]"
-                       value="<? if (isset($arResult["vendorCode"])) {
-                           echo $arResult["vendorCode"];
-                       } ?>">
+                       value="<?=isset($arResult["vendorCode"]) ? $arResult["vendorCode"] : ''?>">
             </td>
         </tr>
         <tr>

@@ -75,19 +75,19 @@ class CShowElement extends CBitrixComponent
         {
             $ar_res = $ob->GetFields();
             $ar_res["PROPERTIES"] = $ob->GetProperties();
-
+            //var_dump($ar_res['PROPERTIES']['GALLERY']);die;
             $arPict = Array();
             $temp = CIBlockElement::GetProperty(IBLOCK_CATALOG_ID, $ar_res['ID'], array(), Array("CODE"=>"GALLERY"));
-            while ($ob_res = $temp->GetNext()) {
-                $arPict[] = CFile::GetPath($ob_res['VALUE']);
+            foreach ($ar_res['PROPERTIES']['GALLERY']['VALUE'] as $pictureId) {
+                $arPict[] = CFile::GetPath($pictureId);
             }
 
             $arElement[] = array(
                 'ID' => $ar_res["ID"],
                 'NAME' => $ar_res["NAME"],
                 'PRICE' => $this->getPrice($ar_res['ID']),
-                'DET_D' => $ar_res["DETAIL_TEXT"],
-                'DET_P' => CFile::GetPath($ar_res["DETAIL_PICTURE"]),
+                'DETAIL_TEXT' => $ar_res["DETAIL_TEXT"],
+                'DETAIL_PICTURE' => CFile::GetPath($ar_res["DETAIL_PICTURE"]),
                 'BRAND' => $this->getBrandName($ar_res["PROPERTIES"]["BRAND"]["VALUE"]),
                 'COUNTRY' => $ar_res["PROPERTIES"]["COUNTRY"]["VALUE"],
                 'QUANTITY' => $this->getQuantity($ar_res['ID']),
@@ -108,6 +108,5 @@ class CShowElement extends CBitrixComponent
         }
 
         $this->includeComponentTemplate();
-        return $this->arResult["element"];
     }
 }

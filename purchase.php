@@ -26,7 +26,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
                 </tr>
                 </tbody>
             </table>
-            <button class="purchaseButton" type="submit">Оформить заказ</button>
+            <button class="purchase-button" type="submit">Оформить заказ</button>
         <?php else: ?>
             Заказ сделан!
         <?php endif; ?>

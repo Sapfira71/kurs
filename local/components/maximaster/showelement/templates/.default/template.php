@@ -1,6 +1,11 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
     die();
-} ?>
+}
+if (empty($arResult["element"])) {
+    ShowError('alskjdlasjd');
+    return;
+}
+?>
 
 <div class="section-elems">
     <?php if (!empty($arResult["element"])): ?>
@@ -16,17 +21,17 @@
             </p>
             <div id="container">
                 <div id="products_example">
-                    <div id="products">
+                    <div id="products" class="js-gallery">
                         <div class="slides_container">
                             <?php foreach ($elem['GALLERY'] as $pict): ?>
-                                <a target="_blank"><img class="imageGalleryFull" src="<?= $pict ?>" width="350"
+                                <a target="_blank"><img class="image-gallery-full" src="<?= $pict ?>" width="350"
                                                         alt="Изображение товара"></a>
                             <?php endforeach; ?>
                         </div>
                         <ul class="pagination">
                             <?php foreach ($elem['GALLERY'] as $pict): ?>
                                 <li>
-                                    <div class="imageGallery"><a href="#"><img src="<?= $pict ?>" width="55"
+                                    <div class="image-gallery"><a href="#"><img src="<?= $pict ?>" width="55"
                                                                                alt="Изображение товара"></a></div>
                                 </li>
                             <?php endforeach; ?>
