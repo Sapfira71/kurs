@@ -64,37 +64,42 @@ class ShowElement extends \CBitrixComponent
         $arElement = Array();
 
         $arFilter = Array(
-            "IBLOCK_ID" => IBLOCK_WEAR_ID
+            "IBLOCK_ID" => IBLOCK_WEAR_ID,
+            'ID' => $elementID
         );
 
-        if (!empty($elementID)) {
-            $arFilter['ID'] = $elementID;
-        }
+        $arSelect = Array(
+            'NAME',
+            'DETAIL_TEXT',
+            'DETAIL_PICTURE',
+            'PROPERTY_BRAND',
+            'PROPERTY_COUNTRY',
+            'ID',
+            'PROPERTY_GALLERY'
+        );
 
-        $res = \CIBlockElement::GetList(Array(), $arFilter, false, false, Array());
+        $res = \CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
 
-        while ($ob = $res->GetNextElement())
+        if ($ob = $res->Fetch())
         {
-            $ar_res = $ob->GetFields();
-            $ar_res["PROPERTIES"] = $ob->GetProperties();
-            //var_dump($ar_res['PROPERTIES']['GALLERY']);die;
             $arPict = Array();
-            $temp = \CIBlockElement::GetProperty(IBLOCK_WEAR_ID, $ar_res['ID'], array(), Array("CODE"=>"GALLERY"));
-            foreach ($ar_res['PROPERTIES']['GALLERY']['VALUE'] as $pictureId) {
-                $arPict[] = \CFile::GetPath($pictureId);
+            foreach ($ob['PROPERTY_GALLERY_VALUE'] as $pict) {
+                $arPict[] = \CFile::GetPath($pict);
             }
 
+            $arPrice = \CCatalogProduct::GetOptimalPrice($ob['ID']);
+            $arResultPrice = $arPrice['RESULT_PRICE'];
+            $price = $arResultPrice['DISCOUNT_PRICE'] . " " . $arResultPrice['CURRENCY'];
+
             $arElement[] = array(
-                'ID' => $ar_res["ID"],
-                'NAME' => $ar_res["NAME"],
-                'PRICE' => $this->getPrice($ar_res['ID']),
-                'DETAIL_TEXT' => $ar_res["DETAIL_TEXT"],
-                'DETAIL_PICTURE' => \CFile::GetPath($ar_res["DETAIL_PICTURE"]),
-                'BRAND' => $this->getBrandName($ar_res["PROPERTIES"]["BRAND"]["VALUE"]),
-                'COUNTRY' => $ar_res["PROPERTIES"]["COUNTRY"]["VALUE"],
-                'QUANTITY' => $this->getQuantity($ar_res['ID']),
-                'GALLERY' => $arPict,
-                'DET_PAGE' => $ar_res['DETAIL_PAGE_URL']
+                'NAME' => $ob["NAME"],
+                'PRICE' => $price,
+                'DET_D' => $ob["DETAIL_TEXT"],
+                'DET_P' => \CFile::GetPath($ob["DETAIL_PICTURE"]),
+                'BRAND' => $this->getBrandName($ob["PROPERTY_BRAND_VALUE"]),
+                'COUNTRY' => $ob["PROPERTY_COUNTRY_VALUE"],
+                'QUANTITY' => $this->getQuantity($ob['ID']),
+                'GALLERY' => $arPict
             );
         }
 

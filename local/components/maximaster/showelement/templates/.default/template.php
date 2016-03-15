@@ -11,7 +11,7 @@ if (empty($arResult["element"])) {
     <?php if (!empty($arResult["element"])): ?>
         <?php foreach ($arResult['element'] as $elem): ?>
             <p class="section-element">
-                <?= $elem["NAME"] ?>. Цена: <?= $elem["PRICE"] ?> руб.<br>
+                <?= $elem["NAME"] ?>. Цена: <?= $elem["PRICE"] ?><br>
                 <img class="section-image js-img-el" src="<?= $elem['DET_P'] ?>" alt="Изображение товара">
                 <?= $elem['DET_D'] ?><br><br>
                 Бренд: <?= $elem['BRAND'] ?><br>
