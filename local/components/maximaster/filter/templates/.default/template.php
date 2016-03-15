@@ -1,8 +1,8 @@
-<form name="filter" method="post" action="<?=substr_replace($_SERVER['REQUEST_URI'],'',strpos($_SERVER['REQUEST_URI'],'?'))?>">
+<form name="filter" method="get">
     <table>
         <tr>
             <td>Артикул:</td>
-            <td><input type="text" name="myFilter[vendorCode]"
+            <td><input type="text" name="vendorCode"
                        value="<? if (isset($arResult["vendorCode"])) {
                            echo $arResult["vendorCode"];
                        } ?>">
@@ -10,7 +10,7 @@
         </tr>
         <tr>
             <td>Название:</td>
-            <td><input type="text" name="myFilter[name]"
+            <td><input type="text" name="name"
                        value="<? if (isset($arResult["name"])) {
                            echo $arResult["name"];
                        } ?>">
@@ -18,11 +18,11 @@
         </tr>
         <tr>
             <td>Цена:</td>
-            <td>от <input type="text" name="myFilter[price1]"
+            <td>от <input type="text" name="price1"
                           value="<? if (isset($arResult["price1"])) {
                               echo $arResult["price1"];
                           } ?>">
-                до <input type="text" name="myFilter[price2]"
+                до <input type="text" name="price2"
                           value="<? if (isset($arResult["price2"])) {
                               echo $arResult["price2"];
                           } ?>">
@@ -30,7 +30,7 @@
         </tr>
         <tr>
             <td>Только в наличии:</td>
-            <td><input type="checkbox" name="myFilter[availability]"
+            <td><input type="checkbox" name="availability"
                        <? if (isset($arResult["availability"])) {
                             echo "checked";
                        } ?>>
