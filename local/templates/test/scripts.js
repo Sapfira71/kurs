@@ -1,6 +1,6 @@
 jQuery("document").ready(function () {
 
-    //Меню
+    //Прикрепление меню к верху экрана при скролле страницы вниз
     var nav = $('menu');
     $(window).scroll(function () {
         if ($(this).scrollTop() > 80) {
@@ -10,10 +10,10 @@ jQuery("document").ready(function () {
         }
     });
 
-    //Зум
+    //Плагин "лупа" для детального изображения товара
     $('.js-img-el').loupe();
 
-    //ГАлерея
+    //Плагин "галерея" для списка изображений товара
     $('.js-gallery').slides({
         preload: true,
         preloadImage: 'img/loading.gif',
@@ -24,5 +24,4 @@ jQuery("document").ready(function () {
         generateNextPrev: true,
         generatePagination: false
     });
-
 });
