@@ -1,6 +1,11 @@
 <?
+$condition = '0';
 
-$condition = "strripos(\$_SERVER['SCRIPT_FILENAME'], 'index.php')==false";
+if($_SERVER['REQUEST_URI']== "/") {
+    $condition = '0';
+} else {
+    $condition = strripos($_SERVER['REQUEST_URI'], 'index.php') == false ? '1' : '0';
+}
 
 $aMenuLinks = Array(
     Array(
