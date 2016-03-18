@@ -14,16 +14,15 @@ class ShowBrands extends \CBitrixComponent
         $arFilter = Array(
             "IBLOCK_ID" => IBLOCK_WEAR_ID
         );
-        if (!empty($_REQUEST['SECTION_ID'])) {
+
+        if (!empty($_REQUEST['ELEMENT_ID'])) {
+            $arFilter['ID'] = $_REQUEST['ELEMENT_ID'];
+        } elseif (!empty($_REQUEST['SECTION_ID'])) {
             $arFilter = Array(
                 'SECTION_ID' => $_REQUEST['SECTION_ID'],
                 'INCLUDE_SUBSECTIONS' => 'Y'
             );
-        }
-        if (!empty($_REQUEST['ELEMENT_ID'])) {
-            $arFilter['ID'] = $_REQUEST['ELEMENT_ID'];
-        }
-        if (!empty($_REQUEST['BRAND_ID'])) {
+        } elseif (!empty($_REQUEST['BRAND_ID'])) {
             $arFilter['PROPERTY_BRAND'] = $_REQUEST['BRAND_ID'];
         }
 
