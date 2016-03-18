@@ -29,7 +29,7 @@ function sendMessage($id)
     setCookies();
 
     CBitrixComponent::includeComponentClass("maximaster:showelement");
-    $ob = new CShowElement();
+    $ob = new Maximaster\Components\ShowElement();
     $arEl = $ob->readElementInfo($id);
 
     $to = $_POST['mail'];
@@ -42,4 +42,8 @@ function sendMessage($id)
     } else {
         return false;
     }
+}
+
+function getBuyElementURL($id) {
+    return '/purchase.php?ELEMENT_ID=' . $id;
 }

@@ -69,7 +69,8 @@ class ShowElement extends \CBitrixComponent
                 'BRAND' => $this->getBrandName($ob["PROPERTY_BRAND_VALUE"]),
                 'COUNTRY' => $ob["PROPERTY_COUNTRY_VALUE"],
                 'QUANTITY' => $ob['CATALOG_QUANTITY'],
-                'GALLERY' => $arPict
+                'GALLERY' => $arPict,
+                'BUY_PAGE' => getBuyElementURL($ob["ID"])
             );
         }
 
