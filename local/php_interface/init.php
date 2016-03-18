@@ -47,3 +47,7 @@ function sendMessage($id)
 function getBuyElementURL($id) {
     return '/purchase.php?ELEMENT_ID=' . $id;
 }
+
+function getBrandsElementsURL($id) {
+    return '/index.php?BRAND_ID=' . $id;
+}
