@@ -5,11 +5,16 @@ use Bitrix\Highloadblock as HL;
 
 class ShowElement extends \CBitrixComponent
 {
-    private function getBrandName($xml_id)
+    /**
+     * Получить имя бренда по внешнему коду
+     * @param string $xmlId Значение свойства 'Бренд' (тип справочник) элемента инфоблока
+     * @return string
+     */
+    private function getBrandName($xmlId)
     {
-        \CModule::IncludeModule("highloadblock");
+        \CModule::IncludeModule('highloadblock');
 
-        $namebrand = "";
+        $namebrand = '';
 
         $hlblock = HL\HighloadBlockTable::getById(HIGHLOADBLOCK_BRAND_ID)->fetch();
         $entity = HL\HighloadBlockTable::compileEntity($hlblock);
@@ -17,8 +22,8 @@ class ShowElement extends \CBitrixComponent
         $entityTableName = $hlblock['Brand'];
 
         $rsData = $entityDataClass::getList(array(
-            "select" => array('UF_NAME', 'UF_XML_ID'),
-            "filter" => array('=UF_XML_ID' => $xml_id)
+            'select' => array('UF_NAME', 'UF_XML_ID'),
+            'filter' => array('=UF_XML_ID' => $xmlId)
         ));
         $rsData = new \CDBResult($rsData, $entityTableName);
         if ($arRes = $rsData->Fetch()) {
@@ -27,13 +32,18 @@ class ShowElement extends \CBitrixComponent
         return $namebrand;
     }
 
+    /**
+     * Функция, формирующая массив с информацией об элементе инфоблока
+     * @param int $elementID ID элемента, информацию о котором необходимо считать из инфоблока
+     * @return array
+     */
     public function readElementInfo($elementID)
     {
         \CModule::IncludeModule('iblock');
         $arElement = Array();
 
         $arFilter = Array(
-            "IBLOCK_ID" => IBLOCK_WEAR_ID,
+            'IBLOCK_ID' => IBLOCK_WEAR_ID,
             'ID' => $elementID
         );
 
@@ -50,8 +60,7 @@ class ShowElement extends \CBitrixComponent
 
         $res = \CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
 
-        if ($ob = $res->Fetch())
-        {
+        if ($ob = $res->Fetch()) {
             $arPict = Array();
             foreach ($ob['PROPERTY_GALLERY_VALUE'] as $pict) {
                 $arPict[] = \CFile::GetPath($pict);
@@ -59,28 +68,31 @@ class ShowElement extends \CBitrixComponent
 
             $arPrice = \CCatalogProduct::GetOptimalPrice($ob['ID']);
             $arResultPrice = $arPrice['RESULT_PRICE'];
-            $price = $arResultPrice['DISCOUNT_PRICE'] . " " . $arResultPrice['CURRENCY'];
+            $price = $arResultPrice['DISCOUNT_PRICE'] . ' ' . $arResultPrice['CURRENCY'];
 
             $arElement[] = array(
-                'NAME' => $ob["NAME"],
+                'NAME' => $ob['NAME'],
                 'PRICE' => $price,
-                'DET_D' => $ob["DETAIL_TEXT"],
-                'DET_P' => \CFile::GetPath($ob["DETAIL_PICTURE"]),
-                'BRAND' => $this->getBrandName($ob["PROPERTY_BRAND_VALUE"]),
-                'COUNTRY' => $ob["PROPERTY_COUNTRY_VALUE"],
+                'DETAIL_TEXT' => $ob['DETAIL_TEXT'],
+                'DETAIL_PICTURE' => \CFile::GetPath($ob['DETAIL_PICTURE']),
+                'BRAND' => $this->getBrandName($ob['PROPERTY_BRAND_VALUE']),
+                'COUNTRY' => $ob['PROPERTY_COUNTRY_VALUE'],
                 'QUANTITY' => $ob['CATALOG_QUANTITY'],
                 'GALLERY' => $arPict,
-                'BUY_PAGE' => getBuyElementURL($ob["ID"])
+                'BUY_PAGE' => getBuyElementURL($ob['ID'])
             );
         }
 
         return $arElement;
     }
 
+    /**
+     * Выполнение компонента
+     */
     public function executeComponent()
     {
-        if (!empty($_REQUEST["ELEMENT_ID"])) {
-            $this->arResult['element'] = $this->readElementInfo($_REQUEST["ELEMENT_ID"]);
+        if (!empty($_REQUEST['ELEMENT_ID'])) {
+            $this->arResult['element'] = $this->readElementInfo($_REQUEST['ELEMENT_ID']);
         } else {
             return;
         }
