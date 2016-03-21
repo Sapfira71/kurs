@@ -3,8 +3,17 @@ namespace Maximaster\Components;
 
 use Bitrix\Highloadblock as HL;
 
+/**
+ * Класс формирования массива текущих брендов
+ * Class ShowBrands
+ * @package Maximaster\Components
+ */
 class ShowBrands extends \CBitrixComponent
 {
+    /**
+     * Функция, формирующая массив, содержащий значения свойства 'Бренд' элементов инфоблока
+     * @return array
+     */
     private function getListCurrentBrands()
     {
         $result = Array();
@@ -12,7 +21,7 @@ class ShowBrands extends \CBitrixComponent
         \CModule::IncludeModule('iblock');
 
         $arFilter = Array(
-            "IBLOCK_ID" => IBLOCK_WEAR_ID
+            'IBLOCK_ID' => IBLOCK_WEAR_ID
         );
 
         if (!empty($_REQUEST['ELEMENT_ID'])) {
@@ -34,12 +43,16 @@ class ShowBrands extends \CBitrixComponent
         return $result;
     }
 
+    /**
+     * Функция, формирующая массив , содержащий значения NAME и XML_ID текущих брендов
+     * @return array
+     */
     public function getBrands()
     {
         $res = Array();
         $listCurrentBr = $this->getListCurrentBrands();
 
-        \CModule::IncludeModule("highloadblock");
+        \CModule::IncludeModule('highloadblock');
 
         $hlblock = HL\HighloadBlockTable::getById(HIGHLOADBLOCK_BRAND_ID)->fetch();
         $entity = HL\HighloadBlockTable::compileEntity($hlblock);
@@ -47,8 +60,8 @@ class ShowBrands extends \CBitrixComponent
         $entityTableName = $hlblock['Brand'];
 
         $rsData = $entityDataClass::getList(array(
-            "select" => array('UF_NAME', 'UF_XML_ID'),
-            "filter" => array()
+            'select' => array('UF_NAME', 'UF_XML_ID'),
+            'filter' => array()
         ));
         $rsData = new \CDBResult($rsData, $entityTableName);
 
@@ -67,9 +80,12 @@ class ShowBrands extends \CBitrixComponent
         return $res;
     }
 
+    /**
+     * Выполнение компонента
+     */
     public function executeComponent()
     {
-        $this->arResult["brands"] = $this->getBrands();
+        $this->arResult['brands'] = $this->getBrands();
         $this->includeComponentTemplate();
     }
 }
