@@ -36,18 +36,25 @@ function sendMessage($id)
     $message = "Ваше имя: " . $_POST['name'] . ". Телефон: " . $_POST['number'] . ". Почта: " . $_POST['mail'] . ". ";
     $message .= $arEl['NAME'] . ". " . $arEl['PRICE'] . ". " . $arEl['BRAND'] . ". " . $arEl['COUNTRY'];
 
-    //CEvent
-    if (mail($to, "Your order", $message)) {
+    $arEventFields = array(
+        'FROM_EMAIL' => htmlspecialcharsEx('a.morozova@maximaster.ru'),
+        'MESSAGE' => htmlspecialcharsEx($message),
+        'TO_EMAIL' => htmlspecialcharsEx($to)
+    );
+
+    if (\CEvent::Send("ORDER_INFO", "s1", $arEventFields)) {
         return true;
     } else {
         return false;
     }
 }
 
-function getBuyElementURL($id) {
+function getBuyElementURL($id)
+{
     return '/purchase.php?ELEMENT_ID=' . $id;
 }
 
-function getBrandsElementsURL($id) {
+function getBrandsElementsURL($id)
+{
     return '/index.php?BRAND_ID=' . $id;
 }
