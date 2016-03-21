@@ -69,7 +69,7 @@ function getBuyElementURL($id)
 
 /**
  * Функция возвращает URL страницы просмотра списка товаров бренда
- * @param int $id Идентификатор товара
+ * @param string $id Идентификатор бренда
  * @return string
  */
 function getBrandsElementsURL($id)
