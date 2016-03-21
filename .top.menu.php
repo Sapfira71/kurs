@@ -1,7 +1,7 @@
 <?
 $condition = '0';
 
-if($_SERVER['REQUEST_URI']== "/") {
+if ($_SERVER['REQUEST_URI'] == '/') {
     $condition = '0';
 } else {
     $condition = strripos($_SERVER['REQUEST_URI'], 'index.php') == false ? '1' : '0';
@@ -9,24 +9,24 @@ if($_SERVER['REQUEST_URI']== "/") {
 
 $aMenuLinks = Array(
     Array(
-        "Главная страница",
-        "index.php",
+        'Главная страница',
+        'index.php',
         Array(),
         Array(),
         $condition
     ),
     Array(
-        "О себе",
-        "about.php",
+        'О себе',
+        'about.php',
         Array(),
         Array(),
-        ""
+        ''
     ),
     Array(
-        "Контакты",
-        "contacts.php",
+        'Контакты',
+        'contacts.php',
         Array(),
         Array(),
-        ""
+        ''
     )
 );
