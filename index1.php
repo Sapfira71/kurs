@@ -20,7 +20,7 @@ $APPLICATION->IncludeComponent('maximaster:filter', '.default', array('FILTER' =
 $APPLICATION->IncludeComponent('maximaster:showgoods', '.default',
     array(
         'FILTER' => $_POST['myFilter'],
-        "IBLOCK_ID" => IBLOCK_CATALOG_TASK1_ID,
+        "IBLOCK_ID" => IBLOCK_GOODS_ID,
         'FILTER_PARAMS' => $_POST['filterParams']
     ));
 ?>

@@ -3,8 +3,17 @@ namespace Maximaster\Components;
 
 use Bitrix\Highloadblock as HL;
 
-class CShowBrands extends \CBitrixComponent
+/**
+ * Класс формирования массива текущих брендов
+ * Class ShowBrands
+ * @package Maximaster\Components
+ */
+class ShowBrands extends \CBitrixComponent
 {
+    /**
+     * Функция, формирующая массив, содержащий значения свойства 'Бренд' элементов инфоблока
+     * @return array
+     */
     private function getListCurrentBrands()
     {
         $result = Array();
@@ -12,64 +21,58 @@ class CShowBrands extends \CBitrixComponent
         \CModule::IncludeModule('iblock');
 
         $arFilter = Array(
-            "IBLOCK_ID" => IBLOCK_CATALOG_ID
+            'IBLOCK_ID' => IBLOCK_WEAR_ID
         );
-        if (!empty($_REQUEST['SECTION_ID'])) {
+
+        if (!empty($_REQUEST['ELEMENT_ID'])) {
+            $arFilter['ID'] = $_REQUEST['ELEMENT_ID'];
+        } elseif (!empty($_REQUEST['SECTION_ID'])) {
             $arFilter = Array(
                 'SECTION_ID' => $_REQUEST['SECTION_ID'],
                 'INCLUDE_SUBSECTIONS' => 'Y'
             );
-        }
-        if (!empty($_REQUEST['ELEMENT_ID'])) {
-            $arFilter['ID'] = $_REQUEST['ELEMENT_ID'];
-        }
-        if (!empty($_REQUEST['BRAND_ID'])) {
+        } elseif (!empty($_REQUEST['BRAND_ID'])) {
             $arFilter['PROPERTY_BRAND'] = $_REQUEST['BRAND_ID'];
         }
-        $arSelect = Array(
-            'PROPERTY_BRAND'
-        );
 
-        $res = \CIBlockElement::GetList(Array(), $arFilter, array('PROPERTY_BRAND'), false, $arSelect);
+        $res = \CIBlockElement::GetList(Array(), $arFilter, array('PROPERTY_BRAND'), false, Array());
         while ($ob = $res->Fetch()) {
-            $result[ $ob['PROPERTY_BRAND_VALUE'] ] = $ob['PROPERTY_BRAND_VALUE'];
+            $result[] = $ob['PROPERTY_BRAND_VALUE'];
         }
-
 
         return $result;
     }
 
+    /**
+     * Функция, формирующая массив , содержащий значения NAME и XML_ID текущих брендов
+     * @return array
+     */
     public function getBrands()
     {
         $res = Array();
-        $listCurrentBr = array_unique($this->getListCurrentBrands());
-        \CModule::IncludeModule("highloadblock");
+        $listCurrentBr = $this->getListCurrentBrands();
 
-        $hlblock = HL\HighloadBlockTable::getById(ID_BRAND_INFOBLOCK)->fetch();
+        \CModule::IncludeModule('highloadblock');
+
+        $hlblock = HL\HighloadBlockTable::getById(HIGHLOADBLOCK_BRAND_ID)->fetch();
         $entity = HL\HighloadBlockTable::compileEntity($hlblock);
         $entityDataClass = $entity->getDataClass();
         $entityTableName = $hlblock['Brand'];
 
         $rsData = $entityDataClass::getList(array(
-            "select" => array('UF_NAME', 'UF_XML_ID')
+            'select' => array('UF_NAME', 'UF_XML_ID'),
+            'filter' => array()
         ));
         $rsData = new \CDBResult($rsData, $entityTableName);
 
         while ($arRes = $rsData->Fetch()) {
-            if (empty($_REQUEST['BRAND_ID']) && empty($_REQUEST['SECTION_ID']) && empty($_REQUEST['ELEMENT_ID'])) {
-                $res[] = Array(
-                    'NAME' => $arRes['UF_NAME'],
-                    'XML_ID' => $arRes['UF_XML_ID']
-                );
-            } else {
-                foreach ($listCurrentBr as $br) {
-                    if ($arRes['UF_XML_ID'] == $br) {
-                        $res[] = Array(
-                            'NAME' => $arRes['UF_NAME'],
-                            'XML_ID' => $arRes['UF_XML_ID']
-                        );
-                        break;
-                    }
+            foreach ($listCurrentBr as $br) {
+                if ($arRes['UF_XML_ID'] == $br) {
+                    $res[] = Array(
+                        'NAME' => $arRes['UF_NAME'],
+                        'XML_ID' => $arRes['UF_XML_ID']
+                    );
+                    break;
                 }
             }
         }
@@ -77,9 +80,12 @@ class CShowBrands extends \CBitrixComponent
         return $res;
     }
 
+    /**
+     * Выполнение компонента
+     */
     public function executeComponent()
     {
-        $this->arResult["brands"] = $this->getBrands();
+        $this->arResult['brands'] = $this->getBrands();
         $this->includeComponentTemplate();
     }
 }

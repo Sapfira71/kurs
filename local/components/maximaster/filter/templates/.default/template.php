@@ -14,29 +14,21 @@
         <tr>
             <td>Название:</td>
             <td><input type="text" name="name"
-                       value="<? if (isset($arResult["name"])) {
-                           echo $arResult["name"];
-                       } ?>">
+                       value="<?= isset($arResult["name"]) ? $arResult["name"] : '' ?>">
             </td>
         </tr>
         <tr>
             <td>Цена:</td>
             <td>от <input type="text" name="price1"
-                          value="<? if (isset($arResult["price1"])) {
-                              echo $arResult["price1"];
-                          } ?>">
+                          value="<?= isset($arResult["price1"]) ? $arResult["price1"] : '' ?>">
                 до <input type="text" name="price2"
-                          value="<? if (isset($arResult["price2"])) {
-                              echo $arResult["price2"];
-                          } ?>">
+                          value="<?= isset($arResult["price2"]) ? $arResult["price2"] : '' ?>">
             </td>
         </tr>
         <tr>
             <td>Только в наличии:</td>
             <td><input type="checkbox" name="availability"
-                       <? if (isset($arResult["availability"])) {
-                            echo "checked";
-                       } ?>>
+                <?= isset($arResult["availability"]) ? "checked" : '' ?>
             </td>
         </tr>
     </table>

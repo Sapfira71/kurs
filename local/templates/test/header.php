@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js'></script>
     <!--[if lt IE 9]>
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script src='http://html5shiv.googlecode.com/svn/trunk/html5.js'></script>
     <![endif]-->
 
     <?
@@ -19,7 +19,6 @@
 
     <title>
         <?
-        //$APPLICATION->SetTitle("Обучающее задание");
         $APPLICATION->ShowTitle();
         ?>
     </title>
@@ -30,40 +29,40 @@
 $APPLICATION->ShowPanel();
 ?>
 
-<header class="header">
+<header class='header'>
     <? $APPLICATION->IncludeComponent(
-        "bitrix:main.include",
-        "",
+        'bitrix:main.include',
+        '',
         Array(
-            "AREA_FILE_SHOW" => "page",
-            "AREA_FILE_SUFFIX" => "header",
-            "EDIT_TEMPLATE" => ""
+            'AREA_FILE_SHOW' => 'page',
+            'AREA_FILE_SUFFIX' => 'header',
+            'EDIT_TEMPLATE' => ''
         )
     ); ?>
 </header>
-<menu class="menu" type="toolbar">
+<menu class='menu' type='toolbar'>
     <? $APPLICATION->IncludeComponent(
-        "bitrix:menu",
-        "grey_tabs",
+        'bitrix:menu',
+        'grey_tabs',
         Array(
-            "ROOT_MENU_TYPE" => "top"
+            'ROOT_MENU_TYPE' => 'top'
         )
     ); ?>
 </menu>
-<table class="col">
+<table class='col'>
     <tr>
-        <td class="col1">
+        <td class='col1'>
             <aside>
                 <? $APPLICATION->IncludeComponent(
-                    "bitrix:menu",
-                    "tree",
+                    'bitrix:menu',
+                    'tree',
                     Array(
-                        "ROOT_MENU_TYPE" => "left",
-                        "CHILD_MENU_TYPE" => "left",
-                        "USE_EXT" => "Y"
+                        'ROOT_MENU_TYPE' => 'left',
+                        'CHILD_MENU_TYPE' => 'left',
+                        'USE_EXT' => 'Y'
                     )
                 ); ?>
             </aside>
         </td>
         <td>
-            <div class="content">
+            <div class='content'>

@@ -1,27 +1,32 @@
 <?
+$condition = '0';
 
-$condition = "strripos(\$_SERVER['SCRIPT_FILENAME'], 'index.php')==false";
+if ($_SERVER['REQUEST_URI'] == '/') {
+    $condition = '0';
+} else {
+    $condition = strripos($_SERVER['REQUEST_URI'], 'index.php') == false ? '1' : '0';
+}
 
 $aMenuLinks = Array(
     Array(
-        "Главная страница",
-        "index.php",
+        'Главная страница',
+        'index.php',
         Array(),
         Array(),
         $condition
     ),
     Array(
-        "О себе",
-        "about.php",
+        'О себе',
+        'about.php',
         Array(),
         Array(),
-        ""
+        ''
     ),
     Array(
-        "Контакты",
-        "contacts.php",
+        'Контакты',
+        'contacts.php',
         Array(),
         Array(),
-        ""
+        ''
     )
 );
