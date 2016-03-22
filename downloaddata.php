@@ -266,7 +266,7 @@ function readDataFromFile()
             'PREVIEW_TEXT',
             'PREVIEW_PICTURE',
             'DETAIL_TEXT',
-            'DET_PICTURE',
+            'DETAIL_PICTURE',
             'GALLERY'
         );
 

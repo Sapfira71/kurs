@@ -62,7 +62,7 @@ class ShowSections extends \CBitrixComponent
             $arProduct = array(
                 'NAME' => $ob['NAME'],
                 'ID' => $ob['ID'],
-                'PRICE' => $ob['CATALOG_PRICE_' . TYPE_PRICE_BASE_ID],
+                'PRICE' => $ob['CATALOG_PRICE_' . TYPE_PRICE_BASE_ID] . " " . $ob['CATALOG_CURRENCY_' . TYPE_PRICE_BASE_ID],
                 'PREVIEW_TEXT' => $ob['PREVIEW_TEXT'],
                 'PREVIEW_PICTURE' => \CFile::GetPath($ob['PREVIEW_PICTURE']),
                 'DETAIL_URL' => $ob['DETAIL_PAGE_URL']
