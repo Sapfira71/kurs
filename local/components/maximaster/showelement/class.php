@@ -81,6 +81,9 @@ class ShowElement extends \CBitrixComponent
                 'GALLERY' => $arPict,
                 'BUY_PAGE' => getBuyElementURL($ob['ID'])
             );
+        } else {
+            error404();
+            return;
         }
 
         return $arElement;

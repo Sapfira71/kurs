@@ -33,6 +33,8 @@ class ShowSections extends \CBitrixComponent
                 'DESCRIPTION' => $sec['DESCRIPTION'],
                 'IMAGE' => \CFile::GetPath($sec['PICTURE'])
             );
+        } else {
+            error404();
         }
 
         return $res;
@@ -115,6 +117,9 @@ class ShowSections extends \CBitrixComponent
             $this->arResult['elements'] = $this->readSectionElementsInfo($_REQUEST['SECTION_ID']);
         } elseif (!empty($_REQUEST['BRAND_ID'])) {
             $this->arResult['elements'] = $this->readBrandElementsInfo($_REQUEST['BRAND_ID']);
+            if (empty($this->arResult['elements'])) {
+                error404();
+            }
         } else {
             return;
         }
