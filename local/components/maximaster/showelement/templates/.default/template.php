@@ -22,18 +22,20 @@ if (empty($arResult['element'])) {
         <div id='container'>
             <div id='products_example'>
                 <div id='products' class='js-gallery'>
-                    <?php foreach ($elem['GALLERY'] as $pict): ?>
-                        <div class='slides_container'>
+                    <div class='slides_container'>
+                        <?php foreach ($elem['GALLERY'] as $pict): ?>
                             <a target='_blank'><img class='image-gallery-full' src='<?= $pict ?>' width='350'
                                                     alt='Изображение товара'></a>
-                        </div>
-                        <ul class='pagination'>
+                        <?php endforeach; ?>
+                    </div>
+                    <ul class='pagination'>
+                        <?php foreach ($elem['GALLERY'] as $pict): ?>
                             <li>
                                 <div class='image-gallery'><a href='#'><img src='<?= $pict ?>' width='55'
                                                                             alt='Изображение товара'></a></div>
                             </li>
-                        </ul>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </ul>
                 </div>
             </div>
         </div>
