@@ -10,11 +10,15 @@ if (empty($arResult['element'])) {
 <div class='section-elems'>
     <?php foreach ($arResult['element'] as $elem): ?>
         <p class='section-element'>
-            <?= $elem['NAME'] ?>. <? if (!empty($elem['PRICE'])): ?>Цена: <?= $elem['PRICE'] ?><br><? endif; ?>
+            <?= $elem['NAME'] ?>. Цена: <?= $elem['PRICE'] ?><br>
             <img class='section-image js-img-el' src='<?= $elem['DETAIL_PICTURE'] ?>' alt='Изображение товара'>
             <?= $elem['DETAIL_TEXT'] ?><br><br>
             <? if (!empty($elem['BRAND'])): ?> Бренд: <?= $elem['BRAND'] ?><br><? endif; ?>
-            <? if (!empty($elem['QUANTITY'])): ?> Количество на складе: <?= $elem['QUANTITY'] ?><br><? endif; ?>
+            <? if (!empty($elem['QUANTITY'])): ?>
+                Количество на складе: <?= $elem['QUANTITY'] ?><br>
+            <? else: ?>
+                Товар отсутсвует на складе!<br>
+            <? endif; ?>
             <? if (!empty($elem['COUNTRY'])): ?> Страна-производитель: <?= $elem['COUNTRY'] ?><br><? endif; ?>
             <a class='purchase-button' href='<?= $elem['BUY_PAGE']; ?>'>Купить</a>
         </p>
