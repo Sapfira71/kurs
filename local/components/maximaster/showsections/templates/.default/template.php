@@ -23,7 +23,7 @@
         <h3>В разделе есть следующие товары:</h3>
         <?php foreach ($arResult['elements'] as $elem): ?>
             <p class='section-element'>
-                <a href='<?= $elem['DETAIL_URL'] ?>'><?= $elem['NAME'] ?></a>. Цена: <?= $elem['PRICE'] ?> руб.<br>
+                <a href='<?= $elem['DETAIL_URL'] ?>'><?= $elem['NAME'] ?></a>. Цена: <?= $elem['PRICE'] ?><br>
                 <img class='section-image' src='<?= $elem['PREVIEW_PICTURE'] ?>' alt='Изображение товара'>
                 <?= $elem['PREVIEW_TEXT'] ?>
             </p>
