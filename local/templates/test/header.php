@@ -11,6 +11,7 @@
     $assetManager->addCss(SITE_TEMPLATE_PATH . '/styles.css');
     $assetManager->addCss(SITE_TEMPLATE_PATH . '/gallery/css/global.css');
     $assetManager->addJs(SITE_TEMPLATE_PATH . '/scripts.js');
+    $assetManager->addJs(SITE_TEMPLATE_PATH . '/cookie.js');
     $assetManager->addJs(SITE_TEMPLATE_PATH . '/zoom/jquery.loupe.js');
     $assetManager->addJs(SITE_TEMPLATE_PATH . '/gallery/js/slides.min.jquery.js');
     ?>
