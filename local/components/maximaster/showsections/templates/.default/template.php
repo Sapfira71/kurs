@@ -2,7 +2,7 @@
     die();
 } ?>
 
-<? if (empty($arResult['section'])) : ?>
+<? if (!empty($arResult['section'])) : ?>
     <div class='section-head'>
         <h3><?= $arResult['section']['NAME'] ?> (<?= $arResult['section']['ELEMENT_CNT'] ?>)</h3>
     </div>
@@ -12,10 +12,14 @@
 
         <div><?= $arResult['section']['DESCRIPTION'] ?></div>
     </div>
+
+    <? if (empty($arResult['elements'])): ?>
+        <h3>Товары отсутствуют в данном разделе</h3>
+    <? endif; ?>
 <? endif; ?>
 
-<div class='section-elems'>
-    <?php if (!empty($arResult['elements'])): ?>
+<?php if (!empty($arResult['elements'])): ?>
+    <div class='section-elems'>
         <h3>В разделе есть следующие товары:</h3>
         <?php foreach ($arResult['elements'] as $elem): ?>
             <p class='section-element'>
@@ -24,7 +28,5 @@
                 <?= $elem['PREVIEW_TEXT'] ?>
             </p>
         <?php endforeach; ?>
-    <?php else: ?>
-        <h3>Товары отсутствуют в данном разделе</h3>
-    <?php endif; ?>
-</div>
+    </div>
+<?php endif; ?>
