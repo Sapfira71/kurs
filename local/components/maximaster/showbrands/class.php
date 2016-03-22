@@ -4,14 +4,14 @@ namespace Maximaster\Components;
 use Bitrix\Highloadblock as HL;
 
 /**
- * Класс формирования массива текущих брендов
+ * РљР»Р°СЃСЃ РїРѕРєР°Р·Р° СЃРїРёСЃРєР° Р±СЂРµРґРѕРІ
  * Class ShowBrands
  * @package Maximaster\Components
  */
 class ShowBrands extends \CBitrixComponent
 {
     /**
-     * Функция, формирующая массив, содержащий значения свойства 'Бренд' элементов инфоблока
+     * Р¤СѓРЅРєС†РёСЏ, РїРѕР»СѓС‡Р°СЋС‰Р°СЏ СЃРїРёСЃРѕРє Р·РЅР°С‡РµРЅРёР№ СЃРІРѕР№СЃС‚РІР° 'Р‘СЂРµРЅРґ' СЌР»РµРјРµРЅС‚РѕРІ РёРЅС„РѕР±Р»РѕРєР°
      * @return array
      */
     private function getListCurrentBrands()
@@ -44,7 +44,7 @@ class ShowBrands extends \CBitrixComponent
     }
 
     /**
-     * Функция, формирующая массив , содержащий значения NAME и XML_ID текущих брендов
+     * Р¤СѓРЅРєС†РёСЏ, РІРѕР·РІСЂР°С‰Р°СЋС‰Р°СЏ РјР°СЃСЃРёРІ, СЃРѕРґРµСЂР¶Р°С‰РёР№ NAME Рё XML_ID Р±СЂРµРЅРґРѕРІ, С‚РѕРІР°СЂС‹ РєРѕС‚РѕСЂС‹С… РµСЃС‚СЊ РІ РёРЅС„РѕР±Р»РѕРєРµ
      * @return array
      */
     public function getBrands()
@@ -61,27 +61,22 @@ class ShowBrands extends \CBitrixComponent
 
         $rsData = $entityDataClass::getList(array(
             'select' => array('UF_NAME', 'UF_XML_ID'),
-            'filter' => array()
+            'filter' => array('UF_XML_ID' => $listCurrentBr)
         ));
         $rsData = new \CDBResult($rsData, $entityTableName);
 
         while ($arRes = $rsData->Fetch()) {
-            foreach ($listCurrentBr as $br) {
-                if ($arRes['UF_XML_ID'] == $br) {
-                    $res[] = Array(
-                        'NAME' => $arRes['UF_NAME'],
-                        'XML_ID' => $arRes['UF_XML_ID']
-                    );
-                    break;
-                }
-            }
+            $res[] = Array(
+                'NAME' => $arRes['UF_NAME'],
+                'XML_ID' => $arRes['UF_XML_ID']
+            );
         }
 
         return $res;
     }
 
     /**
-     * Выполнение компонента
+     * Р’С‹РїРѕР»РЅРµРЅРёРµ РєРѕРјРїРѕРЅРµРЅС‚Р°
      */
     public function executeComponent()
     {
