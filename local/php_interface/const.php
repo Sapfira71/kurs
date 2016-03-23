@@ -13,7 +13,7 @@ define('IBLOCK_GOODS_ID', 1);
 /**
  * ID типа цен BASE
  */
-define('TYPE_PRICE_BASE_ID', 1);
+define('PRICE_TYPE_BASE_ID', 1);
 
 /**
  * ID highload-блока с брендами
