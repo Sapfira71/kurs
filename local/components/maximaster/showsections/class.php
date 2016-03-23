@@ -61,10 +61,13 @@ class ShowSections extends \CBitrixComponent
         $listElements = \CIBlockElement::GetList(Array(), $filter, false, false, $arSelect);
 
         while ($ob = $listElements->GetNext()) {
+            $price = \CCurrencyLang::CurrencyFormat($ob['CATALOG_PRICE_' . PRICE_TYPE_BASE_ID],
+                $ob['CATALOG_CURRENCY_' . PRICE_TYPE_BASE_ID]);
+
             $arProduct = array(
                 'NAME' => $ob['NAME'],
                 'ID' => $ob['ID'],
-                'PRICE' => $ob['CATALOG_PRICE_' . PRICE_TYPE_BASE_ID] . " " . $ob['CATALOG_CURRENCY_' . PRICE_TYPE_BASE_ID],
+                'PRICE' => $price,
                 'PREVIEW_TEXT' => $ob['PREVIEW_TEXT'],
                 'PREVIEW_PICTURE' => \CFile::GetPath($ob['PREVIEW_PICTURE']),
                 'DETAIL_URL' => $ob['DETAIL_PAGE_URL']

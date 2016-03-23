@@ -68,7 +68,7 @@ class ShowElement extends \CBitrixComponent
 
             $arPrice = \CCatalogProduct::GetOptimalPrice($ob['ID']);
             $arResultPrice = $arPrice['RESULT_PRICE'];
-            $price = $arResultPrice['DISCOUNT_PRICE'] . ' ' . $arResultPrice['CURRENCY'];
+            $price = \CCurrencyLang::CurrencyFormat($arResultPrice['DISCOUNT_PRICE'], $arResultPrice['CURRENCY']);
 
             $arElement = array(
                 'NAME' => $ob['NAME'],
