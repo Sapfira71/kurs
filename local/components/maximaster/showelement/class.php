@@ -70,7 +70,7 @@ class ShowElement extends \CBitrixComponent
             $arResultPrice = $arPrice['RESULT_PRICE'];
             $price = $arResultPrice['DISCOUNT_PRICE'] . ' ' . $arResultPrice['CURRENCY'];
 
-            $arElement[] = array(
+            $arElement = array(
                 'NAME' => $ob['NAME'],
                 'PRICE' => $price,
                 'DETAIL_TEXT' => $ob['DETAIL_TEXT'],
