@@ -82,8 +82,7 @@ class ShowElement extends \CBitrixComponent
                 'BUY_PAGE' => getBuyElementURL($ob['ID'])
             );
         } else {
-            error404();
-            return;
+            @define('ERROR_404', 'Y');
         }
 
         return $arElement;

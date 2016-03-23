@@ -34,7 +34,7 @@ class ShowSections extends \CBitrixComponent
                 'IMAGE' => \CFile::GetPath($sec['PICTURE'])
             );
         } else {
-            error404();
+            @define('ERROR_404', 'Y');
         }
 
         return $res;
@@ -121,7 +121,7 @@ class ShowSections extends \CBitrixComponent
         } elseif (!empty($_REQUEST['BRAND_ID'])) {
             $this->arResult['elements'] = $this->readBrandElementsInfo($_REQUEST['BRAND_ID']);
             if (empty($this->arResult['elements'])) {
-                error404();
+                @define('ERROR_404', 'Y');
             }
         } else {
             return;

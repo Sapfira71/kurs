@@ -36,9 +36,17 @@ function getBrandsElementsURL($id)
     return '/index.php?BRAND_ID=' . $id;
 }
 
-function error404()
+//Обработка ошибки 404
+AddEventHandler("main", "OnEpilog", "OnEpilogHandler");
+function OnEpilogHandler()
 {
-    CHTTP::SetStatus('404 Not Found');
-    @define('ERROR_404', 'Y');
-    include $_SERVER['DOCUMENT_ROOT'] . '/404.php';
+    if(defined('ERROR_404') && ERROR_404 == 'Y')
+    {
+        global $APPLICATION;
+        $APPLICATION->RestartBuffer();
+        CHTTP::SetStatus('404 Not Found');
+        include $_SERVER['DOCUMENT_ROOT'].'/local/templates/test/header.php';
+        include $_SERVER['DOCUMENT_ROOT'].'/404.php';
+        include $_SERVER['DOCUMENT_ROOT'].'/local/templates/test/footer.php';
+    }
 }
