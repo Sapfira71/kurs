@@ -20,13 +20,13 @@ function UpdateGoods($ibe, $elem, $arFields, $value)
 
     $price = \CPrice::GetList(Array(), Array(
         'PRODUCT_ID' => $value['ID'],
-        'CATALOG_GROUP_ID' => TYPE_PRICE_BASE_ID
+        'CATALOG_GROUP_ID' => PRICE_TYPE_BASE_ID
     ), false, false, Array('ID'));
 
     if ($arPrice = $price->Fetch()) {
         \CPrice::Update($arPrice['ID'], array(
             'PRODUCT_ID' => $value['ID'],
-            'CATALOG_GROUP_ID' => TYPE_PRICE_BASE_ID,
+            'CATALOG_GROUP_ID' => PRICE_TYPE_BASE_ID,
             'PRICE' => $elem['PRICE'],
             'CURRENCY' => 'RUB'
         ));
@@ -46,7 +46,7 @@ function AddGoodsPriceAndQuantity($ID, $elem)
     );
     \CPrice::Add(array(
         'PRODUCT_ID' => $ID,
-        'CATALOG_GROUP_ID' => TYPE_PRICE_BASE_ID,
+        'CATALOG_GROUP_ID' => PRICE_TYPE_BASE_ID,
         'PRICE' => $elem['PRICE'],
         'CURRENCY' => 'RUB'
     ));
