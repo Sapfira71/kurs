@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js'></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <!--[if lt IE 9]>
-    <script src='http://html5shiv.googlecode.com/svn/trunk/html5.js'></script>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
     <?
@@ -30,18 +30,18 @@
 $APPLICATION->ShowPanel();
 ?>
 
-<header class='header'>
+<header class="header">
     <? $APPLICATION->IncludeComponent(
         'bitrix:main.include',
         '',
         Array(
             'AREA_FILE_SHOW' => 'sect',
             'AREA_FILE_SUFFIX' => 'header',
-            "AREA_FILE_RECURSIVE" => 'Y'
+            'AREA_FILE_RECURSIVE' => 'Y'
         )
     ); ?>
 </header>
-<menu class='menu' type='toolbar'>
+<menu class="menu" type="toolbar">
     <? $APPLICATION->IncludeComponent(
         'bitrix:menu',
         'grey_tabs',
@@ -50,9 +50,9 @@ $APPLICATION->ShowPanel();
         )
     ); ?>
 </menu>
-<table class='col'>
+<table class="col">
     <tr>
-        <td class='col1'>
+        <td class="col1">
             <aside>
                 <? $APPLICATION->IncludeComponent(
                     'bitrix:menu',
@@ -66,4 +66,4 @@ $APPLICATION->ShowPanel();
             </aside>
         </td>
         <td>
-            <div class='content'>
+            <div class="content">

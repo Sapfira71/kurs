@@ -3,5 +3,5 @@
 } ?>
 
 <?php foreach ($arResult['brands'] as $el): ?>
-    <a href='<?= getBrandsElementsURL($el['XML_ID']) ?>'><?= $el['NAME'] ?></a><br>
+    <a href="<?= getBrandsElementsURL($el['XML_ID']) ?>"><?= $el['NAME'] ?></a><br>
 <?php endforeach; ?>
