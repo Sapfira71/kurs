@@ -14,9 +14,9 @@
         'bitrix:main.include',
         '',
         Array(
-            'AREA_FILE_SHOW' => 'page',
+            'AREA_FILE_SHOW' => 'sect',
             'AREA_FILE_SUFFIX' => 'footer',
-            'EDIT_TEMPLATE' => ''
+            "AREA_FILE_RECURSIVE" => 'Y'
         )
     ); ?>
 </footer>
