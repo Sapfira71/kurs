@@ -37,7 +37,7 @@ function getBrandsElementsURL($id)
 }
 
 //Обработка ошибки 404
-AddEventHandler("main", "OnEpilog", "OnEpilogHandler");
+AddEventHandler('main', 'OnEpilog', 'OnEpilogHandler');
 function OnEpilogHandler()
 {
     if(defined('ERROR_404') && ERROR_404 == 'Y')
