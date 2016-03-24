@@ -3,7 +3,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
 ?>
 <?
 
-$order = new \Maximaster\Classes\Order($_POST['name'], $_POST['name'], $_POST['name'], $_POST['hiddenElID']);
+CModule::RequireAutoloadClass('Order');
+CModule::RequireAutoloadClass('SendMail');
+
+$order = new \Maximaster\Classes\Order($_POST['name'], $_POST['mail'], $_POST['number'], $_POST['hiddenElID'],
+    $_POST['url']);
 $order->SaveOrder();
 if (\Maximaster\Classes\SendMail::sendMail($order)) {
     echo 'Заказ завершен!';

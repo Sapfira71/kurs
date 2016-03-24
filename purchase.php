@@ -2,7 +2,8 @@
 include $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
 ?>
     <form name="order" action="sendmail.php" method="post">
-        <input type="hidden" value="<?= $_REQUEST["ELEMENTS_ID"] ?>" name="hiddenElID">
+        <input type="hidden" value="<?= $_REQUEST['ELEMENT_ID'] ?>" name="hiddenElID">
+        <input type="hidden" value="<?= $_POST['url'] ?>" name="url">
         <table class="order">
             <tbody>
             <tr>

@@ -3,24 +3,24 @@
 namespace Maximaster\Classes;
 
 /**
- * Êëàññ îòïðàâêè ñîîáùåíèÿ î çàêàçå
+ * ÐšÐ»Ð°ÑÑ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²ÐºÐ¸ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ñ Ð¾ Ð·Ð°ÐºÐ°Ð·Ðµ
  * Class SendMail
  * @package Maximaster\Classes
  */
 class SendMail
 {
     /**
-     * Ôóíêöèÿ îòïðàâêè ñîîáùåíèÿ ñ èíôîðìàöèåé î çàêàçå
-     * @param Order $order Îáúåêò êëàññà Order, ñîäåðæàùèé íåîáõîäèìóþ èíôîðìàöèþ î çàêàçå äëÿ îòïðàâêè
-     * @return bool|int Âîçâðàùàåò çíà÷åíèå, ñèãíàëèçèðóþùåå îá óñïåøíîñòè/íåóñïåøíîñòè îòïðàâêè ñîîáùåíèÿ
+     * Ð¤ÑƒÐ½ÐºÑ†Ð¸Ñ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²ÐºÐ¸ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ñ Ñ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸ÐµÐ¹ Ð¾ Ð·Ð°ÐºÐ°Ð·Ðµ
+     * @param Order $order ÐžÐ±ÑŠÐµÐºÑ‚ ÐºÐ»Ð°ÑÑÐ° Order, ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ñ‰Ð¸Ð¹ Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼ÑƒÑŽ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸ÑŽ Ð¾ Ð·Ð°ÐºÐ°Ð·Ðµ Ð´Ð»Ñ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²ÐºÐ¸
+     * @return bool|int Ð’Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÑ‚ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ, ÑÐ¸Ð³Ð½Ð°Ð»Ð¸Ð·Ð¸Ñ€ÑƒÑŽÑ‰ÐµÐµ Ð¾Ð± ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ÑÑ‚Ð¸/Ð½ÐµÑƒÑÐ¿ÐµÑˆÐ½Ð¾ÑÑ‚Ð¸ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²ÐºÐ¸ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ñ
      */
     public static function sendMail(Order $order)
     {
         $to = $order->email;
-        $message = 'Âàøå èìÿ: ' . $order->fio . '. Òåëåôîí: ' . $order->tel . '. Ïî÷òà: ' . $order->email . '. ';
-        $message .= 'Íàçâàíèå òîâàðà: ' . $order->elementInfo['NAME'] . '. Öåíà: ' . $order->elementInfo['PRICE'];
-        $message .= '. Áðåíä: ' . $order->elementInfo['BRAND'] . '. Ñòðàíà: ' . $order->elementInfo['COUNTRY'];
-        $message .= '. Ññûëêà íà òîâàð: ' . $order->elementInfo['DETAIL_PAGE_URL'] . '.';
+        $message = 'Ð’Ð°ÑˆÐµ Ð¸Ð¼Ñ: ' . $order->fio . '. Ð¢ÐµÐ»ÐµÑ„Ð¾Ð½: ' . $order->tel . '. ÐŸÐ¾Ñ‡Ñ‚Ð°: ' . $order->email . '. ';
+        $message .= 'ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ Ñ‚Ð¾Ð²Ð°Ñ€Ð°: ' . $order->elementInfo['NAME'] . '. Ð¦ÐµÐ½Ð°: ' . $order->elementInfo['PRICE'];
+        $message .= '. Ð‘Ñ€ÐµÐ½Ð´: ' . $order->elementInfo['BRAND'] . '. Ð¡Ñ‚Ñ€Ð°Ð½Ð°: ' . $order->elementInfo['COUNTRY'];
+        $message .= '. Ð¡ÑÑ‹Ð»ÐºÐ° Ð½Ð° Ñ‚Ð¾Ð²Ð°Ñ€: ' . $order->url . '.';
 
         $arEventFields = array(
             'FROM_EMAIL' => htmlspecialcharsEx('a.morozova@maximaster.ru'),

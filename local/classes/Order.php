@@ -3,7 +3,7 @@
 namespace Maximaster\Classes;
 
 /**
- * Класс сохранения заказа в инфоблок
+ * РљР»Р°СЃСЃ СЃРѕС…СЂР°РЅРµРЅРёСЏ Р·Р°РєР°Р·Р° РІ РёРЅС„РѕР±Р»РѕРє
  * Class Order
  * @package Maximaster\Classes
  */
@@ -12,22 +12,25 @@ class Order
     public $fio = "";
     public $email = "";
     public $tel = "";
+    public $url = "";
     private $elementId = 0;
     public $elementInfo = Array();
 
     /**
-     * Конструктор класса сохранения заказа в инфоблок
-     * @param string $fio ФИО заказчика
-     * @param string $email Адрес электонной почты заказчика
-     * @param string $tel Телефон заказчика
-     * @param int $elementId Идентификатор заказываемого элемента
+     * РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєР»Р°СЃСЃР° СЃРѕС…СЂР°РЅРµРЅРёСЏ Р·Р°РєР°Р·Р° РІ РёРЅС„РѕР±Р»РѕРє
+     * @param string $fio Р¤РРћ Р·Р°РєР°Р·С‡РёРєР°
+     * @param string $email РђРґСЂРµСЃ СЌР»РµРєС‚РѕРЅРЅРѕР№ РїРѕС‡С‚С‹ Р·Р°РєР°Р·С‡РёРєР°
+     * @param string $tel РўРµР»РµС„РѕРЅ Р·Р°РєР°Р·С‡РёРєР°
+     * @param int $elementId РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ Р·Р°РєР°Р·С‹РІР°РµРјРѕРіРѕ СЌР»РµРјРµРЅС‚Р°
+     * @param string $url РЎСЃС‹Р»РєР° РЅР° СЃС‚СЂР°РЅРёС†Сѓ СЃ С‚РѕРІР°СЂРѕРј
      */
-    function __construct($fio, $email, $tel, $elementId)
+    function __construct($fio, $email, $tel, $elementId, $url)
     {
         $this->fio = $fio;
         $this->email = $email;
         $this->tel = $tel;
         $this->elementId = $elementId;
+        $this->url = $url;
 
         \CBitrixComponent::includeComponentClass('maximaster:showelement');
         $ob = new \Maximaster\Components\ShowElement();
@@ -35,7 +38,7 @@ class Order
     }
 
     /**
-     * Сохранить заказ в инфоблоке
+     * РЎРѕС…СЂР°РЅРёС‚СЊ Р·Р°РєР°Р· РІ РёРЅС„РѕР±Р»РѕРєРµ
      */
     public function SaveOrder()
     {

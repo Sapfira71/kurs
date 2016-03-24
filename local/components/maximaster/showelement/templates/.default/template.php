@@ -5,19 +5,23 @@
 
 <? $elem = $arResult['element']; ?>
 <div class="section-elems">
-    <p class="section-element">
-        <?= $elem['NAME'] ?>. Цена: <?= $elem['PRICE'] ?><br>
-        <img class="section-image js-img-el" src="<?= $elem['DETAIL_PICTURE'] ?>" alt="Изображение товара">
-        <?= $elem['DETAIL_TEXT'] ?><br><br>
-        <? if (!empty($elem['BRAND'])): ?> Бренд: <?= $elem['BRAND'] ?><br><? endif; ?>
-        <? if (!empty($elem['QUANTITY'])): ?>
-            Количество на складе: <?= $elem['QUANTITY'] ?><br>
-        <? else: ?>
-            Товар отсутсвует на складе!<br>
-        <? endif; ?>
-        <? if (!empty($elem['COUNTRY'])): ?> Страна-производитель: <?= $elem['COUNTRY'] ?><br><? endif; ?>
-        <a class="purchase-button" href="<?= $elem['BUY_PAGE']; ?>">Купить</a>
-    </p>
+    <form method="post" action="<?= $elem['BUY_PAGE']; ?>">
+        <p class="section-element">
+            <?= $elem['NAME'] ?>. Цена: <?= $elem['PRICE'] ?><br>
+            <img class="section-image js-img-el" src="<?= $elem['DETAIL_PICTURE'] ?>" alt="Изображение товара">
+            <?= $elem['DETAIL_TEXT'] ?><br><br>
+            <? if (!empty($elem['BRAND'])): ?> Бренд: <?= $elem['BRAND'] ?><br><? endif; ?>
+            <? if (!empty($elem['QUANTITY'])): ?>
+                Количество на складе: <?= $elem['QUANTITY'] ?><br>
+            <? else: ?>
+                Товар отсутсвует на складе!<br>
+            <? endif; ?>
+            <? if (!empty($elem['COUNTRY'])): ?> Страна-производитель: <?= $elem['COUNTRY'] ?><br><? endif; ?>
+
+            <input type="hidden" value="<?= selfURL() ?>" name="url">
+            <button type="submit" class="purchase-button">Купить</button>
+        </p>
+    </form>
 
     <div id="container">
         <div id="products_example">
