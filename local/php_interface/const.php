@@ -6,6 +6,11 @@
 define('IBLOCK_WEAR_ID', 2);
 
 /**
+ * ID инфоблока с заказами
+ */
+define('IBLOCK_ORDER_ID', 3);
+
+/**
  * ID инфоблока с товарами (товары)
  */
 define('IBLOCK_GOODS_ID', 1);

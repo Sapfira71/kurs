@@ -12,7 +12,7 @@ class Order
     public $fio = "";
     public $email = "";
     public $tel = "";
-    public $url = "";
+    public $productUrl = "";
     private $elementId = 0;
     public $elementInfo = Array();
 
@@ -24,13 +24,13 @@ class Order
      * @param int $elementId Идентификатор заказываемого элемента
      * @param string $url Ссылка на страницу с товаром
      */
-    function __construct($fio, $email, $tel, $elementId, $url)
+    function __construct($fio, $email, $tel, $elementId, $productUrl)
     {
         $this->fio = $fio;
         $this->email = $email;
         $this->tel = $tel;
         $this->elementId = $elementId;
-        $this->url = $url;
+        $this->productUrl = $productUrl;
 
         \CBitrixComponent::includeComponentClass('maximaster:showelement');
         $ob = new \Maximaster\Components\ShowElement();
@@ -42,6 +42,28 @@ class Order
      */
     public function SaveOrder()
     {
+        \CModule::IncludeModule('iblock');
+        $ibe = new \CIBlockElement;
+
+        $PROP = Array(
+            'FIO' => $this->fio,
+            'EMAIL' => $this->email,
+            'TELEPHONE' => $this->tel,
+            'LINK' => $this->productUrl,
+            'INFO' => 'Бренд: ' . $this->elementInfo['BRAND'] . '. Страна-производитель: ' . $this->elementInfo['COUNTRY'],
+            'COST' => $this->elementInfo['PRICE']
+        );
+
+        $arFields = Array(
+            'ACTIVE' => 'Y',
+            'IBLOCK_ID' => IBLOCK_ORDER_ID,
+            'NAME' => $this->elementInfo['NAME'],
+            'PROPERTY_VALUES' => $PROP
+        );
+
+        if (!($ID = $ibe->Add($arFields))) {
+            echo 'Error: ' . $ibe->LAST_ERROR . '<br>';
+        }
 
     }
 }

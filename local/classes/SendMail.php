@@ -20,7 +20,7 @@ class SendMail
         $message = 'Ваше имя: ' . $order->fio . '. Телефон: ' . $order->tel . '. Почта: ' . $order->email . '. ';
         $message .= 'Название товара: ' . $order->elementInfo['NAME'] . '. Цена: ' . $order->elementInfo['PRICE'];
         $message .= '. Бренд: ' . $order->elementInfo['BRAND'] . '. Страна: ' . $order->elementInfo['COUNTRY'];
-        $message .= '. Ссылка на товар: ' . $order->url . '.';
+        $message .= '. Ссылка на товар: ' . $order->productUrl . '.';
 
         $arEventFields = array(
             'FROM_EMAIL' => htmlspecialcharsEx('a.morozova@maximaster.ru'),
