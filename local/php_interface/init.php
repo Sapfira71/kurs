@@ -45,9 +45,7 @@ function OnEpilogHandler()
         global $APPLICATION;
         $APPLICATION->RestartBuffer();
         CHTTP::SetStatus('404 Not Found');
-        include $_SERVER['DOCUMENT_ROOT'].'/local/templates/test/header.php';
         include $_SERVER['DOCUMENT_ROOT'].'/404.php';
-        include $_SERVER['DOCUMENT_ROOT'].'/local/templates/test/footer.php';
     }
 }
 
