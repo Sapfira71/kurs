@@ -9,7 +9,7 @@
         <p class="section-element">
             <?= $elem['NAME'] ?>. <? echo GetMessage('PRICE') ?>: <?= $elem['PRICE'] ?><br>
             <img class="section-image js-img-el" src="<?= $elem['DETAIL_PICTURE'] ?>"
-                 alt="<? echo GetMessage('ALT_ELEMENT_IMAGE') ?>">
+                 alt="<?= $elem['NAME'] ?>">
             <?= $elem['DETAIL_TEXT'] ?><br><br>
             <? if (!empty($elem['BRAND'])): ?><? echo GetMessage('BRAND') ?>: <?= $elem['BRAND'] ?><br><? endif; ?>
             <? if (!empty($elem['QUANTITY'])): ?>
@@ -30,14 +30,14 @@
                 <div class="slides_container">
                     <?php foreach ($elem['GALLERY'] as $pict): ?>
                         <a target="_blank"><img class="image-gallery-full" src="<?= $pict ?>" width="350"
-                                                alt="<? echo GetMessage('ALT_ELEMENT_IMAGE') ?>"></a>
+                                                alt="<?= $elem['NAME'] ?>"></a>
                     <?php endforeach; ?>
                 </div>
                 <ul class="pagination">
                     <?php foreach ($elem['GALLERY'] as $pict): ?>
                         <li>
                             <div class="image-gallery"><a href="#"><img src="<?= $pict ?>" width="55"
-                                                                        alt="<? echo GetMessage('ALT_ELEMENT_IMAGE') ?>"></a>
+                                                                        alt="<?= $elem['NAME'] ?>"></a>
                             </div>
                         </li>
                     <?php endforeach; ?>

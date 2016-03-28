@@ -9,7 +9,7 @@
 
     <div class="section">
         <img class="section-image" src="<?= $arResult['section']['IMAGE'] ?>"
-             alt="<? echo GetMessage('ALT_SECTION_IMAGE') ?>">
+             alt="<?= $arResult['section']['NAME'] ?>">
 
         <div><?= $arResult['section']['DESCRIPTION'] ?></div>
     </div>
@@ -26,7 +26,7 @@
             <p class="section-element">
                 <a href="<?= $elem['DETAIL_URL'] ?>"><?= $elem['NAME'] ?></a>. Цена: <?= $elem['PRICE'] ?><br>
                 <img class="section-image" src="<?= $elem['PREVIEW_PICTURE'] ?>"
-                     alt="<? echo GetMessage('ALT_ELEMENT_IMAGE') ?>">
+                     alt="<?= $elem['NAME'] ?>">
                 <?= $elem['PREVIEW_TEXT'] ?>
             </p>
         <?php endforeach; ?>

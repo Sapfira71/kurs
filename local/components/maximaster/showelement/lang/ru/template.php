@@ -1,10 +1,8 @@
 <?
-$MESS = array(
-    'QUANTITY' => 'Количество',
-    'BRAND' => 'Бренд',
-    'PRICE' => 'Цена',
-    'ALT_ELEMENT_IMAGE' => 'Изображение товара',
-    'DEFAULT_GOODS' => 'Товар отсутсвует на складе!',
-    'COUNTRY' => 'Страна-производитель',
-    'BUY_BUTTON' => 'Купить'
-);
+$MESS['QUANTITY'] = 'Количество';
+$MESS['BRAND'] = 'Бренд';
+$MESS['PRICE'] = 'Цена';
+$MESS['ALT_ELEMENT_IMAGE'] = 'Изображение товара';
+$MESS['DEFAULT_GOODS'] = 'Товар отсутсвует на складе!';
+$MESS['COUNTRY'] = 'Страна-производитель';
+$MESS['BUY_BUTTON'] = 'Купить';
