@@ -60,12 +60,13 @@ class ShowElement extends \CBitrixComponent
             'PROPERTY_COUNTRY',
             'ID',
             'PROPERTY_GALLERY',
-            'CATALOG_QUANTITY'
+            'CATALOG_QUANTITY',
+            'DETAIL_PAGE_URL'
         );
 
         $res = \CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
 
-        if ($ob = $res->Fetch()) {
+        if ($ob = $res->GetNext()) {
             $arPict = Array();
             foreach ($ob['PROPERTY_GALLERY_VALUE'] as $pict) {
                 $arPict[] = \CFile::GetPath($pict);
@@ -84,7 +85,8 @@ class ShowElement extends \CBitrixComponent
                 'COUNTRY' => $ob['PROPERTY_COUNTRY_VALUE'],
                 'QUANTITY' => $ob['CATALOG_QUANTITY'],
                 'GALLERY' => $arPict,
-                'BUY_PAGE' => getBuyElementURL($ob['ID'])
+                'BUY_PAGE' => getBuyElementURL($ob['ID']),
+                'DETAIL_URL' => $ob['DETAIL_PAGE_URL']
             );
         } else {
             @define('ERROR_404', 'Y');

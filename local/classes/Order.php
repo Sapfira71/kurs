@@ -12,9 +12,9 @@ class Order
     public $fio = "";
     public $email = "";
     public $tel = "";
-    public $productUrl = "";
     private $elementId = 0;
     public $elementInfo = Array();
+    public $url = "";
 
     /**
      * Конструктор класса сохранения заказа в инфоблок
@@ -24,17 +24,17 @@ class Order
      * @param int $elementId Идентификатор заказываемого элемента
      * @param string $url Ссылка на страницу с товаром
      */
-    function __construct($fio, $email, $tel, $elementId, $productUrl)
+    function __construct($fio, $email, $tel, $elementId)
     {
         $this->fio = $fio;
         $this->email = $email;
         $this->tel = $tel;
         $this->elementId = $elementId;
-        $this->productUrl = $productUrl;
 
         \CBitrixComponent::includeComponentClass('maximaster:showelement');
         $ob = new \Maximaster\Components\ShowElement();
         $this->elementInfo = $ob->readElementInfo($this->elementId);
+        $this->url = $_SERVER['SERVER_NAME'] . $this->elementInfo['DETAIL_URL'];
     }
 
     /**
@@ -49,7 +49,7 @@ class Order
             'FIO' => $this->fio,
             'EMAIL' => $this->email,
             'TELEPHONE' => $this->tel,
-            'LINK' => $this->productUrl,
+            'LINK' => $this->url,
             'INFO' => 'Бренд: ' . $this->elementInfo['BRAND'] . '. Страна-производитель: ' . $this->elementInfo['COUNTRY'],
             'COST' => $this->elementInfo['PRICE']
         );

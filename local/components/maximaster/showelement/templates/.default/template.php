@@ -18,7 +18,6 @@
             <? endif; ?>
             <? if (!empty($elem['COUNTRY'])): ?> Страна-производитель: <?= $elem['COUNTRY'] ?><br><? endif; ?>
 
-            <input type="hidden" value="<?= selfURL() ?>" name="url">
             <button type="submit" class="purchase-button">Купить</button>
         </p>
     </form>

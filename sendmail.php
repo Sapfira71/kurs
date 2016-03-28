@@ -6,8 +6,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
 CModule::RequireAutoloadClass('Order');
 CModule::RequireAutoloadClass('SendMail');
 
-$order = new \Maximaster\Classes\Order($_POST['name'], $_POST['mail'], $_POST['number'], $_POST['hiddenElID'],
-    $_POST['url']);
+$order = new \Maximaster\Classes\Order($_POST['name'], $_POST['mail'], $_POST['number'], $_POST['hiddenElID']);
 $order->SaveOrder();
 if (\Maximaster\Classes\SendMail::sendMail($order)) {
     echo 'Заказ завершен!';
