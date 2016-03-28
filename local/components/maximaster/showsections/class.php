@@ -115,6 +115,7 @@ class ShowSections extends \CBitrixComponent
      */
     public function executeComponent()
     {
+        $this->IncludeComponentLang('template.php', 'ru');
         if (!empty($_REQUEST['SECTION_ID'])) {
             $this->arResult['section'] = $this->readSectionInfo($_REQUEST['SECTION_ID']);
             $this->arResult['elements'] = $this->readSectionElementsInfo($_REQUEST['SECTION_ID']);
