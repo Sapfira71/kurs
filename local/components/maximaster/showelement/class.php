@@ -100,7 +100,6 @@ class ShowElement extends \CBitrixComponent
      */
     public function executeComponent()
     {
-        $this->IncludeComponentLang('template.php', 'ru');
         if (!empty($_REQUEST['ELEMENT_ID'])) {
             $this->arResult['element'] = $this->readElementInfo($_REQUEST['ELEMENT_ID']);
         } else {
