@@ -45,16 +45,16 @@ class Order extends \CBitrixComponent
         $this->fio = $_POST['name'];
 
         $resultTel = preg_match($telPattern, $_POST['number']);
-        if(!$resultTel) {
-            echo '<p>Введенный номер телефона не совпадает с шаблоном!</p>';
+        if (!$resultTel) {
+            echo GetMessage('WRONG_PHONE_NUMBER');
             return 0;
         } else {
             $this->tel = $_POST['number'];
         }
 
         $resultEmail = preg_match($emailPattern, $_POST['mail']);
-        if(!$resultEmail) {
-            echo '<p>Введенный адрес электронной почты не совпадает с шаблоном!</p>';
+        if (!$resultEmail) {
+            echo GetMessage('WRONG_EMAIL');
             return 0;
         } else {
             $this->email = $_POST['mail'];
@@ -77,7 +77,9 @@ class Order extends \CBitrixComponent
      */
     public function saveOrder()
     {
-        if(!$this->saveInfo()) return 0;
+        if (!$this->saveInfo()) {
+            return 0;
+        }
 
         \CModule::IncludeModule('iblock');
         $ibe = new \CIBlockElement;
@@ -87,7 +89,7 @@ class Order extends \CBitrixComponent
             'EMAIL' => $this->email,
             'TELEPHONE' => $this->tel,
             'LINK' => $this->elementUrl,
-            'INFO' => 'Бренд: ' . $this->elementInfo['BRAND'] . '. Страна-производитель: ' . $this->elementInfo['COUNTRY'],
+            'INFO' => GetMessage('BRAND') . ': ' . $this->elementInfo['BRAND'] . '. ' . GetMessage('COUNTRY') . ': ' . $this->elementInfo['COUNTRY'],
             'COST' => $this->elementInfo['PRICE']
         );
 
@@ -112,10 +114,13 @@ class Order extends \CBitrixComponent
     private function sendMail()
     {
         $to = $this->email;
-        $message = 'Ваше имя: ' . $this->fio . '. Телефон: ' . $this->tel . '. Почта: ' . $this->email . '. ';
-        $message .= 'Название товара: ' . $this->elementInfo['NAME'] . '. Цена: ' . $this->elementInfo['PRICE'];
-        $message .= '. Бренд: ' . $this->elementInfo['BRAND'] . '. Страна: ' . $this->elementInfo['COUNTRY'];
-        $message .= '. Ссылка на товар: ' . $this->elementUrl . '.';
+        $message = GetMessage('FIO') . ': ' . $this->fio . '. ' . GetMessage('PHONE_NUMBER') . ': ' . $this->tel;
+        $message .= '. ' . GetMessage('EMAIL') . ': ' . $this->email . '. ';
+        $message .= GetMessage('GOODS_NAME') . ': ' . $this->elementInfo['NAME'];
+        $message .= '. ' . GetMessage('PRICE') . ': ' . $this->elementInfo['PRICE'];
+        $message .= '. ' . GetMessage('BRAND') . ': ' . $this->elementInfo['BRAND'] . '. ';
+        $message .= GetMessage('COUNTRY') . ': ' . $this->elementInfo['COUNTRY'];
+        $message .= '. ' . GetMessage('LINK') . ': ' . $this->elementUrl . '.';
 
         $arEventFields = array(
             'FROM_EMAIL' => htmlspecialcharsEx('a.morozova@maximaster.ru'),
@@ -131,6 +136,7 @@ class Order extends \CBitrixComponent
      */
     public function executeComponent()
     {
+        $this->IncludeComponentLang('class.php');
         if ($this->saveOrder()) {
             $this->arResult['success'] = $this->sendMail() ? '1' : '0';
         } else {
