@@ -3,7 +3,7 @@
 } ?>
 
 <? if ($arResult['success'] == '1'): ?>
-    <p>Заказ завершен!</p>
+    <p><? echo GetMessage('SUCCESSFUL_ORDER') ?></p>
 <? else: ?>
-    <p>Заказ завершить не удалось!</p>
+    <p><? echo GetMessage('UNSUCCESSFUL_ORDER') ?></p>
 <? endif; ?>
