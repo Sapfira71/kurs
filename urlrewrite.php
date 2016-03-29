@@ -1,12 +1,12 @@
 <?
 $arUrlRewrite = array(
     array(
-        'CONDITION' => '#^/catalog/([\-a-zA-Z]+)/#',
+        'CONDITION' => '#^/catalog/#',
         'RULE' => 'SECTION_ID=$1',
         'PATH' => '/index.php'
     ),
     array(
-        'CONDITION' => '#^/goods/([\-a-zA-Z]+)/#',
+        'CONDITION' => '#^/goods/#',
         'RULE' => 'ELEMENT_ID=$1',
         'PATH' => '/index.php'
     )

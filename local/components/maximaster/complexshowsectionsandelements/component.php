@@ -1,7 +1,14 @@
-<?
-
-if(!empty($_REQUEST['SECTION_ID']) || !empty($_REQUEST['BRAND_ID'])) {
-    $this->IncludeComponentTemplate('sections');
-} elseif(!empty($_REQUEST['ELEMENT_ID'])) {
-    $this->IncludeComponentTemplate('element');
+<? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
+    die();
 }
+
+$arDefaultUrlTemplates404 = array(
+    'sections' => 'catalog/index.php?SECTION_ID=#SECTION_ID#',
+    'element' => 'goods/index.php?ELEMENT_ID=#ELEMENT_ID#',
+    'brand' => 'index.php?BRAND_ID=#BRAND_ID#'
+);
+
+$arVariables = array();
+$page = CComponentEngine::ParseComponentPath('/', $arDefaultUrlTemplates404, $arVariables);
+
+$this->IncludeComponentTemplate($page);
