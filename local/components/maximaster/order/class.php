@@ -35,12 +35,31 @@ class Order extends \CBitrixComponent
 
     /**
      * Считывание необходимой информации из запроса
+     * @return int Результат проверки соответствия значений формы (телефон и email) паттернам
      */
     private function saveInfo()
     {
+        $emailPattern = "/[A-Za-z0-9\.]{1,}@[A-Za-z]{1,}\.[A-Za-z]{2,}/";
+        $telPattern = "/\+7\([0-9]{3}\)[0-9]{3}-[0-9]{2}-[0-9]{2}/";
+
         $this->fio = $_POST['name'];
-        $this->email = $_POST['mail'];
-        $this->tel = $_POST['number'];
+
+        $resultTel = preg_match($telPattern, $_POST['number']);
+        if(!$resultTel) {
+            echo '<p>Введенный номер телефона не совпадает с шаблоном!</p>';
+            return 0;
+        } else {
+            $this->tel = $_POST['number'];
+        }
+
+        $resultEmail = preg_match($emailPattern, $_POST['mail']);
+        if(!$resultEmail) {
+            echo '<p>Введенный адрес электронной почты не совпадает с шаблоном!</p>';
+            return 0;
+        } else {
+            $this->email = $_POST['mail'];
+        }
+
         $this->elementId = $_POST['hiddenElID'];
 
         \CBitrixComponent::includeComponentClass('maximaster:showelement');
@@ -48,6 +67,8 @@ class Order extends \CBitrixComponent
         $this->elementInfo = $ob->readElementInfo($this->elementId);
 
         $this->elementUrl = $_SERVER['SERVER_NAME'] . $this->elementInfo['DETAIL_URL'];
+
+        return 1;
     }
 
     /**
@@ -56,7 +77,7 @@ class Order extends \CBitrixComponent
      */
     public function saveOrder()
     {
-        $this->saveInfo();
+        if(!$this->saveInfo()) return 0;
 
         \CModule::IncludeModule('iblock');
         $ibe = new \CIBlockElement;
@@ -112,6 +133,8 @@ class Order extends \CBitrixComponent
     {
         if ($this->saveOrder()) {
             $this->arResult['success'] = $this->sendMail() ? '1' : '0';
+        } else {
+            $this->arResult['success'] = '0';
         }
 
         $this->includeComponentTemplate();
