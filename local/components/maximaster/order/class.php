@@ -35,7 +35,7 @@ class Order extends \CBitrixComponent
 
     /**
      * Считывание необходимой информации из запроса
-     * @return int Результат проверки соответствия значений формы (телефон и email) паттернам
+     * @return bool Результат проверки соответствия значений формы (телефон и email) паттернам
      */
     private function saveInfo()
     {
@@ -47,7 +47,7 @@ class Order extends \CBitrixComponent
         $resultTel = preg_match($telPattern, $_POST['number']);
         if (!$resultTel) {
             echo GetMessage('WRONG_PHONE_NUMBER');
-            return 0;
+            return false;
         } else {
             $this->tel = $_POST['number'];
         }
@@ -55,7 +55,7 @@ class Order extends \CBitrixComponent
         $resultEmail = preg_match($emailPattern, $_POST['mail']);
         if (!$resultEmail) {
             echo GetMessage('WRONG_EMAIL');
-            return 0;
+            return false;
         } else {
             $this->email = $_POST['mail'];
         }
@@ -68,17 +68,17 @@ class Order extends \CBitrixComponent
 
         $this->elementUrl = $_SERVER['SERVER_NAME'] . $this->elementInfo['DETAIL_URL'];
 
-        return 1;
+        return true;
     }
 
     /**
      * Сохранение заказа
-     * @return int Успешность/неуспешность добавления заказа в инфоблок
+     * @return bool Успешность/неуспешность добавления заказа в инфоблок
      */
     public function saveOrder()
     {
         if (!$this->saveInfo()) {
-            return 0;
+            return false;
         }
 
         \CModule::IncludeModule('iblock');
@@ -102,9 +102,9 @@ class Order extends \CBitrixComponent
 
         if (!($ID = $ibe->Add($arFields))) {
             echo 'Error: ' . $ibe->LAST_ERROR . '<br>';
-            return 0;
+            return false;
         }
-        return 1;
+        return true;
     }
 
     /**
@@ -138,9 +138,9 @@ class Order extends \CBitrixComponent
     {
         $this->IncludeComponentLang('class.php');
         if ($this->saveOrder()) {
-            $this->arResult['success'] = $this->sendMail() ? '1' : '0';
+            $this->arResult['success'] = $this->sendMail() ? true : false;
         } else {
-            $this->arResult['success'] = '0';
+            $this->arResult['success'] = false;
         }
 
         $this->includeComponentTemplate();

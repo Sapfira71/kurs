@@ -2,7 +2,7 @@
     die();
 } ?>
 
-<? if ($arResult['success'] == '1'): ?>
+<? if ($arResult['success'] === true): ?>
     <p><? echo GetMessage('SUCCESSFUL_ORDER') ?></p>
 <? else: ?>
     <p><? echo GetMessage('UNSUCCESSFUL_ORDER') ?></p>
