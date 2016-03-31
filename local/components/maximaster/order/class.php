@@ -46,7 +46,7 @@ class Order extends \CBitrixComponent
 
         $resultTel = preg_match($telPattern, $_POST['number']);
         if (!$resultTel) {
-            echo GetMessage('WRONG_PHONE_NUMBER');
+            $this->arResult['WRONG_PHONE_NUMBER'] = GetMessage('WRONG_PHONE_NUMBER');
             return false;
         } else {
             $this->tel = $_POST['number'];
@@ -54,7 +54,7 @@ class Order extends \CBitrixComponent
 
         $resultEmail = preg_match($emailPattern, $_POST['mail']);
         if (!$resultEmail) {
-            echo GetMessage('WRONG_EMAIL');
+            $this->arResult['WRONG_EMAIL'] = GetMessage('WRONG_EMAIL');
             return false;
         } else {
             $this->email = $_POST['mail'];
@@ -101,7 +101,7 @@ class Order extends \CBitrixComponent
         );
 
         if (!($ID = $ibe->Add($arFields))) {
-            echo 'Error: ' . $ibe->LAST_ERROR . '<br>';
+            $this->arResult['ERROR_ADD_ORDER'] = GetMessage('ERROR_ADD_ORDER') . '. Error: ' . $ibe->LAST_ERROR;
             return false;
         }
         return true;
@@ -138,9 +138,7 @@ class Order extends \CBitrixComponent
     {
         $this->IncludeComponentLang('class.php');
         if ($this->saveOrder()) {
-            $this->arResult['success'] = $this->sendMail() ? true : false;
-        } else {
-            $this->arResult['success'] = false;
+            $this->arResult['SUCCESS'] = $this->sendMail() ? true : false;
         }
 
         $this->includeComponentTemplate();
