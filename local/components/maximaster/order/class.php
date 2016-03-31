@@ -114,18 +114,17 @@ class Order extends \CBitrixComponent
     private function sendMail()
     {
         $to = $this->email;
-        $message = GetMessage('FIO') . ': ' . $this->fio . '. ' . GetMessage('PHONE_NUMBER') . ': ' . $this->tel;
-        $message .= '. ' . GetMessage('EMAIL') . ': ' . $this->email . '. ';
-        $message .= GetMessage('GOODS_NAME') . ': ' . $this->elementInfo['NAME'];
-        $message .= '. ' . GetMessage('PRICE') . ': ' . $this->elementInfo['PRICE'];
-        $message .= '. ' . GetMessage('BRAND') . ': ' . $this->elementInfo['BRAND'] . '. ';
-        $message .= GetMessage('COUNTRY') . ': ' . $this->elementInfo['COUNTRY'];
-        $message .= '. ' . GetMessage('LINK') . ': ' . $this->elementUrl . '.';
 
         $arEventFields = array(
             'FROM_EMAIL' => htmlspecialcharsEx('a.morozova@maximaster.ru'),
-            'MESSAGE' => htmlspecialcharsEx($message),
-            'TO_EMAIL' => htmlspecialcharsEx($to)
+            'TO_EMAIL' => htmlspecialcharsEx($to),
+            'FIO' => htmlspecialcharsEx(GetMessage('FIO') . ': ' . $this->fio),
+            'PHONE_NUMBER' => htmlspecialcharsEx(GetMessage('PHONE_NUMBER') . ': ' . $this->tel),
+            'GOODS_NAME' => htmlspecialcharsEx(GetMessage('GOODS_NAME') . ': ' . $this->elementInfo['NAME']),
+            'PRICE' => htmlspecialcharsEx(GetMessage('PRICE') . ': ' . $this->elementInfo['PRICE']),
+            'BRAND' => htmlspecialcharsEx(GetMessage('BRAND') . ': ' . $this->elementInfo['BRAND']),
+            'COUNTRY' => htmlspecialcharsEx(GetMessage('COUNTRY') . ': ' . $this->elementInfo['COUNTRY']),
+            'LINK' => htmlspecialcharsEx(GetMessage('LINK') . ': ' . $this->elementUrl)
         );
 
         return \CEvent::Send('ORDER_INFO', 's1', $arEventFields);
