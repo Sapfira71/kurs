@@ -100,8 +100,8 @@ class ShowElement extends \CBitrixComponent
      */
     public function executeComponent()
     {
-        if (!empty($_REQUEST['ELEMENT_ID'])) {
-            $this->arResult['element'] = $this->readElementInfo($_REQUEST['ELEMENT_ID']);
+        if (!empty($this->arParams['ELEMENT_ID'])) {
+            $this->arResult['element'] = $this->readElementInfo($this->arParams['ELEMENT_ID']);
         } else {
             return;
         }
