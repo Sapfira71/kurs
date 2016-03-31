@@ -56,7 +56,7 @@ $APPLICATION->ShowPanel();
             <aside>
                 <? $APPLICATION->IncludeComponent(
                     'bitrix:menu',
-                    'tree',
+                    'tree1',
                     Array(
                         'ROOT_MENU_TYPE' => 'left',
                         'CHILD_MENU_TYPE' => 'left',
