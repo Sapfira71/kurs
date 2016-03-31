@@ -38,11 +38,13 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
         if(isset($request['SECTION_ID'])) {
             $this->arResult['SECTION_ID'] = $request['SECTION_ID'];
         }
-        if(isset($request['ELEMENT_ID'])) {
+        else if(isset($request['ELEMENT_ID'])) {
             $this->arResult['ELEMENT_ID'] = $request['ELEMENT_ID'];
         }
-        if(isset($request['BRAND_ID'])) {
+        else if(isset($request['BRAND_ID'])) {
             $this->arResult['BRAND_ID'] = $request['BRAND_ID'];
+        } else {
+            return;
         }
 
         $this->IncludeComponentTemplate($this->getPage());
