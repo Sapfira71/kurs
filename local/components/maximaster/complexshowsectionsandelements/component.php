@@ -14,4 +14,15 @@ $engine->addGreedyPart('#SECTION_CODE_PATH#');
 $arVariables = array();
 $page = $engine->guessComponentPath('/', $arDefaultUrlTemplates404, $arVariables);
 
+$request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
+if(isset($request['SECTION_ID'])) {
+    $arResult['SECTION_ID'] = $request['SECTION_ID'];
+}
+if(isset($request['ELEMENT_ID'])) {
+    $arResult['ELEMENT_ID'] = $request['ELEMENT_ID'];
+}
+if(isset($request['BRAND_ID'])) {
+    $arResult['BRAND_ID'] = $request['BRAND_ID'];
+}
+
 $this->IncludeComponentTemplate($page);
