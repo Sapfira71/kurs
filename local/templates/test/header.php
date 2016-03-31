@@ -14,6 +14,7 @@
     $assetManager->addJs(SITE_TEMPLATE_PATH . '/cookie.js');
     $assetManager->addJs(SITE_TEMPLATE_PATH . '/zoom/jquery.loupe.js');
     $assetManager->addJs(SITE_TEMPLATE_PATH . '/gallery/js/slides.min.jquery.js');
+    $assetManager->addJs(SITE_TEMPLATE_PATH . '/jquery.maskedinput.js');
     ?>
 
     <? $APPLICATION->ShowHead() ?>

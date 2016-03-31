@@ -11,8 +11,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
             </tr>
             <tr>
                 <td>Телефон:</td>
-                <td><input name="number" type="tel" required pattern="\+7\([0-9]{3}\)[0-9]{3}\-[0-9]{2}\-[0-9]{2}"
-                           placeholder="+7(###)###-##-##">
+                <td><input name="number" type="tel" required pattern="\+7\([0-9]{3}\)[0-9]{3}\-[0-9]{2}\-[0-9]{2}">
                 </td>
             </tr>
             <tr>

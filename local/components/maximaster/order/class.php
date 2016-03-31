@@ -40,17 +40,8 @@ class Order extends \CBitrixComponent
     private function saveInfo()
     {
         $emailPattern = "/[A-Za-z0-9\.]{1,}@[A-Za-z]{1,}\.[A-Za-z]{2,}/";
-        $telPattern = "/\+7\([0-9]{3}\)[0-9]{3}-[0-9]{2}-[0-9]{2}/";
 
         $this->fio = $_POST['name'];
-
-        $resultTel = preg_match($telPattern, $_POST['number']);
-        if (!$resultTel) {
-            $this->arResult['WRONG_PHONE_NUMBER'] = GetMessage('WRONG_PHONE_NUMBER');
-            return false;
-        } else {
-            $this->tel = $_POST['number'];
-        }
 
         $resultEmail = preg_match($emailPattern, $_POST['mail']);
         if (!$resultEmail) {

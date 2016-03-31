@@ -37,4 +37,6 @@ jQuery('document').ready(function () {
     $("input[name='number']").val(getCookie('number'))
     $("input[name='mail']").val(getCookie('mail'))
 
+    //Установка маски для поля ввода телефона
+    $("input[name='number']").mask("+7(999)999-99-99");
 });

@@ -2,9 +2,6 @@
     die();
 } ?>
 
-<? if (isset($arResult['WRONG_PHONE_NUMBER'])): ?>
-    <p><?=$arResult['WRONG_PHONE_NUMBER']?></p>
-<? endif; ?>
 <? if (isset($arResult['WRONG_EMAIL'])): ?>
     <p><?=$arResult['WRONG_EMAIL']?></p>
 <? endif; ?>
