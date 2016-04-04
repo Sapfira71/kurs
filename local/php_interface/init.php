@@ -47,12 +47,3 @@ function OnEpilogHandler()
         include $_SERVER['DOCUMENT_ROOT'] . '/404.php';
     }
 }
-
-//Подключение своих классов (Order - для сохранения заказа, SendMail - для отправки письма с информацией о заказе)
-CModule::AddAutoloadClasses(
-    '',
-    array(
-        'Order' => '/local/classes/Order.php',
-        'SendMail' => '/local/classes/SendMail.php',
-    )
-);
