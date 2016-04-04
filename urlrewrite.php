@@ -6,7 +6,7 @@ $arUrlRewrite = array(
         'PATH' => '/index.php'
     ),
     array(
-        'CONDITION' => '#^/goods/([\/\-a-zA-Z]+)/([\-_a-zA-Z]+).php#',
+        'CONDITION' => '#^/goods/([\/\-a-zA-Z]+)/([\-_a-zA-Z0-9]+).php#',
         'RULE' => 'CODE=$2',
         'PATH' => '/index.php'
     )
