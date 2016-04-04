@@ -17,7 +17,7 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
         $arDefaultUrlTemplates404 = array(
             'sections' => 'catalog/#SECTION_CODE_PATH#/#SECTION_ID#/',
             'element' => 'goods/#SECTION_CODE_PATH#/#CODE#.php',
-            'brand' => 'index.php?BRAND_ID=#BRAND_ID#'
+            'brand' => 'brands/#BRAND_NAME#/'
         );
 
         $engine = new \CComponentEngine($this);
@@ -35,6 +35,7 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
     public function executeComponent()
     {
         $request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
+        var_dump($request);
         if(isset($request['SECTION_ID'])) {
             $this->arResult['SECTION_ID'] = $request['SECTION_ID'];
         }
