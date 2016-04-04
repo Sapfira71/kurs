@@ -144,7 +144,6 @@ class ShowSections extends \CBitrixComponent
      */
     public function executeComponent()
     {
-        var_dump($this->arParams);
         if (!empty($this->arParams['SECTION_ID'])) {
             $this->arResult['section'] = $this->readSectionInfo($this->arParams['SECTION_ID']);
             $this->arResult['elements'] = $this->readSectionElementsInfo($this->arParams['SECTION_ID']);
