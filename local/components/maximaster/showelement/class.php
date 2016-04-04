@@ -39,17 +39,17 @@ class ShowElement extends \CBitrixComponent
 
     /**
      * Функция, формирующая массив с информацией об элементе инфоблока
-     * @param int $elementID ID элемента, информацию о котором необходимо считать из инфоблока
+     * @param string $elementCode Код элемента, информацию о котором необходимо считать из инфоблока
      * @return array
      */
-    public function readElementInfo($elementID)
+    public function readElementInfo($elementCode)
     {
         \CModule::IncludeModule('iblock');
         $arElement = Array();
 
         $arFilter = Array(
             'IBLOCK_ID' => IBLOCK_WEAR_ID,
-            'ID' => $elementID
+            'CODE' => $elementCode
         );
 
         $arSelect = Array(
@@ -100,8 +100,8 @@ class ShowElement extends \CBitrixComponent
      */
     public function executeComponent()
     {
-        if (!empty($this->arParams['ELEMENT_ID'])) {
-            $this->arResult['element'] = $this->readElementInfo($this->arParams['ELEMENT_ID']);
+        if (!empty($this->arParams['CODE'])) {
+            $this->arResult['element'] = $this->readElementInfo($this->arParams['CODE']);
         } else {
             return;
         }

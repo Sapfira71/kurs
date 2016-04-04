@@ -6,10 +6,10 @@ $arComponentParameters = array(
         )
     ),
     'PARAMETERS' => array(
-        'ELEMENT_ID' => array(
+        'CODE' => array(
             'PARENT' => 'INPUT_PARAMETERS',
-            'NAME' => 'Идентификатор элемента',
-            'TYPE' => 'INT'
+            'NAME' => 'Код элемента',
+            'TYPE' => 'STRING'
         )
     )
 );
