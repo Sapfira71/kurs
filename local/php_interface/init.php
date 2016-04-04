@@ -28,12 +28,12 @@ function getBuyElementURL($id)
 
 /**
  * Функция возвращает URL страницы просмотра списка товаров бренда
- * @param string $id Идентификатор бренда
+ * @param string $name Имя бренда
  * @return string
  */
-function getBrandsElementsURL($id)
+function getBrandsElementsURL($name)
 {
-    return '/index.php?BRAND_ID=' . $id;
+    return '/brands/' . $name . '/';
 }
 
 //Обработка ошибки 404

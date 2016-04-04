@@ -17,7 +17,7 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
         $arDefaultUrlTemplates404 = array(
             'sections' => 'catalog/#SECTION_CODE_PATH#/#SECTION_ID#/',
             'element' => 'goods/#SECTION_CODE_PATH#/#CODE#.php',
-            'brand' => 'index.php?BRAND_ID=#BRAND_ID#'
+            'brand' => 'brands/#BRAND_NAME#/'
         );
 
         $engine = new \CComponentEngine($this);
@@ -41,8 +41,8 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
         else if(isset($request['CODE'])) {
             $this->arResult['CODE'] = $request['CODE'];
         }
-        else if(isset($request['BRAND_ID'])) {
-            $this->arResult['BRAND_ID'] = $request['BRAND_ID'];
+        else if(isset($request['BRAND_NAME'])) {
+            $this->arResult['BRAND_NAME'] = $request['BRAND_NAME'];
         } else {
             return;
         }
