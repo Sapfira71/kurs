@@ -1,6 +1,8 @@
 <?
 namespace Maximaster\Components;
 
+use Bitrix\Highloadblock as HL;
+
 /**
  * Компонент показа информации о разделе и списка элементов в нем
  * Class ShowSections
@@ -97,17 +99,44 @@ class ShowSections extends \CBitrixComponent
 
     /**
      * Получение элементов инфоблока по параметру фильтра BRAND_ID
-     * @param string $brandId Внешний код элемента highload-блока 'Бренды'
+     * @param string $brandName Имя бренда
      * @return array
      */
-    private function readBrandElementsInfo($brandId)
+    private function readBrandElementsInfo($brandName)
     {
         $arFilter = Array(
             'IBLOCK_ID' => IBLOCK_WEAR_ID,
-            'PROPERTY_BRAND' => $brandId
+            'PROPERTY_BRAND' => $this->getBrandId($brandName)
         );
 
         return $this->getElements($arFilter);
+    }
+
+    /**
+     * Получить id бренда по имени
+     * @param string $brandName Имя бренда
+     * @return string
+     */
+    private function getBrandId($brandName)
+    {
+        \CModule::IncludeModule('highloadblock');
+
+        $idbrand = '';
+
+        $hlblock = HL\HighloadBlockTable::getById(HIGHLOADBLOCK_BRAND_ID)->fetch();
+        $entity = HL\HighloadBlockTable::compileEntity($hlblock);
+        $entityDataClass = $entity->getDataClass();
+        $entityTableName = $hlblock['Brand'];
+
+        $rsData = $entityDataClass::getList(array(
+            'select' => array('UF_NAME', 'UF_XML_ID'),
+            'filter' => array('=UF_NAME' => $brandName)
+        ));
+        $rsData = new \CDBResult($rsData, $entityTableName);
+        if ($arRes = $rsData->Fetch()) {
+            $idbrand = $arRes['UF_XML_ID'];
+        }
+        return $idbrand;
     }
 
     /**
@@ -115,11 +144,12 @@ class ShowSections extends \CBitrixComponent
      */
     public function executeComponent()
     {
+        var_dump($this->arParams);
         if (!empty($this->arParams['SECTION_ID'])) {
             $this->arResult['section'] = $this->readSectionInfo($this->arParams['SECTION_ID']);
             $this->arResult['elements'] = $this->readSectionElementsInfo($this->arParams['SECTION_ID']);
-        } elseif (!empty($this->arParams['BRAND_ID'])) {
-            $this->arResult['elements'] = $this->readBrandElementsInfo($this->arParams['BRAND_ID']);
+        } elseif (!empty($this->arParams['BRAND_NAME'])) {
+            $this->arResult['elements'] = $this->readBrandElementsInfo($this->arParams['BRAND_NAME']);
             if (empty($this->arResult['elements'])) {
                 @define('ERROR_404', 'Y');
             }
