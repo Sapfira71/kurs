@@ -35,15 +35,14 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
     public function executeComponent()
     {
         $request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
-        var_dump($request);
         if(isset($request['SECTION_ID'])) {
             $this->arResult['SECTION_ID'] = $request['SECTION_ID'];
         }
         else if(isset($request['CODE'])) {
             $this->arResult['CODE'] = $request['CODE'];
         }
-        else if(isset($request['BRAND_ID'])) {
-            $this->arResult['BRAND_ID'] = $request['BRAND_ID'];
+        else if(isset($request['BRAND_NAME'])) {
+            $this->arResult['BRAND_NAME'] = $request['BRAND_NAME'];
         } else {
             return;
         }
