@@ -15,8 +15,8 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
      */
     private function getPage() {
         $arDefaultUrlTemplates404 = array(
-            'sections' => 'catalog/#SECTION_CODE_PATH#/index.php?SECTION_ID=#SECTION_ID#',
-            'element' => 'goods/#SECTION_CODE_PATH#/index.php?ELEMENT_ID=#ELEMENT_ID#',
+            'sections' => 'catalog/#SECTION_CODE_PATH#/',
+            'element' => 'goods/#SECTION_CODE_PATH#/#CODE#.php',
             'brand' => 'index.php?BRAND_ID=#BRAND_ID#'
         );
 
