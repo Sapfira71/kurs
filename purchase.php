@@ -16,7 +16,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
             </tr>
             <tr>
                 <td>Почта:</td>
-                <td><input name="mail" type="email" required>
+                <td><input name="mail" type="email" required pattern="[A-Za-z0-9\.]{1,}@[A-Za-z]{1,}\.[A-Za-z]{2,}"
+                           placeholder="[#]@[#].[#]"></td>
                 </td>
             </tr>
             </tbody>

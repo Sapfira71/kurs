@@ -42,7 +42,7 @@ class Order extends \CBitrixComponent
         $this->fio = $_POST['name'];
         $this->tel = $_POST['number'];
 
-        if (check_email($_POST['mail'])) {
+        if (!filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)) {
             $this->arResult['WRONG_EMAIL'] = GetMessage('WRONG_EMAIL');
             return false;
         } else {
