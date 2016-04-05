@@ -1,8 +1,10 @@
-<? include_once($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/urlrewrite.php'); ?>
-
-<? global $APPLICATION;
-include $_SERVER['DOCUMENT_ROOT'] . SITE_TEMPLATE_PATH . '/header.php'; ?>
+<?
+global $APPLICATION;
+include $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
+CHTTP::SetStatus('404 Not Found');
+?>
 
     Страница не найдена!
 
-<? include $_SERVER['DOCUMENT_ROOT'] . SITE_TEMPLATE_PATH . '/footer.php'; ?>
+<?
+include $_SERVER['DOCUMENT_ROOT'] . '/bitrix/footer.php';

@@ -43,7 +43,6 @@ function OnEpilogHandler()
     if (defined('ERROR_404') && ERROR_404 == 'Y') {
         global $APPLICATION;
         $APPLICATION->RestartBuffer();
-        CHTTP::SetStatus('404 Not Found');
         include $_SERVER['DOCUMENT_ROOT'] . '/404.php';
     }
 }
