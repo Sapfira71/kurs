@@ -41,6 +41,7 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
         }
         else if(isset($request['CODE'])) {
             $this->arResult['CODE'] = $request['CODE'];
+            $this->arResult['SECTION_PATH'] = $request['SECTION_PATH'];
         }
         else if(isset($request['BRAND_NAME'])) {
             $this->arResult['BRAND_NAME'] = $request['BRAND_NAME'];

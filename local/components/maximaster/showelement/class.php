@@ -52,6 +52,11 @@ class ShowElement extends \CBitrixComponent
             'CODE' => $elementCode
         );
 
+        if(!empty($this->arParams['SECTION_PATH'])) {
+            $sectionCode = explode('/', $this->arParams['SECTION_PATH']);
+            $arFilter['SECTION_CODE'] = $sectionCode[count($sectionCode) - 1];
+        }
+
         $arSelect = Array(
             'NAME',
             'DETAIL_TEXT',

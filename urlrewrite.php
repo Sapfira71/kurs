@@ -7,7 +7,7 @@ $arUrlRewrite = array(
     ),
     array(
         'CONDITION' => '#^/catalog/([\/\-a-zA-Z]+)/([\-_a-zA-Z0-9]+).php#',
-        'RULE' => 'CODE=$2',
+        'RULE' => 'SECTION_PATH=$1&CODE=$2',
         'PATH' => '/index.php'
     ),
     array(
