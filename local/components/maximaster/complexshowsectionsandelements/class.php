@@ -37,6 +37,7 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
         $request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
         if(isset($request['SECTION_ID'])) {
             $this->arResult['SECTION_ID'] = $request['SECTION_ID'];
+            $this->arResult['SECTION_PATH'] = $request['SECTION_PATH'];
         }
         else if(isset($request['CODE'])) {
             $this->arResult['CODE'] = $request['CODE'];
