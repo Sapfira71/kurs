@@ -18,12 +18,12 @@ function selfURL()
 
 /**
  * Функция возвращает URL страницы покупки товара
- * @param int $id Идентификатор товара
+ * @param string $code Код товара
  * @return string
  */
-function getBuyElementURL($id)
+function getBuyElementURL($code)
 {
-    return '/purchase.php?ELEMENT_ID=' . $id;
+    return '/purchase.php?ELEMENT_CODE=' . $code;
 }
 
 /**

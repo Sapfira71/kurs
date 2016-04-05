@@ -21,9 +21,9 @@ class Order extends \CBitrixComponent
      */
     private $tel;
     /**
-     * @var string Идентификатор заказываемого товара
+     * @var string Код заказываемого товара
      */
-    private $elementId;
+    private $elementCode;
     /**
      * @var string Информация о товаре
      */
@@ -49,11 +49,11 @@ class Order extends \CBitrixComponent
             $this->email = $_POST['mail'];
         }
 
-        $this->elementId = $_POST['hiddenElID'];
+        $this->elementCode = $_POST['hiddenElCode'];
 
         \CBitrixComponent::includeComponentClass('maximaster:showelement');
         $ob = new \Maximaster\Components\ShowElement();
-        $this->elementInfo = $ob->readElementInfo($this->elementId);
+        $this->elementInfo = $ob->readElementInfo($this->elementCode);
 
         $this->elementUrl = $_SERVER['SERVER_NAME'] . $this->elementInfo['DETAIL_URL'];
 

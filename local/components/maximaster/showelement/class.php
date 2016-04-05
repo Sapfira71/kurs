@@ -44,6 +44,7 @@ class ShowElement extends \CBitrixComponent
      */
     public function readElementInfo($elementCode)
     {
+        echo $elementCode;
         \CModule::IncludeModule('iblock');
         $arElement = Array();
 
@@ -90,11 +91,11 @@ class ShowElement extends \CBitrixComponent
                 'COUNTRY' => $ob['PROPERTY_COUNTRY_VALUE'],
                 'QUANTITY' => $ob['CATALOG_QUANTITY'],
                 'GALLERY' => $arPict,
-                'BUY_PAGE' => getBuyElementURL($ob['ID']),
+                'BUY_PAGE' => getBuyElementURL($ob['CODE']),
                 'DETAIL_URL' => $ob['DETAIL_PAGE_URL']
             );
         } else {
-            @define('ERROR_404', 'Y');
+
         }
 
         return $arElement;
