@@ -109,39 +109,13 @@ class ShowSections extends \CBitrixComponent
      */
     private function readBrandElementsInfo($brandName)
     {
+        \CBitrixComponent::includeComponentClass('maximaster:showbrands');
         $arFilter = Array(
             'IBLOCK_ID' => IBLOCK_WEAR_ID,
-            'PROPERTY_BRAND' => $this->getBrandId($brandName)
+            'PROPERTY_BRAND' => \Maximaster\Components\ShowBrands::getBrandId($brandName)
         );
 
         return $this->getElements($arFilter);
-    }
-
-    /**
-     * Получить id бренда по имени
-     * @param string $brandName Имя бренда
-     * @return string
-     */
-    private function getBrandId($brandName)
-    {
-        \CModule::IncludeModule('highloadblock');
-
-        $idbrand = '';
-
-        $hlblock = HL\HighloadBlockTable::getById(HIGHLOADBLOCK_BRAND_ID)->fetch();
-        $entity = HL\HighloadBlockTable::compileEntity($hlblock);
-        $entityDataClass = $entity->getDataClass();
-        $entityTableName = $hlblock['Brand'];
-
-        $rsData = $entityDataClass::getList(array(
-            'select' => array('UF_NAME', 'UF_XML_ID'),
-            'filter' => array('=UF_NAME' => $brandName)
-        ));
-        $rsData = new \CDBResult($rsData, $entityTableName);
-        if ($arRes = $rsData->Fetch()) {
-            $idbrand = $arRes['UF_XML_ID'];
-        }
-        return $idbrand;
     }
 
     /**

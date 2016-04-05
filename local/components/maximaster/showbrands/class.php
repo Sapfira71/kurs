@@ -48,7 +48,7 @@ class ShowBrands extends \CBitrixComponent
      * @param string $brandName Имя бренда
      * @return string
      */
-    private function getBrandId($brandName)
+    public static function getBrandId($brandName)
     {
         \CModule::IncludeModule('highloadblock');
 
