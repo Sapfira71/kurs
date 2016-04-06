@@ -12,7 +12,7 @@ $arUrlRewrite = array(
     ),
     array(
         'CONDITION' => '#^/brands/([\-_a-zA-Z]+)/#',
-        'RULE' => 'BRAND_NAME=$1',
+        'RULE' => 'BRAND_CODE=$1',
         'PATH' => '/index.php'
     )
 );

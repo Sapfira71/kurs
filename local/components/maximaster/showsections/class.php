@@ -103,16 +103,16 @@ class ShowSections extends \CBitrixComponent
     }
 
     /**
-     * Получение элементов инфоблока по параметру фильтра BRAND_ID
-     * @param string $brandName Имя бренда
+     * Получение элементов инфоблока по параметру фильтра BRAND_CODE
+     * @param string $brandCode Код бренда
      * @return array
      */
-    private function readBrandElementsInfo($brandName)
+    private function readBrandElementsInfo($brandCode)
     {
         \CBitrixComponent::includeComponentClass('maximaster:showbrands');
         $arFilter = Array(
             'IBLOCK_ID' => IBLOCK_WEAR_ID,
-            'PROPERTY_BRAND' => \Maximaster\Components\ShowBrands::getBrandId($brandName)
+            'PROPERTY_BRAND' => $brandCode
         );
 
         return $this->getElements($arFilter);
@@ -129,8 +129,8 @@ class ShowSections extends \CBitrixComponent
                 $this->arParams['SECTION_PATH']
             );
             $this->arResult['elements'] = $this->readSectionElementsInfo($this->arParams['SECTION_ID']);
-        } elseif (!empty($this->arParams['BRAND_NAME'])) {
-            $this->arResult['elements'] = $this->readBrandElementsInfo($this->arParams['BRAND_NAME']);
+        } elseif (!empty($this->arParams['BRAND_CODE'])) {
+            $this->arResult['elements'] = $this->readBrandElementsInfo($this->arParams['BRAND_CODE']);
             if (empty($this->arResult['elements'])) {
                 @define('ERROR_404', 'Y');
             }

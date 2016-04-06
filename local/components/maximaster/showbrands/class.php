@@ -17,6 +17,7 @@ class ShowBrands extends \CBitrixComponent
     private function getListCurrentBrands()
     {
         $result = Array();
+        $request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
 
         \CModule::IncludeModule('iblock');
 
@@ -24,15 +25,15 @@ class ShowBrands extends \CBitrixComponent
             'IBLOCK_ID' => IBLOCK_WEAR_ID
         );
 
-        if (!empty($_REQUEST['CODE'])) {
-            $arFilter['CODE'] = $_REQUEST['CODE'];
-        } elseif (!empty($_REQUEST['SECTION_ID'])) {
+        if (!empty($request['CODE'])) {
+            $arFilter['CODE'] = $request['CODE'];
+        } elseif (!empty($request['SECTION_ID'])) {
             $arFilter = Array(
-                'SECTION_ID' => $_REQUEST['SECTION_ID'],
+                'SECTION_ID' => $request['SECTION_ID'],
                 'INCLUDE_SUBSECTIONS' => 'Y'
             );
-        } elseif (!empty($_REQUEST['BRAND_NAME'])) {
-            $arFilter['PROPERTY_BRAND'] = $this->getBrandId($_REQUEST['BRAND_NAME']);
+        } elseif (!empty($request['BRAND_CODE'])) {
+            $arFilter['PROPERTY_BRAND'] = $request['BRAND_CODE'];
         }
 
         $res = \CIBlockElement::GetList(Array(), $arFilter, array('PROPERTY_BRAND'), false, Array());
@@ -41,33 +42,6 @@ class ShowBrands extends \CBitrixComponent
         }
 
         return $result;
-    }
-
-    /**
-     * Получить id бренда по имени
-     * @param string $brandName Имя бренда
-     * @return string
-     */
-    public static function getBrandId($brandName)
-    {
-        \CModule::IncludeModule('highloadblock');
-
-        $idbrand = '';
-
-        $hlblock = HL\HighloadBlockTable::getById(HIGHLOADBLOCK_BRAND_ID)->fetch();
-        $entity = HL\HighloadBlockTable::compileEntity($hlblock);
-        $entityDataClass = $entity->getDataClass();
-        $entityTableName = $hlblock['Brand'];
-
-        $rsData = $entityDataClass::getList(array(
-            'select' => array('UF_NAME', 'UF_XML_ID'),
-            'filter' => array('=UF_NAME' => $brandName)
-        ));
-        $rsData = new \CDBResult($rsData, $entityTableName);
-        if ($arRes = $rsData->Fetch()) {
-            $idbrand = $arRes['UF_XML_ID'];
-        }
-        return $idbrand;
     }
 
     /**
@@ -94,7 +68,8 @@ class ShowBrands extends \CBitrixComponent
 
         while ($arRes = $rsData->Fetch()) {
             $res[] = Array(
-                'NAME' => $arRes['UF_NAME']
+                'NAME' => $arRes['UF_NAME'],
+                'CODE' => $arRes['UF_XML_ID']
             );
         }
 
