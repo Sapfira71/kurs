@@ -123,6 +123,7 @@ class ShowSections extends \CBitrixComponent
      */
     public function executeComponent()
     {
+        $this->IncludeComponentLang('class.php');
         if (!empty($this->arParams['SECTION_ID'])) {
             $this->arResult['section'] = $this->readSectionInfo(
                 $this->arParams['SECTION_ID'],

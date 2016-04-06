@@ -9,3 +9,5 @@ $MESS['PRICE'] = 'Цена';
 $MESS['BRAND'] = 'Бренд';
 $MESS['COUNTRY'] = 'Страна-производитель';
 $MESS['LINK'] = 'Ссылка на товар';
+$MESS['SUCCESSFUL_SEND_MAIL'] = 'Заказ завершен!';
+$MESS['UNSUCCESSFUL_SEND_MAIL'] = 'Заказ завершить не удалось!';

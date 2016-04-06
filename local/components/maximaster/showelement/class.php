@@ -106,6 +106,7 @@ class ShowElement extends \CBitrixComponent
      */
     public function executeComponent()
     {
+        $this->IncludeComponentLang('class.php');
         if (!empty($this->arParams['CODE'])) {
             $this->arResult['element'] = $this->readElementInfo($this->arParams['CODE']);
         } else {
