@@ -10,6 +10,10 @@ use Bitrix\Highloadblock as HL;
  */
 class ShowBrands extends \CBitrixComponent
 {
+    /**
+     * Получить параметры из запроса
+     * @return array Параметры
+     */
     private function getParameters()
     {
         $arDefaultUrlTemplates404 = array(
