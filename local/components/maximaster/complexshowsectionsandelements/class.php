@@ -16,12 +16,39 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
     public function setArResult($arVariables)
     {
         if (isset($arVariables['SECTION_ID'])) {
-            $this->arResult['SECTION_ID'] = $arVariables['SECTION_ID'];
-            $this->arResult['SECTION_PATH'] = $arVariables['SECTION_PATH'];
+            $flag = $this->isRightSection($arVariables['SECTION_ID'], $arVariables['SECTION_CODE_PATH']);
+            if ($flag) {
+                $this->arResult['SECTION_ID'] = $arVariables['SECTION_ID'];
+            } else {
+                @define('ERROR_404', 'Y');
+            }
         } elseif (isset($arVariables['CODE'])) {
             $this->arResult['CODE'] = $arVariables['CODE'];
         } elseif (isset($arVariables['BRAND_CODE'])) {
             $this->arResult['BRAND_CODE'] = $arVariables['BRAND_CODE'];
+        }
+    }
+
+    /**
+     * Определение правильности секции (соответствует ли идентификатор секции по полному пути)
+     * @param string $sectionId Идентификатор секции
+     * @param string $sectionCodePath Путь из кодов секций
+     * @return bool
+     */
+    public function isRightSection($sectionId, $sectionCodePath)
+    {
+        $sectArr = explode('/', $sectionCodePath);
+        $nav = \CIBlockSection::GetNavChain(IBLOCK_WEAR_ID, $sectionId, Array('CODE'));
+
+        $navRes = array();
+        foreach ($nav->arResult as $section) {
+            $navRes[] = $section['CODE'];
+        }
+
+        if ($sectArr === $navRes) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -54,7 +81,7 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
     {
         $page = $this->getPage();
 
-        if($page) {
+        if ($page) {
             $this->IncludeComponentTemplate($page);
         }
     }
