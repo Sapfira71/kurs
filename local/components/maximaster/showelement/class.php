@@ -44,7 +44,6 @@ class ShowElement extends \CBitrixComponent
      */
     public function readElementInfo($elementCode)
     {
-        echo $elementCode;
         \CModule::IncludeModule('iblock');
         $arElement = Array();
 
@@ -52,11 +51,6 @@ class ShowElement extends \CBitrixComponent
             'IBLOCK_ID' => IBLOCK_WEAR_ID,
             'CODE' => $elementCode
         );
-
-        if(!empty($this->arParams['SECTION_PATH'])) {
-            $sectionCode = explode('/', $this->arParams['SECTION_PATH']);
-            $arFilter['SECTION_CODE'] = $sectionCode[count($sectionCode) - 1];
-        }
 
         $arSelect = Array(
             'NAME',
@@ -95,7 +89,7 @@ class ShowElement extends \CBitrixComponent
                 'DETAIL_URL' => $ob['DETAIL_PAGE_URL']
             );
         } else {
-
+            @define('ERROR_404', 'Y');
         }
 
         return $arElement;

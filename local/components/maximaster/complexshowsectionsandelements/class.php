@@ -20,7 +20,6 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
             $this->arResult['SECTION_PATH'] = $arVariables['SECTION_PATH'];
         } elseif (isset($arVariables['CODE'])) {
             $this->arResult['CODE'] = $arVariables['CODE'];
-            $this->arResult['SECTION_PATH'] = $arVariables['SECTION_PATH'];
         } elseif (isset($arVariables['BRAND_CODE'])) {
             $this->arResult['BRAND_CODE'] = $arVariables['BRAND_CODE'];
         }
@@ -34,7 +33,7 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
     {
         $arDefaultUrlTemplates404 = array(
             'sections' => 'catalog/section/#SECTION_CODE_PATH#/#SECTION_ID#/',
-            'element' => 'catalog/detail/#SECTION_CODE_PATH#/#CODE#.php',
+            'element' => 'catalog/detail/#CODE#.php',
             'brand' => 'catalog/brands/#BRAND_CODE#/'
         );
 
