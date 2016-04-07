@@ -10,14 +10,29 @@ use Bitrix\Highloadblock as HL;
  */
 class ShowBrands extends \CBitrixComponent
 {
+    private function getParameters()
+    {
+        $arDefaultUrlTemplates404 = array(
+            'sections' => 'catalog/section/#SECTION_CODE_PATH#/#SECTION_ID#/',
+            'element' => 'catalog/detail/#CODE#.php',
+            'brand' => 'catalog/brands/#BRAND_CODE#/'
+        );
+        $engine = new \CComponentEngine();
+        $engine->addGreedyPart('#SECTION_CODE_PATH#');
+
+        $arVariables = array();
+        $engine->guessComponentPath('/', $arDefaultUrlTemplates404, $arVariables);
+        return $arVariables;
+    }
+
     /**
      * Функция, получающая список значений свойства 'Бренд' элементов инфоблока
      * @return array
      */
     private function getListCurrentBrands()
     {
+        $arVariables = $this->getParameters();
         $result = Array();
-        $request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
 
         \CModule::IncludeModule('iblock');
 
@@ -25,15 +40,15 @@ class ShowBrands extends \CBitrixComponent
             'IBLOCK_ID' => IBLOCK_WEAR_ID
         );
 
-        if (!empty($request['CODE'])) {
-            $arFilter['CODE'] = $request['CODE'];
-        } elseif (!empty($request['SECTION_ID'])) {
+        if (!empty($arVariables['CODE'])) {
+            $arFilter['CODE'] = $arVariables['CODE'];
+        } elseif (!empty($arVariables['SECTION_ID'])) {
             $arFilter = Array(
-                'SECTION_ID' => $request['SECTION_ID'],
+                'SECTION_ID' => $arVariables['SECTION_ID'],
                 'INCLUDE_SUBSECTIONS' => 'Y'
             );
-        } elseif (!empty($request['BRAND_CODE'])) {
-            $arFilter['PROPERTY_BRAND'] = $request['BRAND_CODE'];
+        } elseif (!empty($arVariables['BRAND_CODE'])) {
+            $arFilter['PROPERTY_BRAND'] = $arVariables['BRAND_CODE'];
         }
 
         $res = \CIBlockElement::GetList(Array(), $arFilter, array('PROPERTY_BRAND'), false, Array());
