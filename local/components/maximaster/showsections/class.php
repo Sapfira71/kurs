@@ -15,15 +15,13 @@ class ShowSections extends \CBitrixComponent
      * @param int $sectionId Идентификатор раздела
      * @return array
      */
-    private function readSectionInfo($sectionId, $sectionPath)
+    private function readSectionInfo($sectionId)
     {
         $res = Array();
-        $sectionCode = explode('/', $sectionPath);
 
         $arFilter = Array(
             'IBLOCK_ID' => IBLOCK_WEAR_ID,
-            'ID' => $sectionId,
-            'CODE' => $sectionCode[count($sectionCode) - 1]
+            'ID' => $sectionId
         );
         $arSelect = Array(
             'NAME',
@@ -125,10 +123,7 @@ class ShowSections extends \CBitrixComponent
     {
         $this->IncludeComponentLang('class.php');
         if (!empty($this->arParams['SECTION_ID'])) {
-            $this->arResult['section'] = $this->readSectionInfo(
-                $this->arParams['SECTION_ID'],
-                $this->arParams['SECTION_PATH']
-            );
+            $this->arResult['section'] = $this->readSectionInfo($this->arParams['SECTION_ID']);
             $this->arResult['elements'] = $this->readSectionElementsInfo($this->arParams['SECTION_ID']);
         } elseif (!empty($this->arParams['BRAND_CODE'])) {
             $this->arResult['elements'] = $this->readBrandElementsInfo($this->arParams['BRAND_CODE']);

@@ -10,14 +10,58 @@ namespace Maximaster\Components;
 class ComplexShowSectionsAndElements extends \CBitrixComponent
 {
     /**
+     * Установка результирующего массива
+     * @param array $arVariables Массив с восстановленными из запрошенного пути переменными
+     */
+    public function setArResult($arVariables)
+    {
+        if (isset($arVariables['SECTION_ID'])) {
+            $flag = $this->isRightSection($arVariables['SECTION_ID'], $arVariables['SECTION_CODE_PATH']);
+            if ($flag) {
+                $this->arResult['SECTION_ID'] = $arVariables['SECTION_ID'];
+            } else {
+                @define('ERROR_404', 'Y');
+            }
+        } elseif (isset($arVariables['CODE'])) {
+            $this->arResult['CODE'] = $arVariables['CODE'];
+        } elseif (isset($arVariables['BRAND_CODE'])) {
+            $this->arResult['BRAND_CODE'] = $arVariables['BRAND_CODE'];
+        }
+    }
+
+    /**
+     * Определение правильности секции (соответствует ли идентификатор секции по полному пути)
+     * @param string $sectionId Идентификатор секции
+     * @param string $sectionCodePath Путь из кодов секций
+     * @return bool
+     */
+    public function isRightSection($sectionId, $sectionCodePath)
+    {
+        $sectArr = explode('/', $sectionCodePath);
+        $nav = \CIBlockSection::GetNavChain(IBLOCK_WEAR_ID, $sectionId, Array('CODE'));
+
+        $navRes = array();
+        foreach ($nav->arResult as $section) {
+            $navRes[] = $section['CODE'];
+        }
+
+        if ($sectArr === $navRes) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Получить имя нужного шаблона
      * @return string
      */
-    private function getPage() {
+    private function getPage()
+    {
         $arDefaultUrlTemplates404 = array(
-            'sections' => 'catalog/#SECTION_CODE_PATH#/#SECTION_ID#/',
-            'element' => 'catalog/#SECTION_CODE_PATH#/#CODE#.php',
-            'brand' => 'brands/#BRAND_CODE#/'
+            'sections' => 'catalog/section/#SECTION_CODE_PATH#/#SECTION_ID#/',
+            'element' => 'catalog/detail/#CODE#.php',
+            'brand' => 'catalog/brands/#BRAND_CODE#/'
         );
 
         $engine = new \CComponentEngine($this);
@@ -25,6 +69,7 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
 
         $arVariables = array();
         $page = $engine->guessComponentPath('/', $arDefaultUrlTemplates404, $arVariables);
+        $this->setArResult($arVariables);
 
         return $page;
     }
@@ -34,22 +79,11 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
      */
     public function executeComponent()
     {
-        $request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
-        if(isset($request['SECTION_ID'])) {
-            $this->arResult['SECTION_ID'] = $request['SECTION_ID'];
-            $this->arResult['SECTION_PATH'] = $request['SECTION_PATH'];
-        }
-        else if(isset($request['CODE'])) {
-            $this->arResult['CODE'] = $request['CODE'];
-            $this->arResult['SECTION_PATH'] = $request['SECTION_PATH'];
-        }
-        else if(isset($request['BRAND_CODE'])) {
-            $this->arResult['BRAND_CODE'] = $request['BRAND_CODE'];
-        } else {
-            return;
-        }
+        $page = $this->getPage();
 
-        $this->IncludeComponentTemplate($this->getPage());
+        if ($page) {
+            $this->IncludeComponentTemplate($page);
+        }
     }
 
 }
