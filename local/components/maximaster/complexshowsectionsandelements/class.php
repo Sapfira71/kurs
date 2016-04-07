@@ -15,9 +15,9 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
      */
     private function getPage() {
         $arDefaultUrlTemplates404 = array(
-            'sections' => 'catalog/#SECTION_CODE_PATH#/#SECTION_ID#/',
-            'element' => 'catalog/#SECTION_CODE_PATH#/#CODE#.php',
-            'brand' => 'brands/#BRAND_CODE#/'
+            'sections' => 'catalog/section/#SECTION_CODE_PATH#/#SECTION_ID#/',
+            'element' => 'catalog/detail/#SECTION_CODE_PATH#/#CODE#.php',
+            'brand' => 'catalog/brands/#BRAND_CODE#/'
         );
 
         $engine = new \CComponentEngine($this);
@@ -25,6 +25,20 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
 
         $arVariables = array();
         $page = $engine->guessComponentPath('/', $arDefaultUrlTemplates404, $arVariables);
+
+        if(isset($arVariables['SECTION_ID'])) {
+            $this->arResult['SECTION_ID'] = $arVariables['SECTION_ID'];
+            $this->arResult['SECTION_PATH'] = $arVariables['SECTION_PATH'];
+        }
+        else if(isset($arVariables['CODE'])) {
+            $this->arResult['CODE'] = $arVariables['CODE'];
+            $this->arResult['SECTION_PATH'] = $arVariables['SECTION_PATH'];
+        }
+        else if(isset($arVariables['BRAND_CODE'])) {
+            $this->arResult['BRAND_CODE'] = $arVariables['BRAND_CODE'];
+        } else {
+            return;
+        }
 
         return $page;
     }
@@ -34,21 +48,6 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
      */
     public function executeComponent()
     {
-        $request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
-        if(isset($request['SECTION_ID'])) {
-            $this->arResult['SECTION_ID'] = $request['SECTION_ID'];
-            $this->arResult['SECTION_PATH'] = $request['SECTION_PATH'];
-        }
-        else if(isset($request['CODE'])) {
-            $this->arResult['CODE'] = $request['CODE'];
-            $this->arResult['SECTION_PATH'] = $request['SECTION_PATH'];
-        }
-        else if(isset($request['BRAND_CODE'])) {
-            $this->arResult['BRAND_CODE'] = $request['BRAND_CODE'];
-        } else {
-            return;
-        }
-
         $this->IncludeComponentTemplate($this->getPage());
     }
 

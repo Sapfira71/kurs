@@ -33,7 +33,7 @@ function getBuyElementURL($code)
  */
 function getBrandsElementsURL($code)
 {
-    return '/brands/' . $code . '/';
+    return '/catalog/brands/' . $code . '/';
 }
 
 //Обработка ошибки 404
