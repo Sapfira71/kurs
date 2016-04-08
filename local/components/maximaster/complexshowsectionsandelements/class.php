@@ -20,7 +20,7 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
             if ($flag) {
                 $this->arResult['SECTION_ID'] = $arVariables['SECTION_ID'];
             } else {
-                @define('ERROR_404', 'Y');
+                define('ERROR_404', 'Y');
             }
         } elseif (isset($arVariables['CODE'])) {
             $this->arResult['CODE'] = $arVariables['CODE'];

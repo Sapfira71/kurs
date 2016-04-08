@@ -89,7 +89,7 @@ class ShowElement extends \CBitrixComponent
                 'DETAIL_URL' => $ob['DETAIL_PAGE_URL']
             );
         } else {
-            @define('ERROR_404', 'Y');
+            define('ERROR_404', 'Y');
         }
 
         return $arElement;
