@@ -5,7 +5,7 @@ $aMenuLinks = Array(
         'index.php',
         Array(),
         Array(),
-        '!strripos($APPLICATION->GetCurUri("", true), "index.php") ? (!strripos($_SERVER["REAL_FILE_PATH"], "index.php") ? "1" : "0") : "0"'
+        '!strripos(\Bitrix\Main\Application::getInstance()->getContext()->getRequest()->getScriptFile(), "index.php")'
     ),
     Array(
         'О себе',
