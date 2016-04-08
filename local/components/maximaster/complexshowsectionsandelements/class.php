@@ -13,7 +13,7 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
      * Установка результирующего массива
      * @param array $arVariables Массив с восстановленными из запрошенного пути переменными
      */
-    public function setArResult($arVariables)
+    public function setResult($arVariables)
     {
         if (isset($arVariables['SECTION_ID'])) {
             $flag = $this->isRightSection($arVariables['SECTION_ID'], $arVariables['SECTION_CODE_PATH']);
@@ -69,7 +69,7 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
 
         $arVariables = array();
         $page = $engine->guessComponentPath('/', $arDefaultUrlTemplates404, $arVariables);
-        $this->setArResult($arVariables);
+        $this->setResult($arVariables);
 
         return $page;
     }
