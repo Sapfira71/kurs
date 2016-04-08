@@ -122,10 +122,14 @@ class ShowSections extends \CBitrixComponent
     public function executeComponent()
     {
         $this->IncludeComponentLang('class.php');
-        if (!empty($this->arParams['SECTION_ID'])) {
+
+        $issetSectionId = !empty($this->arParams['SECTION_ID']);
+        $issetBrandCode = !empty($this->arParams['BRAND_CODE']);
+
+        if ($issetSectionId) {
             $this->arResult['section'] = $this->readSectionInfo($this->arParams['SECTION_ID']);
             $this->arResult['elements'] = $this->readSectionElementsInfo($this->arParams['SECTION_ID']);
-        } elseif (!empty($this->arParams['BRAND_CODE'])) {
+        } elseif ($issetBrandCode) {
             $this->arResult['elements'] = $this->readBrandElementsInfo($this->arParams['BRAND_CODE']);
             if (empty($this->arResult['elements'])) {
                 @define('ERROR_404', 'Y');
