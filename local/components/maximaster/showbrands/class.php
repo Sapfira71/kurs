@@ -11,31 +11,15 @@ use Bitrix\Highloadblock as HL;
 class ShowBrands extends \CBitrixComponent
 {
     /**
-     * Получить параметры из запроса
-     * @return array Параметры
-     */
-    private function getParameters()
-    {
-        $arDefaultUrlTemplates404 = array(
-            'sections' => 'catalog/section/#SECTION_CODE_PATH#/#SECTION_ID#/',
-            'element' => 'catalog/detail/#CODE#.php',
-            'brand' => 'catalog/brands/#BRAND_CODE#/'
-        );
-        $engine = new \CComponentEngine();
-        $engine->addGreedyPart('#SECTION_CODE_PATH#');
-
-        $arVariables = array();
-        $engine->guessComponentPath('/', $arDefaultUrlTemplates404, $arVariables);
-        return $arVariables;
-    }
-
-    /**
      * Функция, получающая список значений свойства 'Бренд' элементов инфоблока
      * @return array
      */
     private function getListCurrentBrands()
     {
-        $arVariables = $this->getParameters();
+        \CBitrixComponent::includeComponentClass('maximaster:complexshowsectionsandelements');
+        $ob = new ComplexShowSectionsAndElements();
+        $arVariables = $ob->getVariables();
+
         $result = Array();
 
         \CModule::IncludeModule('iblock');

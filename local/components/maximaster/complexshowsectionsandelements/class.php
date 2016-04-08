@@ -9,11 +9,42 @@ namespace Maximaster\Components;
  */
 class ComplexShowSectionsAndElements extends \CBitrixComponent
 {
+    private $arVariables = array();
+    private $page;
+
+    /**
+     * Функция, устанавливающая значения полей $arVariables и $page класса ComplexShowSectionsAndElements
+     */
+    private function Construct()
+    {
+        $arDefaultUrlTemplates404 = array(
+            'sections' => 'catalog/section/#SECTION_CODE_PATH#/#SECTION_ID#/',
+            'element' => 'catalog/detail/#CODE#.php',
+            'brand' => 'catalog/brands/#BRAND_CODE#/'
+        );
+
+        $engine = new \CComponentEngine($this);
+        $engine->addGreedyPart('#SECTION_CODE_PATH#');
+
+        $this->page = $engine->guessComponentPath('/', $arDefaultUrlTemplates404, $this->arVariables);
+        $this->setResult($this->arVariables);
+    }
+
+    /**
+     * Получить массив значений из запроса
+     * @return array
+     */
+    public function getVariables()
+    {
+        $this->Construct();
+        return $this->arVariables;
+    }
+
     /**
      * Установка результирующего массива
      * @param array $arVariables Массив с восстановленными из запрошенного пути переменными
      */
-    public function setResult($arVariables)
+    private function setResult($arVariables)
     {
         if (isset($arVariables['SECTION_ID'])) {
             $flag = $this->isRightSection($arVariables['SECTION_ID'], $arVariables['SECTION_CODE_PATH']);
@@ -35,7 +66,7 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
      * @param string $sectionCodePath Путь из кодов секций
      * @return bool
      */
-    public function isRightSection($sectionId, $sectionCodePath)
+    private function isRightSection($sectionId, $sectionCodePath)
     {
         $sectArr = explode('/', $sectionCodePath);
         $nav = \CIBlockSection::GetNavChain(IBLOCK_WEAR_ID, $sectionId, Array('CODE'));
@@ -58,20 +89,7 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
      */
     private function getPage()
     {
-        $arDefaultUrlTemplates404 = array(
-            'sections' => 'catalog/section/#SECTION_CODE_PATH#/#SECTION_ID#/',
-            'element' => 'catalog/detail/#CODE#.php',
-            'brand' => 'catalog/brands/#BRAND_CODE#/'
-        );
-
-        $engine = new \CComponentEngine($this);
-        $engine->addGreedyPart('#SECTION_CODE_PATH#');
-
-        $arVariables = array();
-        $page = $engine->guessComponentPath('/', $arDefaultUrlTemplates404, $arVariables);
-        $this->setResult($arVariables);
-
-        return $page;
+        return $this->page;
     }
 
     /**
@@ -79,6 +97,7 @@ class ComplexShowSectionsAndElements extends \CBitrixComponent
      */
     public function executeComponent()
     {
+        $this->Construct();
         $page = $this->getPage();
 
         if ($page) {
