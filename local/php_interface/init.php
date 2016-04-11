@@ -1,6 +1,7 @@
 <?php
 
 require __DIR__ . '/const.php';
+require SITE_SERVER_NAME . 'vendor/autoload.php';
 
 /**
  * Функция возвращает URL страницы
