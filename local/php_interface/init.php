@@ -47,3 +47,6 @@ function OnEpilogHandler()
         include $_SERVER['DOCUMENT_ROOT'] . '/404.php';
     }
 }
+
+require_once($_SERVER['DOCUMENT_ROOT']."/local/php_interface/classes/CCustomTypes/CCustomTypes.php");
+AddEventHandler('iblock', 'OnIBlockPropertyBuildList', array('CCustomTypeDesignerDate', 'GetUserTypeDescription'));
