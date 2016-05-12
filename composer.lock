@@ -1,0 +1,56 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "55059ce8c7cebff901931fa5d4bf49f5",
+    "content-hash": "7905325de5e8f73939cfcec26a04e1dc",
+    "packages": [
+        {
+            "name": "Sapfira71/customproperty",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sapfira71/customproperty",
+                "reference": "1dcfe7fdee591d1a6811db3f9a18dc19bbfcdafb"
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/CCustomTypes.php"
+                ],
+                "files": [
+                    "src/connection.php"
+                ]
+            },
+            "authors": [
+                {
+                    "name": "Морозова Анастасия",
+                    "email": "a.morozova@maximaster.ru"
+                }
+            ],
+            "description": "Кастомное свойство 'Дизайнер и дата выпуска модели'",
+            "support": {
+                "www": "http://www.maximaster.ru",
+                "source": "https://github.com/Sapfira71/customproperty.git"
+            },
+            "time": "2016-05-12 07:36:46"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "sapfira71/customproperty": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=5.3.0"
+    },
+    "platform-dev": []
+}

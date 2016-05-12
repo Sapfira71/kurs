@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Sapfira71/customproperty",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Sapfira71/customproperty",
+            "reference": "1dcfe7fdee591d1a6811db3f9a18dc19bbfcdafb"
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2016-05-12 07:36:46",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "src/CCustomTypes.php"
+            ],
+            "files": [
+                "src/connection.php"
+            ]
+        },
+        "authors": [
+            {
+                "name": "Морозова Анастасия",
+                "email": "a.morozova@maximaster.ru"
+            }
+        ],
+        "description": "Кастомное свойство 'Дизайнер и дата выпуска модели'",
+        "support": {
+            "www": "http://www.maximaster.ru",
+            "source": "https://github.com/Sapfira71/customproperty.git"
+        }
+    }
+]
