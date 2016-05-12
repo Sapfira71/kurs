@@ -1,7 +1,7 @@
 {
   "require": {
     "php": ">=5.3.0",
-    "Sapfira71/customproperty" : "dev-composer"
+    "Sapfira71/customproperty" : "dev-master"
   },
   "repositories":[
     {
