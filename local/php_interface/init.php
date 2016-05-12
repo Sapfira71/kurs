@@ -47,3 +47,6 @@ function OnEpilogHandler()
         include $_SERVER['DOCUMENT_ROOT'] . '/404.php';
     }
 }
+
+// Библиотеки composer
+require_once('../../vendor/autoload.php');
