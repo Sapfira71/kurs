@@ -1,0 +1,12 @@
+{
+  "require": {
+    "php": ">=5.3.0",
+    "Sapfira71/customproperty" : "dev-composer"
+  },
+  "repositories":[
+    {
+      "type":"git",
+      "url":"https://github.com/Sapfira71/customproperty"
+    }
+  ]
+}
