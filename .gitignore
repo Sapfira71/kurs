@@ -3,3 +3,4 @@ upload/
 .idea/
 *.csv
 local/images
+/vendor/
