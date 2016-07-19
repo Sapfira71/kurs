@@ -12,13 +12,18 @@ Loc::loadMessages(__FILE__);
 return array(
     array(
         'parent_menu' => 'global_menu_content',
-        'sort' => 300,
+        'sort' => 500,
         'icon' => 'fileman_sticker_icon',
         'page_icon' => 'fileman_sticker_icon',
         'text' => Loc::getMessage('MAXIMASTER_NEWS'),
-        'url' => NewsListHelper::getUrl(),
-        'more_url' => array(
-            NewsEditHelper::getUrl(),
-        )
+        'url' => NewsListHelper::getUrl()
+    ),
+    array(
+        'parent_menu' => 'global_menu_content',
+        'sort' => 501,
+        'icon' => 'fileman_sticker_icon',
+        'page_icon' => 'fileman_sticker_icon',
+        'text' => Loc::getMessage('MAXIMASTER_NEWS_ONE'),
+        'url' => NewsEditHelper::getUrl()
     )
 );
