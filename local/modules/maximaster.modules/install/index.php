@@ -37,9 +37,10 @@ class maximaster_modules extends CModule
 
         $this->GetConnection()->query("CREATE TABLE " . NewsTable::getTableName() . " (
             ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-            DATE_CREATE DATETIME NOT NULL,
-            NAME VARCHAR(255) NOT NULL,
-            TEXT VARCHAR(255) NOT NULL
+            DATE_CREATE DATETIME,
+            NAME VARCHAR(255),
+            TEXT LONGTEXT,
+            TEXT_TEXT_TYPE VARCHAR(255)
         );");
     }
 

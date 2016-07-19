@@ -7,6 +7,7 @@ use DigitalWand\AdminHelper\Helper\AdminInterface;
 use DigitalWand\AdminHelper\Widget\DateTimeWidget;
 use DigitalWand\AdminHelper\Widget\NumberWidget;
 use DigitalWand\AdminHelper\Widget\StringWidget;
+use DigitalWand\AdminHelper\Widget\VisualEditorWidget;
 
 Loc::loadMessages(__FILE__);
 
@@ -31,9 +32,8 @@ class NewsAdminInterface extends AdminInterface
                         'REQUIRED' => true
                     ),
                     'TEXT' => array(
-                        'WIDGET' => new StringWidget(),
-                        'SIZE' => '255',
-                        'FILTER' => true,
+                        'WIDGET' => new VisualEditorWidget(),
+                        'HEADER' => false,
                         'REQUIRED' => true
                     ),
                     'DATE_CREATE' => array(

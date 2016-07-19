@@ -24,7 +24,7 @@ class NewsTable extends DataManager
                 'autocomplete' => true,
                 'title' => Loc::getMessage('MAXIMASTER_NEWS_ID'),
             )),
-            new Entity\DateField('DATE_CREATE', array(
+            new Entity\DatetimeField('DATE_CREATE', array(
                 'required' => true,
                 'default_value' => new DateTime(),
                 'title' => Loc::getMessage('MAXIMASTER_NEWS_DATE_CREATE'),
@@ -33,10 +33,11 @@ class NewsTable extends DataManager
                 'required' => true,
                 'title' => Loc::getMessage('MAXIMASTER_NEWS_NAME')
             )),
-            new Entity\StringField('TEXT', array(
+            new Entity\TextField('TEXT', array(
                 'required' => true,
                 'title' => Loc::getMessage('MAXIMASTER_NEWS_TEXT')
-            ))
+            )),
+            new Entity\StringField('TEXT_TEXT_TYPE', array())
         );
     }
 

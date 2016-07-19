@@ -13,8 +13,8 @@ return array(
     array(
         'parent_menu' => 'global_menu_content',
         'sort' => 300,
-        'icon' => '',
-        'page_icon' => '',
+        'icon' => 'fileman_sticker_icon',
+        'page_icon' => 'fileman_sticker_icon',
         'text' => Loc::getMessage('MAXIMASTER_NEWS'),
         'url' => NewsListHelper::getUrl(),
         'more_url' => array(

@@ -1,3 +1,3 @@
 <?php
 
-$MESS['MAXIMASTER_NEWS'] = 'Новость';
+$MESS['MAXIMASTER_NEWS'] = 'Новости';
